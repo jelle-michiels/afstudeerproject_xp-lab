@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scipts/Database.cs.meta
+guid: 860423a0052d443f385e14d973cb9dc9
+========
+guid: aa54fa7b208e746c6bf35a903992b65f
+>>>>>>>> 9ac2dbf59a27b4fe3c1b40274062095f4d1b76da:Assets/Scipts/Game.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

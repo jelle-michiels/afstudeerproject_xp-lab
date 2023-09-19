@@ -1,0 +1,1 @@
+{"createdObjects":[{"position":{"x":-2.75,"y":1.5,"z":5.0},"rotation":{"x":0.0,"y":0.0,"z":0.0,"w":1.0},"scale":{"x":5.0,"y":3.0,"z":0.5},"tag":"Wall"},{"position":{"x":-0.5,"y":1.5,"z":7.25},"rotation":{"x":0.0,"y":0.7071068286895752,"z":0.0,"w":0.7071068286895752},"scale":{"x":5.0,"y":3.0,"z":0.5},"tag":"Wall"}],"floors":[{"floorNumber":0,"floorPlanPath":""}]}

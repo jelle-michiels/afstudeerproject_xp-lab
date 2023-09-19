@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/CountdownTimer.cs.meta
+guid: d90f4733e9e645640813d10be1161ca9
+========
+guid: 13e9b7aa123c1489e83a737fd543c81d
+>>>>>>>> 9ac2dbf59a27b4fe3c1b40274062095f4d1b76da:Assets/Scipts/CheckPointManager.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

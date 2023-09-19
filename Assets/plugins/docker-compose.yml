@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  mysql:
+    image: mcr.microsoft.com/azure-sql-edge:latest
+    container_name: mydb
+    environment:
+      - "ACCEPT_EULA=1"
+      - "MSSQL_SA_PASSWORD=Password1234"
+    volumes:
+      - "mssql-azuresql-edge-data:/var/opt/mssql"
+    ports:
+      - "1433:1433"
+volumes:
+  mssql-azuresql-edge-data:
