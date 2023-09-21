@@ -9,6 +9,9 @@ public class OptionMenu : MonoBehaviour
     public InputField maxTime;
     public InputField minTime;
 
+    public static string maxTimeText = "300";
+    public static string minTimeText;
+
     private Toggle setActive;
 
     void Start()
@@ -19,6 +22,9 @@ public class OptionMenu : MonoBehaviour
 
     public void addTimer()
     {
+        maxTimeText = maxTime.text;
+        minTimeText = minTime.text;
+
         Debug.Log("Max time: " + maxTime.text);
         Debug.Log("Min time: " + minTime.text);
         string level = GameObject.Find("LevelDropdown").GetComponent<DropdownHandler>().value;

@@ -4,13 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class CountdownTimer : MonoBehaviour
 {
     private float maxTimeAllowed;
     private float minTimeRequired;
     private float timeTaken;
-    private float scorePercent;
+    private float score;
 
     public TextMeshProUGUI countdownText;
     public TextMeshProUGUI gameOverText;
@@ -22,6 +23,7 @@ public class CountdownTimer : MonoBehaviour
 
     void Start()
     {
+        scoreText.gameObject.SetActive(false);
         gameOverText.enabled = false;
         tryAgainBtn.gameObject.SetActive(false);
         gameFinished = false;
@@ -29,30 +31,17 @@ public class CountdownTimer : MonoBehaviour
 
     void Update()
     {
-        if (!gameFinished && maxTimeAllowed > 0)
+        if (!gameFinished )
         {
             timeTaken += Time.deltaTime; // update the time taken while the game is running
 
-            if (timeTaken >= maxTimeAllowed)
+            if (timeTaken >= int.Parse(OptionMenu.maxTimeText))
             {
                 gameFinished = true;
-                timeTaken = maxTimeAllowed; // limit the time taken to the max time allowed
+                CalculateScore();
+                EndGame();
             }
-        }
-
-        countdownText.text = "Time: " + timeTaken.ToString("F2"); // update the countdown text
-        if (timeTaken >= minTimeRequired)
-        {
-            CalculateScore(); // calculate the score
-        }
-        else if (timeTaken < minTimeRequired)
-        {
-            scoreText.text = "Score: 100%"; // update the score text
-        }
-
-        if (gameFinished && !scoreSaved)
-        {
-            EndGame();
+            countdownText.text = "Time: " + timeTaken.ToString("F2"); // update the countdown text
         }
 
     }
@@ -60,20 +49,20 @@ public class CountdownTimer : MonoBehaviour
     private void CalculateScore()
     {
         // Calculate the score as a percentage using the formula
-        scorePercent = ((maxTimeAllowed - timeTaken) / (maxTimeAllowed - minTimeRequired)) * 100f;
-        scoreText.text = "Score: " + scorePercent.ToString("F2") + "%"; // update the score text
+        score = (int.Parse(OptionMenu.maxTimeText) - timeTaken) * 5;
+        if (score < 0)
+        {
+            score = 0;
+        }
+        scoreText.gameObject.SetActive(true);
+        scoreText.text = "Score: " + score.ToString("F2"); // update the score text
     }
 
     private void EndGame()
     {
-        float score = 100f;
         gameOverText.enabled = true;
         tryAgainBtn.gameObject.SetActive(true);
-        Debug.Log("Game Over. Score: " + scorePercent + "%");
-        if (timeTaken >= minTimeRequired)
-        {
-            score = scorePercent;
-        }
+        Debug.Log("Game Over. Score: " + score);
         GameObject.Find("LoadCanvas").GetComponent<EditorDatabase>().SetScore(score);
         scoreSaved = true;
     }
