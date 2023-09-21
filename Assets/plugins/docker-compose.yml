@@ -9,7 +9,6 @@ services:
       - "MSSQL_SA_PASSWORD=Password1234"
     volumes:
       - "mssql-azuresql-edge-data:/var/opt/mssql"
-      - "./create_database.sql:/docker-entrypoint-initdb.d/create_database.sql"
     ports:
       - "1433:1433"
 volumes:
