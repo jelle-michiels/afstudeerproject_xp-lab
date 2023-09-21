@@ -61,4 +61,4 @@ now the database should be created
 
 to check this use the command 'select name from sys.databases'
 
-to run a command in this server you need to type go on the next line before it runs.
+to run a command in this server you need to type "go" on the next line before it runs.
