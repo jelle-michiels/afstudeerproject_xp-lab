@@ -23,6 +23,7 @@ install docker desktop
 
 download  Microsoft ODBC Driver 17 for SQL Server
 via: https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16
+
 MAKE SURE TO GET VERSION 17
 
 
