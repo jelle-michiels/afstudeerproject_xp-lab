@@ -6,7 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using UnityEngine.SceneManagement;
 
-public class Database : MonoBehaviour
+/*public class Database : MonoBehaviour
 {
     private string conn;
     public InputField firstname;
@@ -76,4 +76,4 @@ public class Database : MonoBehaviour
         PlayerPrefs.SetString("PlayerLastName", lastname.text);
     }
 
-}
+}*/
