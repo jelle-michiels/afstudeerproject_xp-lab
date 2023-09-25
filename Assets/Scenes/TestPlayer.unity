@@ -2683,6 +2683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13e9b7aa123c1489e83a737fd543c81d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  winScreen: {fileID: 445467800}
 --- !u!1 &1380386485
 GameObject:
   m_ObjectHideFlags: 0
