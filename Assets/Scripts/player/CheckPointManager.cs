@@ -6,12 +6,13 @@ using UnityEngine.InputSystem;
 
 public class CheckPointManager : MonoBehaviour
 {
+
+    public GameObject winScreen;
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "finish")
         {
-            //GameObject.Find("ScoreCanvas").GetComponent<CountdownTimer>().gameFinished = true;
-            levelState.FinishReached();
+            LevelState.endPointReached(winScreen);
             print("collision"); 
             
         }
