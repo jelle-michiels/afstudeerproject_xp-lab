@@ -144,8 +144,8 @@ public class PlayerControl : MonoBehaviour
     {
         if (other.gameObject.tag == "Endpoint")
         {
-            GameObject.Find("ScoreCanvas").GetComponent<CountdownTimer>().gameFinished = true;
-
+            //GameObject.Find("ScoreCanvas").GetComponent<CountdownTimer>().gameFinished = true;
+            
         }
     }
 }
