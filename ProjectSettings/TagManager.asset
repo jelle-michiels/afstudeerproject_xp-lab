@@ -13,6 +13,8 @@ TagManager:
   - CorrectDoor
   - WrongDoor
   - Endpoint
+  - finish
+  - winScreen
   layers:
   - Default
   - TransparentFX
