@@ -12,7 +12,11 @@ public class SpawnManager : MonoBehaviour
     
     void Start()
     {
-
+        if (spawnpoint == null)
+        {
+            spawnpoint = player.transform;
+        }
+        player.transform.position = spawnpoint.position;
     }
 
     public void SpawnPlayer()

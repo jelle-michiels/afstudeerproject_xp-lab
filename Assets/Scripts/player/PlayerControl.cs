@@ -142,10 +142,14 @@ public class PlayerControl : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Endpoint")
+        if (other.gameObject.tag == "finish")
         {
-            GameObject.Find("ScoreCanvas").GetComponent<CountdownTimer>().gameFinished = true;
-
+            //GameObject.Find("ScoreCanvas").GetComponent<CountdownTimer>().gameFinished = true;
+            Debug.Log("endpoint reached");
+            print("test");
+        }
+        if (other.gameObject.tag == "checkpoint"){
+            
         }
     }
 }
