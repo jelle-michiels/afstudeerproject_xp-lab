@@ -20,6 +20,7 @@ public class CountdownTimer : MonoBehaviour
 
     public bool gameFinished = false;
     private bool scoreSaved = false;
+    private bool timeStarted = false;
 
     void Start()
     {
@@ -27,15 +28,20 @@ public class CountdownTimer : MonoBehaviour
         gameOverText.enabled = false;
         tryAgainBtn.gameObject.SetActive(false);
         gameFinished = false;
+        timeTaken = int.Parse(OptionMenu.maxTimeText);
     }
 
     void Update()
     {
         if (!gameFinished )
         {
-            timeTaken += Time.deltaTime; // update the time taken while the game is running
+            if (timeStarted)
+            {
+                timeTaken -= Time.deltaTime; // update the time taken while the game is running
+            }
+            /*timeTaken -= Time.deltaTime;*/ // update the time taken while the game is running
 
-            if (timeTaken >= int.Parse(OptionMenu.maxTimeText))
+            if (timeTaken <= int.Parse(OptionMenu.minTimeText))
             {
                 gameFinished = true;
                 CalculateScore();
@@ -65,6 +71,7 @@ public class CountdownTimer : MonoBehaviour
         Debug.Log("Game Over. Score: " + score);
         GameObject.Find("LoadCanvas").GetComponent<EditorDatabase>().SetScore(score);
         scoreSaved = true;
+        timeStarted = false;
     }
 
     public void GameOver()
@@ -93,6 +100,11 @@ public class CountdownTimer : MonoBehaviour
     {
         maxTimeAllowed = maxTime;
         minTimeRequired = minTime;
+    }
+
+    public void startTimer()
+    {
+        timeStarted = true;
     }
 
 }

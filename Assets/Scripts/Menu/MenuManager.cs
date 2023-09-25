@@ -19,7 +19,6 @@ public class MenuManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button7))
         {
             optionsMenu.SetActive(!optionsMenu.activeSelf);
-            infoMenu.SetActive(false);
         }
         
     }
