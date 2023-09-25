@@ -13,8 +13,6 @@ public class CloseNavigationHelp : MonoBehaviour
         {
             gameobject.SetActive(false);
         }
-
-        GameObject.Find("LoadCanvas").GetComponent<LevelLoader>().LoadLevel();
  
         //wtf
     }

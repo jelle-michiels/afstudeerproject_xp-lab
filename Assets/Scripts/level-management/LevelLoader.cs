@@ -16,6 +16,13 @@ public class LevelLoader : MonoBehaviour
     void Start()
     {
         activeLevel = PlayerPrefs.GetString("ActiveLevel");
+        StartCoroutine(DelayedLoadLevel());
+    }
+
+    IEnumerator DelayedLoadLevel()
+    {
+        yield return new WaitForSeconds(0.01f); // Adjust the delay time as needed
+        LoadLevel();
     }
 
     // Update is called once per frame
