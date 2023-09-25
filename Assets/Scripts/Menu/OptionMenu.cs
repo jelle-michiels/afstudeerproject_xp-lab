@@ -16,12 +16,12 @@ public class OptionMenu : MonoBehaviour
     public static string maxTimeText = "3600";
     public static string minTimeText = "0";
 
-    private Toggle setActive;
+/*    public Toggle setActive;*/
 
     void Start()
     {
-        setActive = GameObject.Find("MakeActiveToggle").GetComponent<Toggle>();
-        setActive.onValueChanged.AddListener(delegate { SetActiveLevel(); });
+        /*setActive = GameObject.Find("MakeActiveToggle").GetComponent<Toggle>();
+        setActive.onValueChanged.AddListener(delegate { SetActiveLevel(); });*/
     }
 
     public void addTimer()
@@ -31,7 +31,7 @@ public class OptionMenu : MonoBehaviour
 
         Debug.Log("Max time: " + maxTimeText);
         Debug.Log("Min time: " + minTimeText);
-        string level = GameObject.Find("LevelDropdown").GetComponent<DropdownHandler>().value;
+        string level = GetComponent<DropdownHandler>().value;
         Debug.Log("Selected: " + level);
 
         GetComponent<EditorDatabase>().addTimers(int.Parse(maxTimeText), int.Parse(minTimeText), level);
@@ -40,16 +40,16 @@ public class OptionMenu : MonoBehaviour
 
     public void SetActiveLevel()
     {
-        if (setActive.isOn)
-        {
-            string level = GameObject.Find("LevelDropdown").GetComponent<DropdownHandler>().value;
+        /*if (setActive.isOn)
+        {*/
+            string level = GetComponent<DropdownHandler>().value;
             Debug.Log("Selected: " + level);
             PlayerPrefs.SetString("ActiveLevel", level);
-        }
+        /*}
         else if (!setActive.isOn)
         {
             PlayerPrefs.SetString("ActiveLevel", "");
-        }
+        }*/
 
     }
 
