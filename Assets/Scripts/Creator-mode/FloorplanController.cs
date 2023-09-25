@@ -9,6 +9,7 @@ using SimpleFileBrowser;
 public class FloorplanController : MonoBehaviour
 {
     private Button uploadButton;
+    private Button scratchButton;
     private GameObject floors;
 
     public GameObject floorPlane;
@@ -31,6 +32,8 @@ public class FloorplanController : MonoBehaviour
     void Start()
     {
         floors = GameObject.Find("Floors");
+        scratchButton = GameObject.Find("ScratchButton").GetComponent <Button>();
+        scratchButton.onClick.AddListener(StartFromScratch);
         uploadButton = GameObject.Find("UploadButton").GetComponent<Button>();
         uploadButton.onClick.AddListener(OpenFileExplorer);
         uploadButtons.Add(uploadButton);
@@ -51,10 +54,6 @@ public class FloorplanController : MonoBehaviour
 
         FileBrowser.SetFilters(true, new FileBrowser.Filter("Images", ".jpg", ".png"));
         FileBrowser.AddQuickLink("Users", "C:\\Users", null);
-
-
-
-
     }
 
     // Update is called once per frame
@@ -87,7 +86,6 @@ public class FloorplanController : MonoBehaviour
                         }
                     }
                 }
-
             }
 
             if (Input.GetKeyDown(KeyCode.PageUp))
@@ -104,13 +102,10 @@ public class FloorplanController : MonoBehaviour
                 }
 
             }
-
-
         }
         else
         {
             uploadButton.gameObject.SetActive(false);
-
         }
     }
 
@@ -156,6 +151,11 @@ public class FloorplanController : MonoBehaviour
             StartCoroutine(UI.GetComponent<UIController>().CloseMessagePanel());
         }
 
+    }
+    void StartFromScratch()
+    {
+        uploadButton.gameObject.SetActive(false);
+        scratchButton.gameObject.SetActive(false);
     }
 
     public void LoadFloorplanFromSave(int floor, string imagePath)
@@ -221,6 +221,8 @@ public class FloorplanController : MonoBehaviour
 
         }
     }
+
+    
 
     IEnumerator ClickTimer()
     {
