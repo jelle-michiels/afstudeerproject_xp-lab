@@ -12,10 +12,22 @@ public class LevelLoader : MonoBehaviour
 
     private LevelEditor level;
 
+    public PlayerControl playerControl;
+
     // Start is called before the first frame update
     void Start()
     {
+        playerControl.enabled = false;
         activeLevel = PlayerPrefs.GetString("ActiveLevel");
+        StartCoroutine(DelayedLoadLevel());
+        
+
+    }
+
+    IEnumerator DelayedLoadLevel()
+    {
+        yield return new WaitForSeconds(0.01f); // Adjust the delay time as needed
+        LoadLevel();
     }
 
     // Update is called once per frame

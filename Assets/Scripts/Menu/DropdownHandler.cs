@@ -5,32 +5,35 @@ using UnityEngine.UI;
 
 public class DropdownHandler : MonoBehaviour
 {
+    public Dropdown levelDropdown;
+
     public string value;
 
     // Start is called before the first frame update
     void Start()
     {
-        var dropdown = transform.GetComponent<Dropdown>();
+        List<string> levels = GetComponent<EditorDatabase>().GetLevels();
 
-        List<string> test = GetComponent<EditorDatabase>().GetLevels();
-
-        foreach (string level in test)
+        foreach (string level in levels)
         {
-
-            dropdown.options.Add(new Dropdown.OptionData() { text = level });
+            levelDropdown.options.Add(new Dropdown.OptionData() { text = level });
         }
 
-        DropdownValueChanged(dropdown);
+        DropdownValueChanged(levelDropdown);
 
-        dropdown.onValueChanged.AddListener(delegate {
-            DropdownValueChanged(dropdown);
-        });
+        levelDropdown.RefreshShownValue();
+
+        /*levelDropdown.onValueChanged.AddListener(delegate {
+            DropdownValueChanged(levelDropdown);
+        });*/
     }
 
     public void DropdownValueChanged(Dropdown change)
     {
         value = change.options[change.value].text.ToString();
         Debug.Log("Selected: " + value);
+
+        PlayerPrefs.SetString("ActiveLevel", value);
     }
 
     public string getValue()
