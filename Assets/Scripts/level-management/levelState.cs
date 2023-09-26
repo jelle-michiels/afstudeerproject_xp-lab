@@ -8,4 +8,13 @@ public static class LevelState
         screen.SetActive(true);
         Debug.Log("endpoint reached");
     }
+
+    public static void checkpointReached(GameObject checkpoint){
+        checkpoint.SetActive(false);
+        Debug.Log("checkpoint reached");
+    }
+
+    public static void died(GameObject screen){
+        screen.SetActive(true);
+    }
 }
