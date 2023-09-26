@@ -6,13 +6,13 @@ public static class LevelState
 {
     public static void endPointReached(GameObject screen){
         screen.SetActive(true);
-        Debug.Log("endpoint reached");
     }
 
     public static void checkpointReached(GameObject checkpoint){
+        checkpoint.SetActive(true);
+        new WaitForSeconds(2);
         checkpoint.SetActive(false);
-        Debug.Log("checkpoint reached");
-    }
+     }
 
     public static void died(GameObject screen){
         screen.SetActive(true);
