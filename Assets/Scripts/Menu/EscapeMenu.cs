@@ -41,7 +41,6 @@ public class EscapeMenu : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
         playerControl.enabled = true;
-        Cursor.visible = false;
     }
 
     public void Pause()
@@ -50,7 +49,6 @@ public class EscapeMenu : MonoBehaviour
         Time.timeScale = 0f;
         isPaused = true;
         playerControl.enabled = false;
-        Cursor.visible = true;
     }
 
     public void LoadMenu()
