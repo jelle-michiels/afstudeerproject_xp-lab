@@ -18,8 +18,7 @@ public class CheckPointManager : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "CheckPoint"){
-            Debug.Log("checkpoint reached");
-            LevelState.checkpointReached(checkpoint);
+            LevelState.enableCheckpointScreen(checkpoint);
         }
 
         if (other.gameObject.tag == "Damage"){
