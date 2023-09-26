@@ -15,10 +15,20 @@ public class CheckPointManager : MonoBehaviour
 
     public GameObject checkpoint;
 
+
+    private IEnumerator checkpointDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        LevelState.disableCheckpointscreen(checkpoint);
+    }
+
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "CheckPoint"){
             LevelState.enableCheckpointScreen(checkpoint);
+            StartCoroutine(checkpointDelay());
+            Debug.Log("test");
+            
         }
 
         if (other.gameObject.tag == "Damage"){

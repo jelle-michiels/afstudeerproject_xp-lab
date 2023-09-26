@@ -3561,11 +3561,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7596822624527837102, guid: ea9f40cfca5b54114b53ebf9263714ea, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.46
+      value: 5.55
       objectReference: {fileID: 0}
     - target: {fileID: 7596822624527837102, guid: ea9f40cfca5b54114b53ebf9263714ea, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.89
+      value: 5.4
       objectReference: {fileID: 0}
     - target: {fileID: 7596822624527837102, guid: ea9f40cfca5b54114b53ebf9263714ea, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4191,6 +4191,22 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5458125541185599518, guid: f86e40690fab040f19fb5ab98be375be, type: 3}
       propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5515029910384029995, guid: f86e40690fab040f19fb5ab98be375be, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5515029910384029995, guid: f86e40690fab040f19fb5ab98be375be, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5515029910384029995, guid: f86e40690fab040f19fb5ab98be375be, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5515029910384029995, guid: f86e40690fab040f19fb5ab98be375be, type: 3}
+      propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6554995643554309868, guid: f86e40690fab040f19fb5ab98be375be, type: 3}
