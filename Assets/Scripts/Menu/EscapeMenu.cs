@@ -10,7 +10,7 @@ public class EscapeMenu : MonoBehaviour
 
     public static bool isPaused = false;
 
-    public GameObject escapeMenu;
+    public GameObject escapeMenu, playerTipsMenu;
 
     public PlayerControl playerControl;
 
@@ -19,15 +19,17 @@ public class EscapeMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button7))
         {
-            if (isPaused)
+            if (!playerTipsMenu.activeSelf)
             {
-                Resume();
+                if (isPaused)
+                {
+                    Resume();
+                }
+                else
+                {
+                    Pause();
+                }
             }
-            else
-            {   
-                Pause();
-            }
-
             /*optionsMenu.SetActive(!optionsMenu.activeSelf);*/
         }
         
