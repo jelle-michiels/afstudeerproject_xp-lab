@@ -73,8 +73,28 @@ public class LevelController : MonoBehaviour
 
         GetComponent<EditorDatabase>().SaveLevel(level, levelName);
 
+        StartCoroutine(WaitAndDeleteFile(levelName));
+
 
     }
+
+    private IEnumerator WaitAndDeleteFile(string levelName)
+    {
+        yield return new WaitForSeconds(1.0f); // Wait for 1 second
+
+        string folder = UnityEngine.Application.dataPath + "/Saved/";
+        string levelFile = levelName + ".json";
+        string path = Path.Combine(folder, levelFile); // set filepath
+
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+            Debug.Log("File deleted after waiting for 1 second.");
+        }
+    }
+
+
+
 
 
     // Loading a level
@@ -83,7 +103,7 @@ public class LevelController : MonoBehaviour
         Debug.Log("Loading level");
 
         level = GetComponent<EditorDatabase>().LoadLevel(levelName);
-        
+
 
         if (level == null)
         {
@@ -93,7 +113,7 @@ public class LevelController : MonoBehaviour
         }
         else
         {
-            
+
             Debug.Log("Loading level.");
 
             CreatedObject[] foundObjects = FindObjectsOfType<CreatedObject>();
@@ -125,7 +145,7 @@ public class LevelController : MonoBehaviour
 
 
 
-        /*string folder = UnityEngine.Application.dataPath + "/Saved/";
+        string folder = UnityEngine.Application.dataPath + "/Saved/";
         string levelFile = levelName + ".json";
 
         string path = Path.Combine(folder, levelFile); // set filepath
@@ -167,7 +187,7 @@ public class LevelController : MonoBehaviour
             UI.GetComponent<UIController>().messagePanel.SetActive(true);
             UI.GetComponent<UIController>().message.text = "Level " + levelName + " bestaat niet!";
             StartCoroutine(UI.GetComponent<UIController>().CloseMessagePanel());
-        }*/
+        }
     }
 
     void CreateFromFile()
