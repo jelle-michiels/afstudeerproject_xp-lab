@@ -46,6 +46,7 @@ public class PlacementController : MonoBehaviour
 
     private TextMeshProUGUI heightText;
     private float heightForText;
+    private float displayHeight;
 
     private GameObject selected;
     private Vector3 selectedPosition;
@@ -343,7 +344,8 @@ public class PlacementController : MonoBehaviour
         {
             height += 3f;
             heightForText += 3f;
-            heightText.text = "Hoogte: " + heightForText.ToString();
+            displayHeight = heightForText/3;
+            heightText.text = "Hoogte: " + displayHeight;
         }
     }
 
@@ -361,7 +363,8 @@ public class PlacementController : MonoBehaviour
             {
                 height -= 3f;
                 heightForText -= 3f;
-                heightText.text = "Hoogte: " + heightForText.ToString();
+                displayHeight = heightForText / 3;
+                heightText.text = "Hoogte: " + displayHeight;
             }
 
         }
