@@ -12,7 +12,7 @@ public class UIController : MonoBehaviour
 {
 
     private GameObject controlsText;
-    private Button controls;
+    /*private Button controls;*/
     private GameObject mainUI;
 
     private GameObject saveAndLoadUI;
@@ -52,8 +52,8 @@ public class UIController : MonoBehaviour
         controlsText = GameObject.Find("ControlsText");
         controlsText.SetActive(false);
         mainUI = GameObject.Find("MainUI");
-        controls = GameObject.Find("Controls").GetComponent<Button>();
-        controls.onClick.AddListener(ToggleControls);
+       /* controls = GameObject.Find("Controls").GetComponent<Button>();
+        controls.onClick.AddListener(ToggleControls);*/
 
         saveAndLoadUI = GameObject.Find("SaveAndLoadMenu");
         saveMenu = GameObject.Find("SaveMenu");

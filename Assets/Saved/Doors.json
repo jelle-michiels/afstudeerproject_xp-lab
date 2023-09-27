@@ -1,1 +1,0 @@
-{"createdObjects":[{"position":{"x":-6.25,"y":0.30000001192092898,"z":6.5},"rotation":{"x":0.0,"y":0.0,"z":0.0,"w":1.0},"scale":{"x":1.0,"y":1.0,"z":1.0},"tag":"CorrectDoor"},{"position":{"x":-0.75,"y":0.30000001192092898,"z":6.25},"rotation":{"x":0.0,"y":0.0,"z":0.0,"w":1.0},"scale":{"x":1.0,"y":1.0,"z":1.0},"tag":"WrongDoor"}],"floors":[{"floorNumber":0,"floorPlanPath":""}]}
