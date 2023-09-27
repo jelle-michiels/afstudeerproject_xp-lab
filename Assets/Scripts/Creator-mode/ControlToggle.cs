@@ -7,12 +7,15 @@ using DG.Tweening;
 public class ControlToggle : MonoBehaviour
 {
     public RectTransform controlToggle;
-    public Color backgroundActiveColor;
-    public Toggle toggle;
-    public Image backgroundImage;
-    public GameObject controlMenu;
 
+    public Color backgroundActiveColor;
     Color backgroundDefaultColor;
+
+    public Toggle toggle;
+
+    public Image backgroundImage;
+
+    public GameObject controlMenu, buttonCanvas;
 
     Vector2 handlePosition;
 
@@ -37,6 +40,8 @@ public class ControlToggle : MonoBehaviour
     {
         controlToggle.DOAnchorPos(on ? handlePosition * -1 : handlePosition, .4f).SetEase(Ease.InOutBack);
         backgroundImage.DOColor(on ? backgroundActiveColor : backgroundDefaultColor, .6f);
+        buttonCanvas.SetActive(on ? false : true);
+
     }
 
     void OnDestroy()

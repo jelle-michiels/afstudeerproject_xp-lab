@@ -8,18 +8,18 @@ using SimpleFileBrowser;
 
 public class FloorplanController : MonoBehaviour
 {
-    private Button uploadButton;
-    private Button scratchButton;
-    private GameObject floors;
+    public Button uploadButton;
+    public Button scratchButton;
+    public GameObject floors;
 
     public GameObject floorPlane;
 
     private GameObject currentFloorPlane;
 
-    private GameObject ground;
+    public GameObject ground;
 
     private string imagePath;
-    private GameObject UI;
+    public GameObject UI;
     private int clickCount = 0;
 
     private List<Button> uploadButtons = new List<Button>();
@@ -31,14 +31,8 @@ public class FloorplanController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        floors = GameObject.Find("Floors");
-        scratchButton = GameObject.Find("ScratchButton").GetComponent <Button>();
-        scratchButton.onClick.AddListener(StartFromScratch);
-        uploadButton = GameObject.Find("UploadButton").GetComponent<Button>();
-        uploadButton.onClick.AddListener(OpenFileExplorer);
         uploadButtons.Add(uploadButton);
         currentFloor = 0;
-        ground = GameObject.Find("Ground");
         currentFloorPlane = ground;
 
         FloorData floorData = currentFloorPlane.AddComponent<FloorData>();
@@ -48,9 +42,6 @@ public class FloorplanController : MonoBehaviour
 
         floorplans = new Dictionary<int, GameObject>();
         floorplans.Add(0, currentFloorPlane);
-
-
-        UI = GameObject.Find("UI");
 
         FileBrowser.SetFilters(true, new FileBrowser.Filter("Images", ".jpg", ".png"));
         FileBrowser.AddQuickLink("Users", "C:\\Users", null);
@@ -152,7 +143,7 @@ public class FloorplanController : MonoBehaviour
         }
 
     }
-    void StartFromScratch()
+    public void StartFromScratch()
     {
         uploadButton.gameObject.SetActive(false);
         scratchButton.gameObject.SetActive(false);
@@ -305,7 +296,7 @@ public class FloorplanController : MonoBehaviour
         uploadButton.gameObject.SetActive(true);
     }
 
-    void OpenFileExplorer()
+    public void OpenFileExplorer()
     {
         StartCoroutine(ShowLoadDialogCoroutine());
     }

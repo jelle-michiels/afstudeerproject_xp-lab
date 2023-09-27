@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,17 @@ public class EscapeMenu : MonoBehaviour
 
     public PlayerControl playerControl;
 
+    void Start()
+    {
+        if (escapeMenu.activeSelf)
+        {
+            isPaused = true;
+        } else
+        {
+            isPaused = false;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -21,6 +33,7 @@ public class EscapeMenu : MonoBehaviour
         {
             if (!playerTipsMenu.activeSelf)
             {
+                OnEscape(isPaused);
                 if (isPaused)
                 {
                     Resume();
@@ -35,9 +48,13 @@ public class EscapeMenu : MonoBehaviour
         
     }
 
+    void OnEscape(bool shown)
+    {
+        escapeMenu.SetActive(shown ? false : true);
+    }
+
     public void Resume()
     {
-        escapeMenu.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
         playerControl.enabled = true;
@@ -45,7 +62,6 @@ public class EscapeMenu : MonoBehaviour
 
     public void Pause()
     {
-        escapeMenu.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
         playerControl.enabled = false;
