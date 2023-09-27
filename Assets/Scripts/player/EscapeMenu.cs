@@ -11,7 +11,7 @@ public class EscapeMenu : MonoBehaviour
 
     public static bool isPaused = false;
 
-    public GameObject escapeMenu, playerTipsMenu;
+    public GameObject escapeMenu, playerTipsMenu, optionsMenu;
 
     public PlayerControl playerControl;
 
@@ -31,7 +31,7 @@ public class EscapeMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button7))
         {
-            if (!playerTipsMenu.activeSelf)
+            if (!playerTipsMenu.activeSelf && !optionsMenu.activeSelf)
             {
                 OnEscape(isPaused);
                 if (isPaused)
@@ -55,6 +55,7 @@ public class EscapeMenu : MonoBehaviour
 
     public void Resume()
     {
+        OnEscape(isPaused);
         Time.timeScale = 1f;
         isPaused = false;
         playerControl.enabled = true;
@@ -65,11 +66,6 @@ public class EscapeMenu : MonoBehaviour
         Time.timeScale = 0f;
         isPaused = true;
         playerControl.enabled = false;
-    }
-
-    public void LoadMenu()
-    {
-        Debug.Log("Loading menu...");
     }
 
     public void LoadHomeScreen()

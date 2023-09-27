@@ -2366,11 +2366,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239aa249424579943938e9a409de241d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controlsText: {fileID: 1842664361}
+  mainUI: {fileID: 2036002561}
   allowInput: 0
   levelButtonPrefab: {fileID: 1066460164067779719, guid: 14619d4ca0aefb74cb33fff3794ddc5a, type: 3}
   deleteIconPrefab: {fileID: 1540322971328243108, guid: c9449beb9dd0bc34faf7928b8fd14201, type: 3}
-  messagePanel: {fileID: 0}
-  message: {fileID: 0}
+  messagePanel: {fileID: 714516873}
+  message: {fileID: 1136052625}
 --- !u!1 &714516873
 GameObject:
   m_ObjectHideFlags: 0

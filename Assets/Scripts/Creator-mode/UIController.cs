@@ -11,9 +11,8 @@ using UnityEditor;
 public class UIController : MonoBehaviour
 {
 
-    private GameObject controlsText;
-    /*private Button controls;*/
-    private GameObject mainUI;
+    public GameObject controlsText;
+    public GameObject mainUI;
 
     private GameObject saveAndLoadUI;
     private GameObject saveMenu;
@@ -49,7 +48,6 @@ public class UIController : MonoBehaviour
     {
         mouse = GameObject.Find("Mouse");
 
-        controlsText = GameObject.Find("ControlsText");
         controlsText.SetActive(false);
         mainUI = GameObject.Find("MainUI");
        /* controls = GameObject.Find("Controls").GetComponent<Button>();

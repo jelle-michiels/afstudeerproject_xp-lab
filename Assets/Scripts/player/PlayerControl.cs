@@ -8,7 +8,7 @@ public class PlayerControl : MonoBehaviour
     public Rigidbody rb;
     public GameObject camHolder;
     public float speed;
-    public float sensitivity;
+    public static float sensitivity = 1;
     public float maxForce;
     public float jumpForce;
     public bool grounded;
