@@ -15,6 +15,7 @@ public class CheckPointManager : MonoBehaviour
 
     public GameObject checkpoint;
 
+    public GameObject dmgScreen;
 
     private IEnumerator checkpointDelay()
     {
@@ -28,12 +29,13 @@ public class CheckPointManager : MonoBehaviour
             LevelState.enableCheckpointScreen(checkpoint);
             StartCoroutine(checkpointDelay());
             Debug.Log("test");
-            
         }
 
-        if (other.gameObject.tag == "Damage"){
-            Debug.Log("died");
-            LevelState.died(loseScreen);
+        if (other.gameObject.tag == "Damage" || other.gameObject.tag == "WrongDoor"){
+            if (GameObject.Find("Player").GetComponent<HealthState>().damaged()){
+                LevelState.died(loseScreen);
+                Debug.Log("damage");
+            } ;
         }
 
         if (other.gameObject.tag == "finish"){
