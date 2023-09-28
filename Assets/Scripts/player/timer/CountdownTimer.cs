@@ -49,7 +49,7 @@ public class CountdownTimer : MonoBehaviour
             if (timeTaken <= int.Parse(OptionMenu.minTimeText))
             {
                 CalculateScore();
-                EndGame();
+                EndGame(false);
             }
             countdownText.text = "Time: " + timeTaken.ToString("F2"); // update the countdown text
         }
@@ -68,11 +68,10 @@ public class CountdownTimer : MonoBehaviour
         scoreText.text = "Score: " + score.ToString("F2"); // update the score text
     }
 
-    public void EndGame()
+    public void EndGame(Boolean result)
     {
         gameFinished = true;
-        gameOverText.enabled = true;
-        //gameResult(result);
+        gameResult(result);
         tryAgainBtn.gameObject.SetActive(true);
         Debug.Log("Game Over. Score: " + score);
         GameObject.Find("LoadCanvas").GetComponent<EditorDatabase>().SetScore(score);
