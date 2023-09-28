@@ -9718,7 +9718,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1893173987310863807, guid: cf088889d6b6cc047a82b4718c2e12f3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Upload
+      value: OpenFileExplorer
       objectReference: {fileID: 0}
     - target: {fileID: 1893173987310863807, guid: cf088889d6b6cc047a82b4718c2e12f3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
