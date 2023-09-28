@@ -1364,7 +1364,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1306389925}
         m_TargetAssemblyTypeName: CloseNavigationHelp, Assembly-CSharp
-        m_MethodName: whenButtonClicked
+        m_MethodName: DisablePlayerTips
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3051,8 +3051,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ce92118520fe514f9d4d502c6729dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameobject: {fileID: 1306389920}
-  playerControl: {fileID: 1372965467}
+  playerTips: {fileID: 1306389920}
+  movement: {fileID: 1372965467}
   countDownTimer: {fileID: 139613909}
 --- !u!1 &1372965465
 GameObject:

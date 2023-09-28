@@ -5,21 +5,27 @@ using UnityEngine;
 
 public class CloseNavigationHelp : MonoBehaviour
 {
-    public GameObject gameobject;
+    public GameObject playerTips;
 
-    public PlayerControl playerControl;
+    public PlayerControl movement;
 
     public CountdownTimer countDownTimer;
 
-    public void whenButtonClicked()
+    void Update()
     {
-        if (gameobject.activeInHierarchy == true)
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
-            playerControl.enabled = true;
-            gameobject.SetActive(false);
+            DisablePlayerTips();
+        }
+    }
+
+    public void DisablePlayerTips()
+    {
+        if (playerTips.activeInHierarchy == true)
+        {
+            movement.enabled = true;
+            playerTips.SetActive(false);
             countDownTimer.startTimer();
         }
- 
-        //wtf
     }
 }
