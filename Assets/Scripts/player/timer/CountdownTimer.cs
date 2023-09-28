@@ -64,7 +64,7 @@ public class CountdownTimer : MonoBehaviour
         scoreText.text = "Score: " + score.ToString("F2"); // update the score text
     }
 
-    private void EndGame()
+    public void EndGame()
     {
         gameOverText.enabled = true;
         tryAgainBtn.gameObject.SetActive(true);
@@ -74,7 +74,7 @@ public class CountdownTimer : MonoBehaviour
         timeStarted = false;
     }
 
-    public void GameOver()
+    /*public void GameOver()
     {
         gameFinished = true;
         scoreSaved = true;
@@ -82,7 +82,7 @@ public class CountdownTimer : MonoBehaviour
         tryAgainBtn.gameObject.SetActive(true);
         scoreText.text = "Score: 0%";
         GameObject.Find("LoadCanvas").GetComponent<EditorDatabase>().SetScore(0f);
-    }
+    }*/
 
     public void resetTheGame()
     {
