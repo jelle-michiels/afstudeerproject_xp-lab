@@ -403,6 +403,7 @@ GameObject:
   - component: {fileID: 22546181}
   - component: {fileID: 22546180}
   - component: {fileID: 22546179}
+  - component: {fileID: 22546182}
   m_Layer: 5
   m_Name: Stairs
   m_TagString: Untagged
@@ -512,6 +513,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 22546177}
   m_CullTransparentMesh: 1
+--- !u!114 &22546182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 22546177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac02351b8b285ac4d812a3ca6c62c905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipToShow: Stairs. Don't forget to increase the height when working on a different
+    floor.
 --- !u!1 &71730354
 GameObject:
   m_ObjectHideFlags: 0
@@ -1102,6 +1117,7 @@ GameObject:
   - component: {fileID: 302679144}
   - component: {fileID: 302679143}
   - component: {fileID: 302679142}
+  - component: {fileID: 302679145}
   m_Layer: 5
   m_Name: Endpoint
   m_TagString: Untagged
@@ -1211,6 +1227,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 302679140}
   m_CullTransparentMesh: 1
+--- !u!114 &302679145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 302679140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac02351b8b285ac4d812a3ca6c62c905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipToShow: An endpoint to finish the level.
 --- !u!1 &331293927
 GameObject:
   m_ObjectHideFlags: 0
@@ -2541,6 +2570,7 @@ GameObject:
   - component: {fileID: 777182076}
   - component: {fileID: 777182075}
   - component: {fileID: 777182074}
+  - component: {fileID: 777182077}
   m_Layer: 5
   m_Name: Floor
   m_TagString: Untagged
@@ -2650,6 +2680,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 777182072}
   m_CullTransparentMesh: 1
+--- !u!114 &777182077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777182072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac02351b8b285ac4d812a3ca6c62c905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipToShow: Floor used for making multiple levels.
 --- !u!1 &792968730
 GameObject:
   m_ObjectHideFlags: 0
@@ -3392,6 +3435,7 @@ GameObject:
   - component: {fileID: 969675714}
   - component: {fileID: 969675713}
   - component: {fileID: 969675712}
+  - component: {fileID: 969675715}
   m_Layer: 5
   m_Name: Checkpoint
   m_TagString: Untagged
@@ -3501,6 +3545,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 969675710}
   m_CullTransparentMesh: 1
+--- !u!114 &969675715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 969675710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac02351b8b285ac4d812a3ca6c62c905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipToShow: A checkpoint to track progress.
 --- !u!1 &969730343
 GameObject:
   m_ObjectHideFlags: 0
@@ -6388,6 +6445,7 @@ GameObject:
   - component: {fileID: 1353323873}
   - component: {fileID: 1353323872}
   - component: {fileID: 1353323871}
+  - component: {fileID: 1353323874}
   m_Layer: 5
   m_Name: WrongDoor
   m_TagString: Untagged
@@ -6497,6 +6555,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1353323869}
   m_CullTransparentMesh: 1
+--- !u!114 &1353323874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353323869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac02351b8b285ac4d812a3ca6c62c905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipToShow: A wrong door. This door is not supposed to be oppened by the player.
 --- !u!1 &1356803538
 GameObject:
   m_ObjectHideFlags: 0
@@ -8148,6 +8219,7 @@ GameObject:
   - component: {fileID: 1617498754}
   - component: {fileID: 1617498753}
   - component: {fileID: 1617498752}
+  - component: {fileID: 1617498755}
   m_Layer: 5
   m_Name: CorrectDoor
   m_TagString: Untagged
@@ -8257,6 +8329,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1617498750}
   m_CullTransparentMesh: 1
+--- !u!114 &1617498755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617498750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac02351b8b285ac4d812a3ca6c62c905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipToShow: A correct door. This door is supposed to be oppened by the player
 --- !u!1 &1618175973
 GameObject:
   m_ObjectHideFlags: 0
@@ -8269,6 +8354,7 @@ GameObject:
   - component: {fileID: 1618175977}
   - component: {fileID: 1618175976}
   - component: {fileID: 1618175975}
+  - component: {fileID: 1618175978}
   m_Layer: 5
   m_Name: WallPart
   m_TagString: Untagged
@@ -8378,6 +8464,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1618175973}
   m_CullTransparentMesh: 1
+--- !u!114 &1618175978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618175973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac02351b8b285ac4d812a3ca6c62c905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipToShow: A partial wall.
 --- !u!1 &1705911999
 GameObject:
   m_ObjectHideFlags: 0
@@ -8688,7 +8787,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0f06f0f079cd9f4aac9b15477464235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallText: {fileID: 0}
 --- !u!114 &1796921625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8701,7 +8799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac02351b8b285ac4d812a3ca6c62c905, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tipToShow: A solid wall where the player will not be able to move through
+  tipToShow: A solid wall where the player will not be able to move through.
 --- !u!1 &1808776356
 GameObject:
   m_ObjectHideFlags: 0
