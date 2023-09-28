@@ -31,6 +31,7 @@ public class CountdownTimer : MonoBehaviour
     {
         scoreText.gameObject.SetActive(false);
         gameOverText.enabled = false;
+        youWinText.enabled = false;
         tryAgainBtn.gameObject.SetActive(false);
         gameFinished = false;
         timeTaken = int.Parse(OptionMenu.maxTimeText);
@@ -70,8 +71,8 @@ public class CountdownTimer : MonoBehaviour
 
     public void EndGame(Boolean result)
     {
-        gameFinished = true;
         gameResult(result);
+        gameFinished = true; // Check gameResult() before touching this
         tryAgainBtn.gameObject.SetActive(true);
         Debug.Log("Game Over. Score: " + score);
         GameObject.Find("LoadCanvas").GetComponent<EditorDatabase>().SetScore(score);
@@ -79,8 +80,13 @@ public class CountdownTimer : MonoBehaviour
         timeStarted = false;
     }
 
+    // If the game is finished the win - lose screen won't change to the other
     public void gameResult(Boolean result){
-        (result ? gameOverText : youWinText).enabled = true;    
+        Debug.Log("Game Result: " + result);
+        if (this.gameFinished == false) {
+            (result ? youWinText: gameOverText).enabled = true;
+        }
+            
     }
 
     /*public void GameOver()
