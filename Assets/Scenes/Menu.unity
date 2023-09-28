@@ -387,10 +387,10 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 1772120821}
-    m_SelectOnDown: {fileID: 84648392}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 1697239403}
+    m_SelectOnRight: {fileID: 1697239403}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
@@ -432,6 +432,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 153022670}
+        m_TargetAssemblyTypeName: mainMenu, Assembly-CSharp
+        m_MethodName: CloseSettingsMenu
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -767,6 +779,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b61c5991e567254dbcf09b0059790b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingsMenuFirst: {fileID: 35114954}
+  settingsMenuButton: {fileID: 1772120818}
 --- !u!1 &156189598
 GameObject:
   m_ObjectHideFlags: 0
@@ -3176,7 +3190,7 @@ GameObject:
   - component: {fileID: 1220140083}
   - component: {fileID: 1220140084}
   m_Layer: 5
-  m_Name: OptionsMenu
+  m_Name: SettingsMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4749,10 +4763,10 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 1772120821}
-    m_SelectOnDown: {fileID: 84648392}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 35114956}
+    m_SelectOnRight: {fileID: 35114956}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
@@ -4806,6 +4820,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 153022670}
+        m_TargetAssemblyTypeName: mainMenu, Assembly-CSharp
+        m_MethodName: CloseSettingsMenu
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4905,6 +4931,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b61c5991e567254dbcf09b0059790b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingsMenuFirst: {fileID: 0}
+  settingsMenuButton: {fileID: 0}
 --- !u!114 &1772120821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4965,6 +4993,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 153022670}
+        m_TargetAssemblyTypeName: mainMenu, Assembly-CSharp
+        m_MethodName: OpenSettingsMenu
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5616,6 +5656,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b61c5991e567254dbcf09b0059790b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingsMenuFirst: {fileID: 0}
+  settingsMenuButton: {fileID: 0}
 --- !u!114 &1947173413
 MonoBehaviour:
   m_ObjectHideFlags: 0

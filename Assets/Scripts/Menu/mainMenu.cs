@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class mainMenu : MonoBehaviour
 {
-   public void PlayGame(){
+    public GameObject settingsMenuFirst, settingsMenuButton;
+
+    public void PlayGame()
+    {
         SceneManager.LoadScene("Game");
     }
 
-   public void PlayWorldBuilder(){
+    public void PlayWorldBuilder()
+    {
         SceneManager.LoadScene("Editor");
     }
 
@@ -21,9 +26,20 @@ public class mainMenu : MonoBehaviour
         Debug.Log("TextureUpload");
     }
 
-   public void QuitGame(){
-      Debug.Log("quit");
-      Application.Quit();
-   }
-    
+    public void QuitGame()
+    {
+        Debug.Log("quit");
+        Application.Quit();
+    }
+
+    public void OpenSettingsMenu()
+    {
+        EventSystem.current.SetSelectedGameObject(settingsMenuFirst);
+    }
+
+    public void CloseSettingsMenu()
+    {
+        EventSystem.current.SetSelectedGameObject(settingsMenuButton);
+    }
+
 }

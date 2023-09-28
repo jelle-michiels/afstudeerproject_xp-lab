@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
+using System;
 
 public class CountdownTimer : MonoBehaviour
 {
@@ -15,7 +16,11 @@ public class CountdownTimer : MonoBehaviour
 
     public TextMeshProUGUI countdownText;
     public TextMeshProUGUI gameOverText;
+
+    public TextMeshProUGUI youWinText;
     public TextMeshProUGUI scoreText;
+
+    
     public Button tryAgainBtn;
 
     public bool gameFinished = false;
@@ -26,6 +31,7 @@ public class CountdownTimer : MonoBehaviour
     {
         scoreText.gameObject.SetActive(false);
         gameOverText.enabled = false;
+        youWinText.enabled = false;
         tryAgainBtn.gameObject.SetActive(false);
         gameFinished = false;
         timeTaken = int.Parse(OptionMenu.maxTimeText);
@@ -43,9 +49,8 @@ public class CountdownTimer : MonoBehaviour
 
             if (timeTaken <= int.Parse(OptionMenu.minTimeText))
             {
-                gameFinished = true;
                 CalculateScore();
-                EndGame();
+                EndGame(false);
             }
             countdownText.text = "Time: " + timeTaken.ToString("F2"); // update the countdown text
         }
@@ -64,9 +69,10 @@ public class CountdownTimer : MonoBehaviour
         scoreText.text = "Score: " + score.ToString("F2"); // update the score text
     }
 
-    private void EndGame()
+    public void EndGame(Boolean result)
     {
-        gameOverText.enabled = true;
+        gameResult(result);
+        gameFinished = true; // Check gameResult() before touching this
         tryAgainBtn.gameObject.SetActive(true);
         Debug.Log("Game Over. Score: " + score);
         GameObject.Find("LoadCanvas").GetComponent<EditorDatabase>().SetScore(score);
@@ -74,7 +80,16 @@ public class CountdownTimer : MonoBehaviour
         timeStarted = false;
     }
 
-    public void GameOver()
+    // If the game is finished the win - lose screen won't change to the other
+    public void gameResult(Boolean result){
+        Debug.Log("Game Result: " + result);
+        if (this.gameFinished == false) {
+            (result ? youWinText: gameOverText).enabled = true;
+        }
+            
+    }
+
+    /*public void GameOver()
     {
         gameFinished = true;
         scoreSaved = true;
@@ -82,7 +97,7 @@ public class CountdownTimer : MonoBehaviour
         tryAgainBtn.gameObject.SetActive(true);
         scoreText.text = "Score: 0%";
         GameObject.Find("LoadCanvas").GetComponent<EditorDatabase>().SetScore(0f);
-    }
+    }*/
 
     public void resetTheGame()
     {
