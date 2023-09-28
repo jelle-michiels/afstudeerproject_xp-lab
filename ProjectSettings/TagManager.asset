@@ -15,6 +15,7 @@ TagManager:
   - Endpoint
   - finish
   - winScreen
+  - Damage
   layers:
   - Default
   - TransparentFX
