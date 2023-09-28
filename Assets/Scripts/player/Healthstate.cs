@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class HealthState : MonoBehaviour
 {
 
+    public TextMeshProUGUI healthText;
     private int health = 3;
     public int Health{
         get { return health; }
@@ -21,14 +23,23 @@ public class HealthState : MonoBehaviour
     }
     
     public bool damaged(){
-        if (health > 1)
+        health--;
+        if (health > 0)
         {
-            health--;
             return false;
         }
         else
         {
             return true;
+        }
+    }
+
+    void Update()
+    {
+        Debug.Log("Update method called."); // Add this line
+        if (healthText != null) // Ensure the reference is not null
+        {
+            healthText.text = "X " + health.ToString();
         }
     }
 

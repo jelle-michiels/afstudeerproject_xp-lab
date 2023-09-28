@@ -16,11 +16,16 @@ public class CheckPointManager : MonoBehaviour
     public GameObject checkpoint;
 
     public GameObject dmgScreen;
-
     private IEnumerator checkpointDelay()
     {
         yield return new WaitForSeconds(0.5f);
         LevelState.disableCheckpointscreen(checkpoint);
+    }
+
+    private IEnumerator damageDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        LevelState.damagescreenOff(dmgScreen);
     }
 
     void OnCollisionEnter(Collision other)
@@ -35,7 +40,11 @@ public class CheckPointManager : MonoBehaviour
             if (GameObject.Find("Player").GetComponent<HealthState>().damaged()){
                 LevelState.died(loseScreen);
                 Debug.Log("damage");
-            } ;
+            } else {
+                LevelState.damageTaken(dmgScreen);
+                StartCoroutine(damageDelay());
+                Debug.Log("dead");
+            };
         }
 
         if (other.gameObject.tag == "finish"){
@@ -43,5 +52,4 @@ public class CheckPointManager : MonoBehaviour
             LevelState.endPointReached(winScreen);            
         }
     }
-
 }

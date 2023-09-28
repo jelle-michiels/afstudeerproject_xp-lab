@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class LevelState
 {
+    
     public static void endPointReached(GameObject screen){
         screen.SetActive(true);
     }
@@ -17,6 +18,14 @@ public static class LevelState
         checkpoint.SetActive(false);
         Debug.Log("disabled");
      }
+
+    public static void damageTaken(GameObject screen){
+        screen.SetActive(true);
+    }
+
+    public static void damagescreenOff(GameObject screen){
+        screen.SetActive(false);
+    }
 
     public static void died(GameObject screen){
         screen.SetActive(true);
