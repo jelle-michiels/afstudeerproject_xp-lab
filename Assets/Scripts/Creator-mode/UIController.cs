@@ -47,8 +47,9 @@ public class UIController : MonoBehaviour
     void Start()
     {
         mouse = GameObject.Find("Mouse");
-
+        if (controlsText != null) { 
         controlsText.SetActive(false);
+            }
         mainUI = GameObject.Find("MainUI");
        /* controls = GameObject.Find("Controls").GetComponent<Button>();
         controls.onClick.AddListener(ToggleControls);*/
@@ -58,9 +59,15 @@ public class UIController : MonoBehaviour
         loadMenu = GameObject.Find("LoadMenu");
         saveButton = GameObject.Find("SaveButton").GetComponent<Button>();
         loadButton = GameObject.Find("LoadButton").GetComponent<Button>();
+        if (saveAndLoadUI != null) { 
         saveAndLoadUI.SetActive(false);
+            }
+        if (saveMenu != null) { 
         saveMenu.SetActive(false);
+            }
+        if (loadMenu != null) { 
         loadMenu.SetActive(false);
+            }
 
         saveButton.onClick.AddListener(OpenSaveMenu);
         loadButton.onClick.AddListener(OpenLoadMenu);
@@ -68,7 +75,9 @@ public class UIController : MonoBehaviour
         messagePanel = GameObject.Find("MessagePanel");
         message = GameObject.Find("Message").GetComponent<TextMeshProUGUI>();
         
+        if (messagePanel != null) { 
         messagePanel.SetActive(false);
+            }
 
         allowInput = true;
     }

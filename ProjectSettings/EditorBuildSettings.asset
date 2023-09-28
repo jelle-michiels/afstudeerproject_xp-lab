@@ -5,15 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/LoginMenu.unity
     guid: 4cea4b8f36230487d92ef31cb1939d7e
@@ -26,5 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Editor.unity
     guid: 3092df3fcd1a3df4084eb02ea25bbe78
+  - enabled: 1
+    path: Assets/Scenes/TextureUpload.unity
+    guid: 33b31c6cb27e7a245b7869f834878be2
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: e315c9e4fc9774832aa1d71dfaedb3d7, type: 2}

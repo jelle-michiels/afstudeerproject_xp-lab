@@ -18,6 +18,7 @@ public class mainMenu : MonoBehaviour
     public void PlayTextureUpload()
     {
         SceneManager.LoadScene("TextureUpload");
+        Debug.Log("TextureUpload");
     }
 
    public void QuitGame(){
