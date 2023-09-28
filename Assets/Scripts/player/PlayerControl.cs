@@ -14,6 +14,12 @@ public class PlayerControl : MonoBehaviour
     public bool grounded;
     public float finish;
 
+    public GameObject winScreen;
+
+    public GameObject loseScreen;
+
+    public GameObject checkpoint;
+
     public static bool gameIsPaused;
 
     private Vector2 move;
@@ -145,6 +151,7 @@ public class PlayerControl : MonoBehaviour
         if (other.gameObject.tag == "finish")
         {
             //GameObject.Find("ScoreCanvas").GetComponent<CountdownTimer>().gameFinished = true;
+            LevelState.endPointReached(winScreen);
             Debug.Log("endpoint reached");
             print("test");
         }
