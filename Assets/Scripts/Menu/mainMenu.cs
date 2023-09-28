@@ -13,6 +13,13 @@ public class mainMenu : MonoBehaviour
         SceneManager.LoadScene("Editor");
     }
 
+
+
+    public void PlayTextureUpload()
+    {
+        SceneManager.LoadScene("TextureUpload");
+    }
+
    public void QuitGame(){
       Debug.Log("quit");
       Application.Quit();
