@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
+using System;
 
 public class CountdownTimer : MonoBehaviour
 {
@@ -15,7 +16,11 @@ public class CountdownTimer : MonoBehaviour
 
     public TextMeshProUGUI countdownText;
     public TextMeshProUGUI gameOverText;
+
+    public TextMeshProUGUI youWinText;
     public TextMeshProUGUI scoreText;
+
+    
     public Button tryAgainBtn;
 
     public bool gameFinished = false;
@@ -43,7 +48,6 @@ public class CountdownTimer : MonoBehaviour
 
             if (timeTaken <= int.Parse(OptionMenu.minTimeText))
             {
-                gameFinished = true;
                 CalculateScore();
                 EndGame();
             }
@@ -66,12 +70,18 @@ public class CountdownTimer : MonoBehaviour
 
     public void EndGame()
     {
+        gameFinished = true;
         gameOverText.enabled = true;
+        //gameResult(result);
         tryAgainBtn.gameObject.SetActive(true);
         Debug.Log("Game Over. Score: " + score);
         GameObject.Find("LoadCanvas").GetComponent<EditorDatabase>().SetScore(score);
         scoreSaved = true;
         timeStarted = false;
+    }
+
+    public void gameResult(Boolean result){
+        (result ? gameOverText : youWinText).enabled = true;    
     }
 
     /*public void GameOver()
