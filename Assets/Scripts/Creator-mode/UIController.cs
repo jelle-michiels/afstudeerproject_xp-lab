@@ -73,6 +73,7 @@ public class UIController : MonoBehaviour
         loadButton.onClick.AddListener(OpenLoadMenu);
 
         messagePanel = GameObject.Find("MessagePanel");
+
         message = GameObject.Find("Message").GetComponent<TextMeshProUGUI>();
         
         if (messagePanel != null) { 

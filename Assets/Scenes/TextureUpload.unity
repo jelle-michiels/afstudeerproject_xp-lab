@@ -2340,13 +2340,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239aa249424579943938e9a409de241d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controlsText: {fileID: 0}
-  mainUI: {fileID: 0}
+  controlsText: {fileID: 1842664361}
+  mainUI: {fileID: 2036002561}
   allowInput: 0
   levelButtonPrefab: {fileID: 1066460164067779719, guid: 14619d4ca0aefb74cb33fff3794ddc5a, type: 3}
   deleteIconPrefab: {fileID: 1540322971328243108, guid: c9449beb9dd0bc34faf7928b8fd14201, type: 3}
-  messagePanel: {fileID: 0}
-  message: {fileID: 0}
+  messagePanel: {fileID: 714516873}
+  message: {fileID: 1136052625}
 --- !u!1 &714516873
 GameObject:
   m_ObjectHideFlags: 0
@@ -4743,9 +4743,9 @@ MonoBehaviour:
   uploadButton: {fileID: 1893173989132453515}
   scratchButton: {fileID: 0}
   floors: {fileID: 1893173988952568623, guid: cf088889d6b6cc047a82b4718c2e12f3, type: 3}
-  floorPrefab: {fileID: 0}
-  ground: {fileID: 0}
-  UI: {fileID: 1835223330}
+  floorPrefab: {fileID: 1893173988952568623, guid: cf088889d6b6cc047a82b4718c2e12f3, type: 3}
+  ground: {fileID: 1893173989132453516}
+  UI: {fileID: 690490725}
 --- !u!1 &1174179339
 GameObject:
   m_ObjectHideFlags: 0
@@ -8539,30 +8539,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1821800571}
   m_CullTransparentMesh: 1
---- !u!1 &1835223330 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1893173987593622224, guid: cf088889d6b6cc047a82b4718c2e12f3, type: 3}
-  m_PrefabInstance: {fileID: 1893173989132453514}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1835223334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1835223330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 239aa249424579943938e9a409de241d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controlsText: {fileID: 0}
-  mainUI: {fileID: 0}
-  allowInput: 0
-  levelButtonPrefab: {fileID: 0}
-  deleteIconPrefab: {fileID: 0}
-  messagePanel: {fileID: 0}
-  message: {fileID: 0}
 --- !u!1 &1842664361
 GameObject:
   m_ObjectHideFlags: 0
@@ -9804,10 +9780,7 @@ PrefabInstance:
     - {fileID: 1893173988952568608, guid: cf088889d6b6cc047a82b4718c2e12f3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1893173987593622224, guid: cf088889d6b6cc047a82b4718c2e12f3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1835223334}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf088889d6b6cc047a82b4718c2e12f3, type: 3}
 --- !u!114 &1893173989132453515 stripped
 MonoBehaviour:
@@ -9820,6 +9793,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1893173989132453516 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1893173988952568623, guid: cf088889d6b6cc047a82b4718c2e12f3, type: 3}
+  m_PrefabInstance: {fileID: 1893173989132453514}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
