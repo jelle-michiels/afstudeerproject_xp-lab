@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -870,6 +870,7 @@ MonoBehaviour:
   toggle: {fileID: 168283292}
   backgroundImage: {fileID: 1455212576}
   controlMenu: {fileID: 1842664361}
+  buttonCanvas: {fileID: 0}
 --- !u!1 &271435964
 GameObject:
   m_ObjectHideFlags: 0
@@ -2344,6 +2345,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239aa249424579943938e9a409de241d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controlsText: {fileID: 0}
+  mainUI: {fileID: 0}
   allowInput: 0
   levelButtonPrefab: {fileID: 1066460164067779719, guid: 14619d4ca0aefb74cb33fff3794ddc5a, type: 3}
   deleteIconPrefab: {fileID: 1540322971328243108, guid: c9449beb9dd0bc34faf7928b8fd14201, type: 3}
@@ -2882,7 +2885,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &846547921
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4707,6 +4710,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1166253650}
   - component: {fileID: 1166253649}
+  - component: {fileID: 1166253651}
   m_Layer: 0
   m_Name: Floors
   m_TagString: Untagged
@@ -4726,7 +4730,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66737f8d70f902946871dacf784aaf8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uploadButton: {fileID: 0}
+  scratchButton: {fileID: 0}
+  floors: {fileID: 0}
   floorPlane: {fileID: 1893173988952568623, guid: cf088889d6b6cc047a82b4718c2e12f3, type: 3}
+  ground: {fileID: 0}
+  UI: {fileID: 0}
 --- !u!4 &1166253650
 Transform:
   m_ObjectHideFlags: 0
@@ -4743,6 +4752,24 @@ Transform:
   - {fileID: 364459433}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1166253651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166253648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33452d357106b3141bd041c0a832d84a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uploadButton: {fileID: 0}
+  scratchButton: {fileID: 0}
+  floors: {fileID: 1893173988952568623, guid: cf088889d6b6cc047a82b4718c2e12f3, type: 3}
+  floorPlane: {fileID: 0}
+  ground: {fileID: 0}
+  UI: {fileID: 0}
 --- !u!1 &1174179339
 GameObject:
   m_ObjectHideFlags: 0
@@ -5294,7 +5321,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1207582046
 RectTransform:
   m_ObjectHideFlags: 0
