@@ -36,7 +36,7 @@ public class HoverTipManager : MonoBehaviour
         tipWindow.sizeDelta = new Vector2(tipText.preferredWidth > 200 ? 200 : tipText.preferredWidth, tipText.preferredHeight);
 
         tipWindow.gameObject.SetActive(true);
-        tipWindow.transform.position = new Vector2(mousepos.x + tipWindow.sizeDelta.x * 2, mousepos.y);
+        tipWindow.transform.position = new Vector2(mousepos.x - tipWindow.sizeDelta.x, mousepos.y);
     }
 
     private void HideTip()
