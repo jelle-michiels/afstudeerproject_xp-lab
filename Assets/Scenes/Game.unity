@@ -162,6 +162,7 @@ MonoBehaviour:
   tryAgainBtn: {fileID: 583123797}
   homeButton: {fileID: 512482631}
   gameFinished: 0
+  playerControl: {fileID: 1372965467}
 --- !u!114 &139613910
 MonoBehaviour:
   m_ObjectHideFlags: 0

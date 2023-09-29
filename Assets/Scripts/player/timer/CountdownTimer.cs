@@ -21,12 +21,13 @@ public class CountdownTimer : MonoBehaviour
     public TextMeshProUGUI youWinText;
     public TextMeshProUGUI scoreText;
 
-    
     public Button tryAgainBtn, homeButton;
 
     public bool gameFinished = false;
     private bool scoreSaved = false;
     private bool timeStarted = false;
+
+    public PlayerControl playerControl;
 
     void Start()
     {
@@ -89,6 +90,7 @@ public class CountdownTimer : MonoBehaviour
         if (this.gameFinished == false) {
             (result ? youWinText : gameOverText).enabled = true;
             EventSystem.current.SetSelectedGameObject(result ? homeButton.gameObject : tryAgainBtn.gameObject);
+            playerControl.enabled = false;
         }
             
     }
