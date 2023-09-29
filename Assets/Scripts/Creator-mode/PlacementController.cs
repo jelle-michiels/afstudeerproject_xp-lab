@@ -37,6 +37,8 @@ public class PlacementController : MonoBehaviour
     private Button wallPart;
     private Button stairs;
     private Button checkpoint;
+    private Button realCheckpoint;
+    private Button damagePoint;
     private Button endpoint;
     private Button wrongDoor;
     private Button correctDoor;
@@ -88,6 +90,8 @@ public class PlacementController : MonoBehaviour
         endpoint = GameObject.Find("Endpoint").GetComponent<Button>();
         wrongDoor = GameObject.Find("WrongDoor").GetComponent<Button>();
         correctDoor = GameObject.Find("CorrectDoor").GetComponent<Button>();
+        damagePoint = GameObject.Find("DamagePoint").GetComponent<Button>();
+        realCheckpoint = GameObject.Find("RealCheckpoint").GetComponent<Button>();
 
 
         heightButton = GameObject.Find("HeightButton").GetComponent<Button>();
@@ -111,6 +115,8 @@ public class PlacementController : MonoBehaviour
         endpoint.onClick.AddListener(() => { ChangeObject(5); });
         wrongDoor.onClick.AddListener(() => { ChangeObject(6); });
         correctDoor.onClick.AddListener(() => { ChangeObject(7); });
+        damagePoint.onClick.AddListener(() => { ChangeObject(8); });
+        realCheckpoint.onClick.AddListener(() => { ChangeObject(9); });
 
         deleteButton.onClick.AddListener(() => { DestroyObject(selectedObject); });
 
