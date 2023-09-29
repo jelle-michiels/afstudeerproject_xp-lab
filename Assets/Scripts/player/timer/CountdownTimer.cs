@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 using System;
+using UnityEngine.EventSystems;
 
 public class CountdownTimer : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class CountdownTimer : MonoBehaviour
     public TextMeshProUGUI scoreText;
 
     
-    public Button tryAgainBtn;
+    public Button tryAgainBtn, homeButton;
 
     public bool gameFinished = false;
     private bool scoreSaved = false;
@@ -33,6 +34,7 @@ public class CountdownTimer : MonoBehaviour
         gameOverText.enabled = false;
         youWinText.enabled = false;
         tryAgainBtn.gameObject.SetActive(false);
+        homeButton.gameObject.SetActive(false);
         gameFinished = false;
         timeTaken = int.Parse(OptionMenu.maxTimeText);
     }
@@ -74,6 +76,7 @@ public class CountdownTimer : MonoBehaviour
         gameResult(result);
         gameFinished = true; // Check gameResult() before touching this
         tryAgainBtn.gameObject.SetActive(true);
+        homeButton.gameObject.SetActive(true);
         Debug.Log("Game Over. Score: " + score);
         GameObject.Find("LoadCanvas").GetComponent<EditorDatabase>().SetScore(score);
         scoreSaved = true;
@@ -84,7 +87,8 @@ public class CountdownTimer : MonoBehaviour
     public void gameResult(Boolean result){
         Debug.Log("Game Result: " + result);
         if (this.gameFinished == false) {
-            (result ? youWinText: gameOverText).enabled = true;
+            (result ? youWinText : gameOverText).enabled = true;
+            EventSystem.current.SetSelectedGameObject(result ? homeButton.gameObject : tryAgainBtn.gameObject);
         }
             
     }
