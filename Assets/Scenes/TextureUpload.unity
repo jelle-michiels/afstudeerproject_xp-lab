@@ -2235,6 +2235,7 @@ GameObject:
   - component: {fileID: 690490727}
   - component: {fileID: 690490726}
   - component: {fileID: 690490730}
+  - component: {fileID: 690490731}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -2347,6 +2348,19 @@ MonoBehaviour:
   deleteIconPrefab: {fileID: 1540322971328243108, guid: c9449beb9dd0bc34faf7928b8fd14201, type: 3}
   messagePanel: {fileID: 714516873}
   message: {fileID: 1136052625}
+--- !u!114 &690490731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690490725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e0d897a82313c345a3557db1a242e45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scriptNameToFind: PlacementController
 --- !u!1 &714516873
 GameObject:
   m_ObjectHideFlags: 0
@@ -3705,6 +3719,8 @@ MonoBehaviour:
   - {fileID: 3881804174959848972, guid: 03bdab2d72b30c54d8d77f90ab920348, type: 3}
   - {fileID: 8130921515360841392, guid: 485034ba39ca04b45a356b1bcb71f389, type: 3}
   - {fileID: 8130921515360841392, guid: 8d2d193b614b8c2459d61e746bdb8cff, type: 3}
+  - {fileID: 7596822624527837103, guid: ea9f40cfca5b54114b53ebf9263714ea, type: 3}
+  - {fileID: 6554995643554309868, guid: f86e40690fab040f19fb5ab98be375be, type: 3}
   placing: {fileID: 2100000, guid: 5a51c9f7f9a219c4a86298815f6f65e5, type: 2}
   selectedMaterial: {fileID: 2100000, guid: ea599227dded00f40b7f89c0f719bf39, type: 2}
   gridSize: 0.5
@@ -4741,9 +4757,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uploadButton: {fileID: 1893173989132453515}
-  scratchButton: {fileID: 0}
-  floors: {fileID: 1166253648}
-  floorPrefab: {fileID: 1893173988952568623, guid: cf088889d6b6cc047a82b4718c2e12f3, type: 3}
   ground: {fileID: 1893173989132453516}
   UI: {fileID: 690490725}
 --- !u!1 &1174179339

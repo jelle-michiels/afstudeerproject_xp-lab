@@ -90,7 +90,9 @@ public class PlacementController : MonoBehaviour
         endpoint = GameObject.Find("Endpoint").GetComponent<Button>();
         wrongDoor = GameObject.Find("WrongDoor").GetComponent<Button>();
         correctDoor = GameObject.Find("CorrectDoor").GetComponent<Button>();
-        damagePoint = GameObject.Find("DamagePoint").GetComponent<Button>();
+        if (GameObject.Find("DamagePoint") != null)
+        { damagePoint = GameObject.Find("DamagePoint").GetComponent<Button>(); }
+       
         realCheckpoint = GameObject.Find("RealCheckpoint").GetComponent<Button>();
 
 
@@ -229,8 +231,15 @@ public class PlacementController : MonoBehaviour
         wall.interactable = UI.GetComponent<UIController>().allowInput;
         floor.interactable = UI.GetComponent<UIController>().allowInput;
         wallPart.interactable = UI.GetComponent<UIController>().allowInput;
-        heightButton.interactable = UI.GetComponent<UIController>().allowInput;
-        deleteButton.interactable = UI.GetComponent<UIController>().allowInput;
+        if (heightButton != null)
+        {
+            heightButton.interactable = UI.GetComponent<UIController>().allowInput;
+        }
+        if (deleteButton != null)
+        {
+            deleteButton.interactable = UI.GetComponent<UIController>().allowInput;
+        }
+
 
 
         if (!UI.GetComponent<UIController>().allowInput)
