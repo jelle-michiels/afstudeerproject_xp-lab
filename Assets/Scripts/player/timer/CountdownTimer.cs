@@ -63,7 +63,7 @@ public class CountdownTimer : MonoBehaviour
     private void CalculateScore()
     {
         // Calculate the score as a percentage using the formula
-        score = (int.Parse(SettingsMenu.maxTimeText) - timeTaken) * 100;
+        score = (int.Parse(SettingsMenu.maxTimeText) + timeTaken) / 5;
         if (score < 0)
         {
             score = 0;
