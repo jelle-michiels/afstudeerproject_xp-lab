@@ -4742,7 +4742,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uploadButton: {fileID: 1893173989132453515}
   scratchButton: {fileID: 0}
-  floors: {fileID: 1893173988952568623, guid: cf088889d6b6cc047a82b4718c2e12f3, type: 3}
+  floors: {fileID: 1166253648}
   floorPrefab: {fileID: 1893173988952568623, guid: cf088889d6b6cc047a82b4718c2e12f3, type: 3}
   ground: {fileID: 1893173989132453516}
   UI: {fileID: 690490725}
@@ -9727,6 +9727,10 @@ PrefabInstance:
     - target: {fileID: 1893173987310863807, guid: cf088889d6b6cc047a82b4718c2e12f3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893173987470937441, guid: cf088889d6b6cc047a82b4718c2e12f3, type: 3}
+      propertyPath: m_text
+      value: 3D model uploaden
       objectReference: {fileID: 0}
     - target: {fileID: 1893173988952568611, guid: cf088889d6b6cc047a82b4718c2e12f3, type: 3}
       propertyPath: m_RootOrder

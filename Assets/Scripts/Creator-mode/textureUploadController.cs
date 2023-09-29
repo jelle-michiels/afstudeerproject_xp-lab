@@ -3,59 +3,28 @@ using UnityEngine.UI;
 using UnityEditor;
 using SimpleFileBrowser;
 using System.Collections;
-using System.Collections.Generic;
+using System.IO;
 
 public class TextureUploadController : MonoBehaviour
 {
     public Button uploadButton;
-    public Button scratchButton;
-    public GameObject floors;
-    public GameObject floorPrefab;
-    public GameObject ground;
-
-    private GameObject currentFloorPlane;
-    private string modelPath;
+    public GameObject ground; // Reference to the ground plane in your scene
     public GameObject UI;
-    private int clickCount = 0;
-    private int currentFloor = 0;
 
-    // Start is called before the first frame update
-    void Start()
+    private int clickCount = 0;
+
+    private void Start()
     {
-        FileBrowser.SetFilters(true, new FileBrowser.Filter("3D Models", ".fbx", ".obj"));
-        FileBrowser.AddQuickLink("Users", "C:\\Users", null);
+        // No need to set up currentFloorPlane here, as it's not used in this script
+        // CurrentFloorPlane should be set up in the Unity Editor or your other scripts.
+        // Instead, reference the ground plane directly.
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (UI.GetComponent<UIController>().allowInput)
         {
-            Ray ray;
-            RaycastHit hit;
-
-            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit))
-            {
-                if (hit.collider.gameObject == currentFloorPlane)
-                {
-                    // On double click
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        clickCount++;
-                        if (clickCount == 2)
-                        {
-                            uploadButton.gameObject.SetActive(!uploadButton.gameObject.activeSelf);
-                            clickCount = 0;
-                        }
-                        else
-                        {
-                            StartCoroutine(ClickTimer());
-                        }
-                    }
-                }
-            }
+            // Your existing input handling code
         }
         else
         {
@@ -75,22 +44,40 @@ public class TextureUploadController : MonoBehaviour
 
         if (!string.IsNullOrEmpty(modelPath))
         {
-            // Load the 3D model from the file path
-            GameObject modelPrefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(modelPath);
+            // Get the filename from the full path
+            string fileName = Path.GetFileName(modelPath);
+
+            // Define the target path within the "3dModels" folder in the Assets directory
+            string targetPath = "Assets/3dModels/" + fileName;
+
+            // Check if the file already exists at the target location
+            if (!File.Exists(targetPath))
+            {
+                // Copy the selected 3D model file to the target path
+                FileUtil.CopyFileOrDirectory(modelPath, targetPath);
+            }
+
+            // Load the 3D model from the relative file path
+            GameObject modelPrefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(targetPath);
 
             if (modelPrefab != null)
             {
-                // Instantiate the 3D model as the current floor
-                GameObject newFloor = Instantiate(modelPrefab, currentFloorPlane.transform.position, Quaternion.identity);
-                newFloor.name = "Floor " + currentFloor;
+                // Instantiate the 3D model on the ground plane
+                Vector3 spawnPosition = ground.transform.position + Vector3.up; // Adjust the height
+                GameObject newModel = Instantiate(modelPrefab, spawnPosition, Quaternion.identity);
 
-                // Replace the current floor with the new floor
-                Destroy(currentFloorPlane);
-                currentFloorPlane = newFloor;
+                // Optionally, you can set the parent of the new model to the ground to keep the hierarchy organized
+                newModel.transform.parent = ground.transform;
 
+                // Set a specific name for the new model
+                newModel.name = "Model";
+
+                // Display a success message
                 UI.GetComponent<UIController>().messagePanel.SetActive(true);
                 UI.GetComponent<UIController>().message.text = "Model successfully uploaded";
                 StartCoroutine(UI.GetComponent<UIController>().CloseMessagePanel());
+                //disable upload button
+                uploadButton.gameObject.SetActive(false);
             }
             else
             {
@@ -105,16 +92,12 @@ public class TextureUploadController : MonoBehaviour
         }
     }
 
-    public void StartFromScratch()
-    {
-        uploadButton.gameObject.SetActive(false);
-        scratchButton.gameObject.SetActive(false);
-    }
-
     public void OpenFileExplorer()
     {
         StartCoroutine(ShowLoadDialogCoroutine());
     }
+
+    private string modelPath; // Add a field to store the model path
 
     IEnumerator ShowLoadDialogCoroutine()
     {
@@ -123,6 +106,7 @@ public class TextureUploadController : MonoBehaviour
 
         if (FileBrowser.Success)
         {
+            // Assign the selected model path to the modelPath variable before calling Upload
             modelPath = FileBrowser.Result[0];
             Upload();
         }
