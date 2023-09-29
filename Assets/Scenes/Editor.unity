@@ -864,7 +864,7 @@ GameObject:
   - component: {fileID: 122458618}
   - component: {fileID: 122458617}
   m_Layer: 5
-  m_Name: DamagePoints
+  m_Name: DamagePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
