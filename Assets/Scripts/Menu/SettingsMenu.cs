@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class OptionMenu : MonoBehaviour
+public class SettingsMenu : MonoBehaviour
 {
 /*    public InputField maxTime;
     public InputField minTime;*/

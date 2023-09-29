@@ -37,7 +37,7 @@ public class CountdownTimer : MonoBehaviour
         tryAgainBtn.gameObject.SetActive(false);
         homeButton.gameObject.SetActive(false);
         gameFinished = false;
-        timeTaken = int.Parse(OptionMenu.maxTimeText);
+        timeTaken = int.Parse(SettingsMenu.maxTimeText);
     }
 
     void Update()
@@ -50,7 +50,7 @@ public class CountdownTimer : MonoBehaviour
             }
             /*timeTaken -= Time.deltaTime;*/ // update the time taken while the game is running
 
-            if (timeTaken <= int.Parse(OptionMenu.minTimeText))
+            if (timeTaken <= int.Parse(SettingsMenu.minTimeText))
             {
                 CalculateScore();
                 EndGame(false);
@@ -63,7 +63,7 @@ public class CountdownTimer : MonoBehaviour
     private void CalculateScore()
     {
         // Calculate the score as a percentage using the formula
-        score = (int.Parse(OptionMenu.maxTimeText) - timeTaken) * 5;
+        score = (int.Parse(SettingsMenu.maxTimeText) - timeTaken) * 5;
         if (score < 0)
         {
             score = 0;
