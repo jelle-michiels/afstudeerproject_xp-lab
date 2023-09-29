@@ -3686,11 +3686,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 983908376}
-  - component: {fileID: 983908375}
   - component: {fileID: 983908377}
   - component: {fileID: 983908378}
   - component: {fileID: 983908380}
   - component: {fileID: 983908379}
+  - component: {fileID: 983908381}
   m_Layer: 0
   m_Name: Mouse
   m_TagString: Untagged
@@ -3698,35 +3698,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &983908375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 983908374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c1f39b6eab1d6544a5d1c2b9b053810, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  placeableObjectPrefabs:
-  - {fileID: 8544633097445549815, guid: 6b8d3a13502ab6b428f0d033ea82d8db, type: 3}
-  - {fileID: 8166981330466387127, guid: c2fc1fb3cc8b79f4a856722d72249927, type: 3}
-  - {fileID: 8544633097445549815, guid: 07ec76aa1f1b5b745ba4581be339769c, type: 3}
-  - {fileID: 308483552022518720, guid: a051b923a8916e34c8e0f19973df7faa, type: 3}
-  - {fileID: 3881804174959848972, guid: f5437caf8b32d49429fe5a0cab253e59, type: 3}
-  - {fileID: 3881804174959848972, guid: 03bdab2d72b30c54d8d77f90ab920348, type: 3}
-  - {fileID: 8130921515360841392, guid: 485034ba39ca04b45a356b1bcb71f389, type: 3}
-  - {fileID: 8130921515360841392, guid: 8d2d193b614b8c2459d61e746bdb8cff, type: 3}
-  - {fileID: 7596822624527837103, guid: ea9f40cfca5b54114b53ebf9263714ea, type: 3}
-  - {fileID: 6554995643554309868, guid: f86e40690fab040f19fb5ab98be375be, type: 3}
-  placing: {fileID: 2100000, guid: 5a51c9f7f9a219c4a86298815f6f65e5, type: 2}
-  selectedMaterial: {fileID: 2100000, guid: ea599227dded00f40b7f89c0f719bf39, type: 2}
-  gridSize: 0.5
-  level:
-    createdObjects: []
-    floors: []
 --- !u!4 &983908376
 Transform:
   m_ObjectHideFlags: 0
@@ -3821,6 +3792,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0d3a5a420087454ba29ea8b0b720a97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &983908381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983908374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a6b166c2e8316441998bc4e3663275e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placeableObjectPrefabs: []
+  placing: {fileID: 2100000, guid: 5a51c9f7f9a219c4a86298815f6f65e5, type: 2}
+  selectedMaterial: {fileID: 2100000, guid: ea599227dded00f40b7f89c0f719bf39, type: 2}
+  gridSize: 0.05
+  level:
+    createdObjects: []
+    floors: []
 --- !u!1 &995231110
 GameObject:
   m_ObjectHideFlags: 0
