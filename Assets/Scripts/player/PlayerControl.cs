@@ -38,7 +38,6 @@ public class PlayerControl : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-       Jump();
     }
 
     void FixedUpdate()
@@ -110,9 +109,25 @@ public class PlayerControl : MonoBehaviour
         Look();
     }
 
-    public void SetGrounded(bool state)
+ /*   void FixedUpdate()
     {
-        grounded = state;
+        Move();
+
+        // Check if the player is grounded.
+        CheckGrounded();
+
+        if (transform.position.y < -finish)
+        {
+            Debug.Log("You Win");
+            gameIsPaused = true;
+        }
+    }*/
+
+
+    void CheckGrounded()
+    {
+        // Perform a raycast to check if the player is grounded.
+        grounded = Physics.Raycast(transform.position, Vector3.down, 0.1f); // Adjust the distance as needed.
     }
 
     /* private void OnTriggerEnter(Collider other)

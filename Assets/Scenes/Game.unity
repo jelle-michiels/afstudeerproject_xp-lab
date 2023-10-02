@@ -4146,7 +4146,7 @@ MonoBehaviour:
   speed: 4
   maxForce: 1
   jumpForce: 1
-  grounded: 0
+  grounded: 1
   finish: 0
   winScreen: {fileID: 0}
   loseScreen: {fileID: 0}
