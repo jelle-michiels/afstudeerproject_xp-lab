@@ -36,7 +36,7 @@ public class LevelController : MonoBehaviour
             StartCoroutine(UI.GetComponent<UIController>().CloseMessagePanel());
         }
 
-        foreach (CreatedObject.Data data in level.createdObjects)
+        foreach (CreatedObject.Data data in level.createdObjectsData)
         {
             Debug.Log(data.tag);
         }
@@ -194,7 +194,7 @@ public class LevelController : MonoBehaviour
     {
         placeableObjectPrefabs = GetComponent<PlacementController>().placeableObjectPrefabs;
 
-        foreach (CreatedObject.Data data in level.createdObjects)
+        foreach (CreatedObject.Data data in level.createdObjectsData)
         {
             Debug.Log("Loading object..");
             for (int i = 0; i < placeableObjectPrefabs.Length; i++)

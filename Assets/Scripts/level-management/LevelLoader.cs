@@ -59,7 +59,7 @@ public class LevelLoader : MonoBehaviour
 
     void CreateFromFile()
     {
-        foreach (CreatedObject.Data data in level.createdObjects)
+        foreach (CreatedObject.Data data in level.createdObjectsData)
         {
             Debug.Log("Loading object..");
             for (int i = 0; i < placeableObjectPrefabs.Length; i++)
