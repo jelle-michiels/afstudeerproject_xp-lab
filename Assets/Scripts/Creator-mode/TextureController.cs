@@ -87,7 +87,6 @@ public class TextureController : MonoBehaviour
 
 
             }
-            // -----
         
         if (deleteButton != null)
         {
