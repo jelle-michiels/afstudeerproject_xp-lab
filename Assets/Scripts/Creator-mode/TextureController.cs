@@ -99,8 +99,8 @@ public class TextureController : MonoBehaviour
         correctDoor = GameObject.Find("CorrectDoor").GetComponent<Button>();
         if (GameObject.Find("DamagePoint") != null)
         { damagePoint = GameObject.Find("DamagePoint").GetComponent<Button>(); }
-
-        realCheckpoint = GameObject.Find("RealCheckpoint").GetComponent<Button>();
+        if (GameObject.Find("RealCheckpoint") != null)
+        { realCheckpoint = GameObject.Find("RealCheckpoint").GetComponent<Button>(); }
 
 
         heightButton = GameObject.Find("HeightButton").GetComponent<Button>();
@@ -124,8 +124,10 @@ public class TextureController : MonoBehaviour
         endpoint.onClick.AddListener(() => { ChangeObject(5); });
         wrongDoor.onClick.AddListener(() => { ChangeObject(6); });
         correctDoor.onClick.AddListener(() => { ChangeObject(7); });
-        damagePoint.onClick.AddListener(() => { ChangeObject(8); });
-        realCheckpoint.onClick.AddListener(() => { ChangeObject(9); });
+        if (GameObject.Find("DamagePoint") != null)
+        { damagePoint.onClick.AddListener(() => { ChangeObject(8); }); }
+        if (GameObject.Find("RealCheckpoint") != null)
+        { realCheckpoint.onClick.AddListener(() => { ChangeObject(9); }); }
 
         deleteButton.onClick.AddListener(() => { DestroyObject(selectedObject); });
 

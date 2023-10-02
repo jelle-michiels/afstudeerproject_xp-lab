@@ -3689,7 +3689,6 @@ GameObject:
   - component: {fileID: 983908377}
   - component: {fileID: 983908378}
   - component: {fileID: 983908380}
-  - component: {fileID: 983908379}
   - component: {fileID: 983908381}
   m_Layer: 0
   m_Name: Mouse
@@ -3768,18 +3767,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   createdObjects: []
---- !u!114 &983908379
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 983908374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b58d83a424d9b0045b324f80e38cc0bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &983908380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6496,9 +6483,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1374125469}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c046e18d3e6747546a4289c9d6bca5cb, type: 3}
+  m_Script: {fileID: 11500000, guid: c52b479f2606661468b941b75fb62ed5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 5
+  rotationSpeed: 2
+  zoomSpeed: 2
 --- !u!1 &1376704877
 GameObject:
   m_ObjectHideFlags: 0
