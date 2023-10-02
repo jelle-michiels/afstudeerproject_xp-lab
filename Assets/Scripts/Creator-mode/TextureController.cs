@@ -279,7 +279,7 @@ public class TextureController : MonoBehaviour
 
                 Debug.Log(newObjData.data.tag);
 
-                level.createdObjects.Add(newObjData.data);
+                level.createdObjectsData.Add(newObjData.data);
 
             }
         }
@@ -303,7 +303,7 @@ public class TextureController : MonoBehaviour
 
     void DestroyObject(GameObject selectedObject)
     {
-        level.createdObjects.Remove(selectedObject.GetComponent<CreatedObject>().data);
+        level.createdObjectsData.Remove(selectedObject.GetComponent<CreatedObject>().data);
         Destroy(selectedObject);
         selectedObject = null;
 

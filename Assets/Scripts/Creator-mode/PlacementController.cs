@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class PlacementController : MonoBehaviour
 {
@@ -92,7 +93,7 @@ public class PlacementController : MonoBehaviour
         correctDoor = GameObject.Find("CorrectDoor").GetComponent<Button>();
         if (GameObject.Find("DamagePoint") != null)
         { damagePoint = GameObject.Find("DamagePoint").GetComponent<Button>(); }
-       
+
         realCheckpoint = GameObject.Find("RealCheckpoint").GetComponent<Button>();
 
 
@@ -174,7 +175,7 @@ public class PlacementController : MonoBehaviour
             if (Input.GetKey(KeyCode.Delete))
             {
                 DestroyObject(selectedObject);
-                
+
             }
 
             if (Input.GetMouseButtonDown(1))
@@ -317,7 +318,7 @@ public class PlacementController : MonoBehaviour
 
                 Debug.Log(newObjData.data.tag);
 
-                level.createdObjects.Add(newObjData.data);
+                level.createdObjectsData.Add(newObjData.data);
 
             }
         }
@@ -341,7 +342,7 @@ public class PlacementController : MonoBehaviour
 
     void DestroyObject(GameObject selectedObject)
     {
-        level.createdObjects.Remove(selectedObject.GetComponent<CreatedObject>().data);
+        level.createdObjectsData.Remove(selectedObject.GetComponent<CreatedObject>().data);
         Destroy(selectedObject);
         selectedObject = null;
 
@@ -359,7 +360,7 @@ public class PlacementController : MonoBehaviour
         {
             height += 3f;
             heightForText += 3f;
-            displayHeight = heightForText/3;
+            displayHeight = heightForText / 3;
             heightText.text = "Hoogte: " + displayHeight;
         }
     }
@@ -551,64 +552,65 @@ public class PlacementController : MonoBehaviour
                 selectedObject = hit.transform.gameObject;
             }
 
-            if (selectedObject  != null) { 
-
-            objectMaterial = selectedObject.GetComponent<MeshRenderer>().material;
-            selectedObject.GetComponent<MeshRenderer>().material = selectedMaterial;
-            currentPlaceableObject = selectedObject;
-
-            if (selectedObject.tag == "Floor")
+            if (selectedObject != null)
             {
-                height = selectedObject.transform.position.y;
-                initialHeight = 0f;
-                heightForText = selectedObject.transform.position.y;
 
-            }
-            if (selectedObject.tag == "WallPart")
-            {
-                height = selectedObject.transform.position.y;
-                initialHeight = 0.25f;
-                heightForText = selectedObject.transform.position.y - 0.25f;
+                objectMaterial = selectedObject.GetComponent<MeshRenderer>().material;
+                selectedObject.GetComponent<MeshRenderer>().material = selectedMaterial;
+                currentPlaceableObject = selectedObject;
 
-            }
-            if (selectedObject.tag == "Spawnpoint" || currentPlaceableObject.tag == "Endpoint")
-            {
-                height = selectedObject.transform.position.y;
-                initialHeight = 0.5f;
-                heightForText = selectedObject.transform.position.y - 0.5f;
-            }
-            if (selectedObject.tag == "Stairs" || selectedObject.tag == "WrongDoor" || selectedObject.tag == "CorrectDoor")
-            {
-                foreach (Transform child in selectedObject.transform)
-                {
-                    child.GetComponent<MeshRenderer>().material = selectedObject.GetComponent<MeshRenderer>().material;
-                }
-
-                if (selectedObject.tag == "Stairs")
+                if (selectedObject.tag == "Floor")
                 {
                     height = selectedObject.transform.position.y;
-                    initialHeight = 0.3f;
-                    heightForText = selectedObject.transform.position.y - 0.3f;
-                }
-                else
-                {
-                    height = selectedObject.transform.position.y;
-                    initialHeight = 0;
+                    initialHeight = 0f;
                     heightForText = selectedObject.transform.position.y;
+
+                }
+                if (selectedObject.tag == "WallPart")
+                {
+                    height = selectedObject.transform.position.y;
+                    initialHeight = 0.25f;
+                    heightForText = selectedObject.transform.position.y - 0.25f;
+
+                }
+                if (selectedObject.tag == "Spawnpoint" || currentPlaceableObject.tag == "Endpoint")
+                {
+                    height = selectedObject.transform.position.y;
+                    initialHeight = 0.5f;
+                    heightForText = selectedObject.transform.position.y - 0.5f;
+                }
+                if (selectedObject.tag == "Stairs" || selectedObject.tag == "WrongDoor" || selectedObject.tag == "CorrectDoor")
+                {
+                    foreach (Transform child in selectedObject.transform)
+                    {
+                        child.GetComponent<MeshRenderer>().material = selectedObject.GetComponent<MeshRenderer>().material;
+                    }
+
+                    if (selectedObject.tag == "Stairs")
+                    {
+                        height = selectedObject.transform.position.y;
+                        initialHeight = 0.3f;
+                        heightForText = selectedObject.transform.position.y - 0.3f;
+                    }
+                    else
+                    {
+                        height = selectedObject.transform.position.y;
+                        initialHeight = 0;
+                        heightForText = selectedObject.transform.position.y;
+                    }
+
+
+                }
+                if (selectedObject.tag == "Wall")
+                {
+
+                    height = selectedObject.transform.position.y;
+                    initialHeight = 1.5f;
+                    heightForText = selectedObject.transform.position.y - 1.5f;
+
                 }
 
-
-            }
-            if (selectedObject.tag == "Wall")
-            {
-
-                height = selectedObject.transform.position.y;
-                initialHeight = 1.5f;
-                heightForText = selectedObject.transform.position.y - 1.5f;
-
-            }
-
-            heightText.text = "Hoogte: " + heightForText.ToString();
+                heightText.text = "Hoogte: " + heightForText.ToString();
 
             }
 
@@ -617,6 +619,39 @@ public class PlacementController : MonoBehaviour
 
 
     }
+
+    public void RemoveAllCreatedObjects()
+    {
+        foreach (CreatedObject.Data createdObjectData in level.createdObjectsData)
+        {
+            GameObject objectToRemove = FindGameObjectByCreatedObjectData(createdObjectData);
+
+            Destroy(objectToRemove);
+        }
+
+        level.createdObjectsData.Clear();
+    }
+
+    private GameObject FindGameObjectByCreatedObjectData(CreatedObject.Data createdObjectData)
+    {
+        foreach (GameObject gameObject in GameObject.FindObjectsOfType<GameObject>())
+        {
+            CreatedObject objectComponent = gameObject.GetComponent<CreatedObject>();
+
+            if (objectComponent != null && AreCreatedObjectDataEqual(objectComponent.data, createdObjectData))
+            {
+                return gameObject;
+            }
+        }
+        return null;
+    }
+
+    private bool AreCreatedObjectDataEqual(CreatedObject.Data data1, CreatedObject.Data data2)
+    {
+        return data1.position == data2.position && data1.rotation == data2.rotation 
+            && data1.scale == data2.scale && data1.tag == data2.tag;
+    }
+
 
 
 

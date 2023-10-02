@@ -98,10 +98,12 @@ public class UIController : MonoBehaviour
                 ToggleControls();
             }
 
-            if (Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKey(KeyCode.R) && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
             {
+                Debug.Log("R and Control pressed");
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
+
         }
 
         if (Input.GetKeyDown(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.S))
