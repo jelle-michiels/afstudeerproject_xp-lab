@@ -14,22 +14,13 @@ public class TextureController : MonoBehaviour
     private float cameraPanSpeed = 0.1f;
     private float cameraZoomSpeed = 10.0f;
 
-    private Material objectMaterial;
-
-    public float gridSize = 0.05f;
-
     public LevelEditor level;
 
     
     private Button deleteButton;
 
-    private TextMeshProUGUI heightText;
-    private float heightForText;
-    private float displayHeight;
-
     private GameObject selected;
     private Vector3 selectedPosition;
-
     private GameObject selectedObject;
 
     private GameObject UI;
