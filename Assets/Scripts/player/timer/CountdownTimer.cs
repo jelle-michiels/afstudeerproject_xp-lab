@@ -52,7 +52,7 @@ public class CountdownTimer : MonoBehaviour
 
             if (timeTaken <= int.Parse(SettingsMenu.minTimeText))
             {
-                CalculateScore();
+                /*CalculateScore();*/
                 EndGame(false);
             }
             countdownText.text = "Time: " + timeTaken.ToString("F2"); // update the countdown text
@@ -63,7 +63,7 @@ public class CountdownTimer : MonoBehaviour
     private void CalculateScore()
     {
         // Calculate the score as a percentage using the formula
-        score = (int.Parse(SettingsMenu.maxTimeText) - timeTaken) * 5;
+        score = (int.Parse(SettingsMenu.maxTimeText) + timeTaken) / 5;
         if (score < 0)
         {
             score = 0;
@@ -74,7 +74,7 @@ public class CountdownTimer : MonoBehaviour
 
     public void EndGame(Boolean result)
     {
-        gameResult(result);
+        GameResult(result);
         gameFinished = true; // Check gameResult() before touching this
         tryAgainBtn.gameObject.SetActive(true);
         homeButton.gameObject.SetActive(true);
@@ -85,12 +85,19 @@ public class CountdownTimer : MonoBehaviour
     }
 
     // If the game is finished the win - lose screen won't change to the other
-    public void gameResult(Boolean result){
+    public void GameResult(Boolean result){
         Debug.Log("Game Result: " + result);
         if (this.gameFinished == false) {
             (result ? youWinText : gameOverText).enabled = true;
+            countdownText.gameObject.SetActive(false);
             EventSystem.current.SetSelectedGameObject(result ? homeButton.gameObject : tryAgainBtn.gameObject);
             playerControl.enabled = false;
+
+
+            if (result)
+            {
+                CalculateScore();
+            }
         }
             
     }
