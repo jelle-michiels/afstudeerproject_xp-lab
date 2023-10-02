@@ -170,7 +170,10 @@ public class PlacementController : MonoBehaviour
                 }
             }
 
-
+            if(Input.GetKey(KeyCode.R))
+            {
+                RemoveAllCreatedObjects();
+            }
 
             if (Input.GetKey(KeyCode.Delete))
             {
