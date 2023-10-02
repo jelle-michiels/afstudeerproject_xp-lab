@@ -12,6 +12,15 @@ public class TextureUploadController : MonoBehaviour
     public GameObject UI;
 
     private int clickCount = 0;
+    private float cameraMoveSpeed = 5.0f; // Adjust this value to control camera movement speed
+    private float cameraRotationSpeed = 2.0f; // Adjust this value to control camera rotation speed
+
+    private Vector3 lastMousePosition;
+    private bool isLeftDragging = false;
+    private bool isRightDragging = false;
+
+
+
 
     private void Start()
     {
@@ -22,14 +31,7 @@ public class TextureUploadController : MonoBehaviour
 
     private void Update()
     {
-        if (UI.GetComponent<UIController>().allowInput)
-        {
-            // Your existing input handling code
-        }
-        else
-        {
-            uploadButton.gameObject.SetActive(false);
-        }
+        
     }
 
     IEnumerator ClickTimer()
@@ -70,13 +72,26 @@ public class TextureUploadController : MonoBehaviour
                 newModel.transform.parent = ground.transform;
 
                 // Set a specific name for the new model
-                newModel.name = "Model";
+                newModel.name = "Modeltest";
+
+                // Find the 'camera' child object under 'Modeltest'
+                Transform cameraTransform = newModel.transform.Find("Camera");
+
+                if (cameraTransform != null)
+                {
+                    // Attach the SandboxCameraController script to the 'camera' child object
+                    SandboxCameraController cameraController = cameraTransform.gameObject.AddComponent<SandboxCameraController>();
+                }
+                else
+                {
+                    Debug.LogError("No 'camera' child object found under 'Modeltest'.");
+                }
 
                 // Display a success message
                 UI.GetComponent<UIController>().messagePanel.SetActive(true);
                 UI.GetComponent<UIController>().message.text = "Model successfully uploaded";
                 StartCoroutine(UI.GetComponent<UIController>().CloseMessagePanel());
-                //disable upload button
+                // Disable upload button
                 uploadButton.gameObject.SetActive(false);
             }
             else
@@ -91,6 +106,8 @@ public class TextureUploadController : MonoBehaviour
             StartCoroutine(UI.GetComponent<UIController>().CloseMessagePanel());
         }
     }
+
+
 
     public void OpenFileExplorer()
     {
