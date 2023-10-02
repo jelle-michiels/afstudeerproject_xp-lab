@@ -55,7 +55,7 @@ public class EditorDatabase : MonoBehaviour
             }
         }*/
 
-        List<CreatedObject.Data> createdObjects = level.createdObjects;
+        List<CreatedObject.Data> createdObjects = level.createdObjectsData;
         List<FloorData.Data> floors = level.floors;
 
         //if level in database update, else add
@@ -159,7 +159,7 @@ public class EditorDatabase : MonoBehaviour
         Debug.Log("Loading level " + name + " from database...");
 
         LevelEditor level = new LevelEditor();
-        level.createdObjects = new List<CreatedObject.Data>();
+        level.createdObjectsData = new List<CreatedObject.Data>();
         level.floors = new List<FloorData.Data>();
         
         SqlConnection dbconn = new SqlConnection(conn);
@@ -206,7 +206,7 @@ public class EditorDatabase : MonoBehaviour
                                 objData.position = StringToVector3(objReader.GetString(objReader.GetOrdinal("position")));
                                 objData.rotation = StringToQuaternion(objReader.GetString(objReader.GetOrdinal("rotation")));
                                 objData.scale = StringToVector3(objReader.GetString(objReader.GetOrdinal("scale")));
-                                level.createdObjects.Add(objData);
+                                level.createdObjectsData.Add(objData);
                             }
                         }
                     }
