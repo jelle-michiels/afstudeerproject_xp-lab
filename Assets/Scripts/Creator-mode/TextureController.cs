@@ -4,9 +4,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
-
-public class PlacementController : MonoBehaviour
+public class TextureController : MonoBehaviour
 {
+
+
+    private bool isRightClicking = false;
+    private Vector3 lastMousePosition;
+    private float cameraRotationSpeed = 2.0f;
+    private float cameraPanSpeed = 0.1f;
+    private float cameraZoomSpeed = 10.0f;
+
     public GameObject[] placeableObjectPrefabs;
 
     private GameObject currentPlaceableObject;
@@ -92,7 +99,7 @@ public class PlacementController : MonoBehaviour
         correctDoor = GameObject.Find("CorrectDoor").GetComponent<Button>();
         if (GameObject.Find("DamagePoint") != null)
         { damagePoint = GameObject.Find("DamagePoint").GetComponent<Button>(); }
-       
+
         realCheckpoint = GameObject.Find("RealCheckpoint").GetComponent<Button>();
 
 
@@ -130,97 +137,52 @@ public class PlacementController : MonoBehaviour
     {
         if (UI.GetComponent<UIController>().allowInput)
         {
-            if (!Input.GetKeyDown(KeyCode.LeftControl))
-            {
-                HandleNewObjectHotkey();
-            }
-
-
-            if (currentPlaceableObject != null)
-            {
-
-
-                MoveCurrentObjectToMouse();
-
-                if (Input.GetMouseButtonDown(0))
+         
+                // Handle camera rotation
+                if (Input.GetMouseButtonDown(1))
                 {
-                    CreateObject();
-
+                    isRightClicking = true;
+                    lastMousePosition = Input.mousePosition;
+                }
+                else if (Input.GetMouseButtonUp(1))
+                {
+                    isRightClicking = false;
                 }
 
-                if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.LeftShift))
+                if (isRightClicking)
                 {
-                    Destroy(currentPlaceableObject);
-                    heightText.text = "Hoogte";
-                    selected.SetActive(false);
+                    Vector3 deltaMousePosition = Input.mousePosition - lastMousePosition;
+                    transform.Rotate(Vector3.up, deltaMousePosition.x * cameraRotationSpeed, Space.World);
+                    transform.Rotate(Vector3.left, deltaMousePosition.y * cameraRotationSpeed);
+                    lastMousePosition = Input.mousePosition;
                 }
-            }
 
-            if (!selected.activeSelf)
-            {
-                if (!EventSystem.current.IsPointerOverGameObject()) // if not over UI
+                // Handle camera panning
+                float horizontalInput = Input.GetAxis("Horizontal");
+                float verticalInput = Input.GetAxis("Vertical");
+
+                if (Mathf.Abs(horizontalInput) > 0 || Mathf.Abs(verticalInput) > 0)
                 {
-
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        ToggleSelection();
-                    }
-
+                    Vector3 cameraDirection = new Vector3(horizontalInput, 0, verticalInput).normalized;
+                    transform.Translate(cameraDirection * cameraPanSpeed);
                 }
-            }
 
+                // Handle camera zooming
+                float scrollWheelInput = Input.GetAxis("Mouse ScrollWheel");
 
+                if (Mathf.Abs(scrollWheelInput) > 0)
+                {
+                    float zoomAmount = scrollWheelInput * cameraZoomSpeed;
+                    Vector3 newPosition = transform.position + transform.forward * zoomAmount;
+                    // Limit the zoom to a minimum and maximum distance if necessary
+                    // Example: newPosition.y = Mathf.Clamp(newPosition.y, minY, maxY);
+                    transform.position = newPosition;
+                }
 
-            if (Input.GetKey(KeyCode.Delete))
-            {
-                DestroyObject(selectedObject);
-                
-            }
-
-            if (Input.GetMouseButtonDown(1))
-            {
-                RotateObjectQuick();
-            }
-
-            if (Input.GetMouseButtonDown(2))
-            {
-                RotateObject();
 
             }
-
-            if (Input.GetKeyDown(KeyCode.KeypadPlus) || Input.GetKeyDown(KeyCode.P))
-            {
-                IncreaseHeight();
-            }
-
-            if (Input.GetKeyDown(KeyCode.KeypadMinus) || Input.GetKeyDown(KeyCode.M))
-            {
-                DecreaseHeight();
-            }
-
-            if (Input.GetKeyDown(KeyCode.Keypad4) || (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.Keypad4)) || Input.GetKeyDown(KeyCode.I) || (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.I)))
-            {
-                DecreaseWidth();
-            }
-
-            if (Input.GetKeyDown(KeyCode.Keypad6) || (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.Keypad6)) || Input.GetKeyDown(KeyCode.K) || (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.K)))
-            {
-                IncreaseWidth();
-            }
-
-            if (Input.GetKeyDown(KeyCode.Keypad2) || (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.Keypad2)) || Input.GetKeyDown(KeyCode.O) || (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.O)))
-            {
-                DecreaseLength();
-            }
-
-            if (Input.GetKeyDown(KeyCode.Keypad8) || (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.Keypad8)) || Input.GetKeyDown(KeyCode.L) || (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.L)))
-            {
-                IncreaseLength();
-            }
-
-        }
-
-        heightPlusButton.interactable = UI.GetComponent<UIController>().allowInput;
+            // -----
+            heightPlusButton.interactable = UI.GetComponent<UIController>().allowInput;
         heightMinusButton.interactable = UI.GetComponent<UIController>().allowInput;
         smallRotateButton.interactable = UI.GetComponent<UIController>().allowInput;
         largeRotateButton.interactable = UI.GetComponent<UIController>().allowInput;
@@ -359,7 +321,7 @@ public class PlacementController : MonoBehaviour
         {
             height += 3f;
             heightForText += 3f;
-            displayHeight = heightForText/3;
+            displayHeight = heightForText / 3;
             heightText.text = "Hoogte: " + displayHeight;
         }
     }
@@ -551,64 +513,65 @@ public class PlacementController : MonoBehaviour
                 selectedObject = hit.transform.gameObject;
             }
 
-            if (selectedObject  != null) { 
-
-            objectMaterial = selectedObject.GetComponent<MeshRenderer>().material;
-            selectedObject.GetComponent<MeshRenderer>().material = selectedMaterial;
-            currentPlaceableObject = selectedObject;
-
-            if (selectedObject.tag == "Floor")
+            if (selectedObject != null)
             {
-                height = selectedObject.transform.position.y;
-                initialHeight = 0f;
-                heightForText = selectedObject.transform.position.y;
 
-            }
-            if (selectedObject.tag == "WallPart")
-            {
-                height = selectedObject.transform.position.y;
-                initialHeight = 0.25f;
-                heightForText = selectedObject.transform.position.y - 0.25f;
+                objectMaterial = selectedObject.GetComponent<MeshRenderer>().material;
+                selectedObject.GetComponent<MeshRenderer>().material = selectedMaterial;
+                currentPlaceableObject = selectedObject;
 
-            }
-            if (selectedObject.tag == "Spawnpoint" || currentPlaceableObject.tag == "Endpoint")
-            {
-                height = selectedObject.transform.position.y;
-                initialHeight = 0.5f;
-                heightForText = selectedObject.transform.position.y - 0.5f;
-            }
-            if (selectedObject.tag == "Stairs" || selectedObject.tag == "WrongDoor" || selectedObject.tag == "CorrectDoor")
-            {
-                foreach (Transform child in selectedObject.transform)
-                {
-                    child.GetComponent<MeshRenderer>().material = selectedObject.GetComponent<MeshRenderer>().material;
-                }
-
-                if (selectedObject.tag == "Stairs")
+                if (selectedObject.tag == "Floor")
                 {
                     height = selectedObject.transform.position.y;
-                    initialHeight = 0.3f;
-                    heightForText = selectedObject.transform.position.y - 0.3f;
-                }
-                else
-                {
-                    height = selectedObject.transform.position.y;
-                    initialHeight = 0;
+                    initialHeight = 0f;
                     heightForText = selectedObject.transform.position.y;
+
+                }
+                if (selectedObject.tag == "WallPart")
+                {
+                    height = selectedObject.transform.position.y;
+                    initialHeight = 0.25f;
+                    heightForText = selectedObject.transform.position.y - 0.25f;
+
+                }
+                if (selectedObject.tag == "Spawnpoint" || currentPlaceableObject.tag == "Endpoint")
+                {
+                    height = selectedObject.transform.position.y;
+                    initialHeight = 0.5f;
+                    heightForText = selectedObject.transform.position.y - 0.5f;
+                }
+                if (selectedObject.tag == "Stairs" || selectedObject.tag == "WrongDoor" || selectedObject.tag == "CorrectDoor")
+                {
+                    foreach (Transform child in selectedObject.transform)
+                    {
+                        child.GetComponent<MeshRenderer>().material = selectedObject.GetComponent<MeshRenderer>().material;
+                    }
+
+                    if (selectedObject.tag == "Stairs")
+                    {
+                        height = selectedObject.transform.position.y;
+                        initialHeight = 0.3f;
+                        heightForText = selectedObject.transform.position.y - 0.3f;
+                    }
+                    else
+                    {
+                        height = selectedObject.transform.position.y;
+                        initialHeight = 0;
+                        heightForText = selectedObject.transform.position.y;
+                    }
+
+
+                }
+                if (selectedObject.tag == "Wall")
+                {
+
+                    height = selectedObject.transform.position.y;
+                    initialHeight = 1.5f;
+                    heightForText = selectedObject.transform.position.y - 1.5f;
+
                 }
 
-
-            }
-            if (selectedObject.tag == "Wall")
-            {
-
-                height = selectedObject.transform.position.y;
-                initialHeight = 1.5f;
-                heightForText = selectedObject.transform.position.y - 1.5f;
-
-            }
-
-            heightText.text = "Hoogte: " + heightForText.ToString();
+                heightText.text = "Hoogte: " + heightForText.ToString();
 
             }
 
@@ -617,7 +580,6 @@ public class PlacementController : MonoBehaviour
 
 
     }
-
 
 
 }
