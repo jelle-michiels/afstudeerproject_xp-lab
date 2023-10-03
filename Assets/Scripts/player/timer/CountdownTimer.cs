@@ -23,7 +23,7 @@ public class CountdownTimer : MonoBehaviour
 
     public Button tryAgainBtn, homeButton;
 
-    public bool gameFinished = false;
+    public static bool gameFinished = false;
     private bool scoreSaved = false;
     private bool timeStarted = false;
 
@@ -87,7 +87,7 @@ public class CountdownTimer : MonoBehaviour
     // If the game is finished the win - lose screen won't change to the other
     public void GameResult(Boolean result){
         Debug.Log("Game Result: " + result);
-        if (this.gameFinished == false) {
+        if (gameFinished == false) {
             (result ? youWinText : gameOverText).enabled = true;
             countdownText.gameObject.SetActive(false);
             EventSystem.current.SetSelectedGameObject(result ? homeButton.gameObject : tryAgainBtn.gameObject);

@@ -7,9 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class EscapeMenu : MonoBehaviour
 {
-    /*public GameObject optionsMenu;
-    public GameObject infoMenu;*/
-
     public static bool isPaused = false;
 
     public GameObject escapeMenu, playerTipsMenu, optionsMenu;
@@ -31,7 +28,7 @@ public class EscapeMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button7))
+        if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button7)) && !CountdownTimer.gameFinished)
         {
             if (optionsMenu.activeSelf)
             {
@@ -40,7 +37,7 @@ public class EscapeMenu : MonoBehaviour
                 EventSystem.current.SetSelectedGameObject(optionMenuButton);
 
             }
-            else if (!playerTipsMenu.activeSelf) // If options menu is not open, then handle the escape behavior
+            else if (!playerTipsMenu.activeSelf)
             {
                 OnEscape(isPaused);
                 if (isPaused)
