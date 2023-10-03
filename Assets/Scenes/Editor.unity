@@ -4307,6 +4307,28 @@ MonoBehaviour:
     createdObjectsData: []
     floors: []
     createdObjects: []
+  heightPlusButton: {fileID: 541299796}
+  heightMinusButton: {fileID: 634011811}
+  smallRotateButton: {fileID: 2071532766}
+  largeRotateButton: {fileID: 829171127}
+  widthPlusButton: {fileID: 1263127522}
+  widthMinusButton: {fileID: 1074852656}
+  lengthPlusButton: {fileID: 818905479}
+  lengthMinusButton: {fileID: 1570458838}
+  wall: {fileID: 1796921621}
+  floor: {fileID: 777182074}
+  wallPart: {fileID: 1618175975}
+  stairs: {fileID: 22546179}
+  checkpoint: {fileID: 969675712}
+  realCheckpoint: {fileID: 1630519412}
+  damagePoint: {fileID: 122458619}
+  endpoint: {fileID: 302679142}
+  wrongDoor: {fileID: 1353323871}
+  correctDoor: {fileID: 1617498752}
+  heightButton: {fileID: 1000297427}
+  deleteButton: {fileID: 1574516882}
+  heightText: {fileID: 1423335120}
+  selected: {fileID: 995231110}
 --- !u!4 &983908376
 Transform:
   m_ObjectHideFlags: 0
@@ -5310,7 +5332,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1147436881
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10449,7 +10471,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 10, y: -100}
+  m_AnchoredPosition: {x: 33, y: -79}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1899265566
@@ -10472,12 +10494,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "- Pijltjes: Camera bewegen\r\n- Nummertoetsen: Object selecteren\r\n-
-    Linkermuisknop: Object plaatsen/object selecteren\r\n- Rechtermuisknop: Object
-    90\xB0 draaien\r\n- Middenmuisknop: Object 15\xB0 draaien\r\n- (Ctrl +) I/K:
-    Lengte object aanpassen\r\n- (Ctrl +) O/L: Breedteobject aanpassen\r\n- P/M:
-    Hoogte aanpassen\r\n- Pg up/pg dn: Verdiep aanpassen\r\n- Delete: geselecteerd
-    object verwijderen\r\n- Shift: perspectief aanpassen\r\n- H: UI tonen/verbergen"
+  m_text: "<b><size=40>Camera view:</size></b>\n- Arrows: Move camera\n- Shift: Change
+    camera perspective\n\n\n<b><size=40>Build options:</size></b>\n- Number keys:
+    Choose ur object\n- Left mouse button: Place/select object\n- Space or Left shift:
+    Deselect object\n- Delete: Remove selected object\n- Right mouse button: Rotate
+    object 90\xB0\n- Middle mouse button: Rotate object 15\xB0\n- Keypad (+) or P:
+    Increase height of object\n- Keypad (-) or M: Decrease height of object\n- Keypad
+    (4) or Left control + Keypad (4) or I or Leftcontrol + I: Decrease width\n- Keypad
+    (6) or Left control + Keypad (6) or K or Leftcontrol + K: Increase width\n- Keypad
+    (2) or Left control + Keypad (2) or O or Leftcontrol + O: Decrease length\n-
+    Keypad (8) or Left control + Keypad (8) or L or Leftcontrol + L: Increase length\n-
+    Page up: Go floor up\n- Page down: Go floor down\n\n\n<b><size=40>General:</size></b>\n-
+    H: Show/hide UI\n- Control + R: Reload everything\n- R: Remove all placed objects"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10504,10 +10532,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30.1
+  m_fontSize: 30
   m_fontSizeBase: 30
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -10797,8 +10825,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -10}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 17.276001, y: -14}
+  m_SizeDelta: {x: 234.552, y: 70.7312}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1997237266
 MonoBehaviour:
@@ -10847,15 +10875,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 44.75
-  m_fontSizeBase: 36
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -11066,8 +11094,8 @@ RectTransform:
   - {fileID: 576729256}
   - {fileID: 1574516881}
   - {fileID: 2006994072}
-  - {fileID: 1207582046}
   - {fileID: 1484513132}
+  - {fileID: 1207582046}
   m_Father: {fileID: 690490729}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
