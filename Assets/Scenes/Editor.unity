@@ -10477,7 +10477,8 @@ MonoBehaviour:
     90\xB0 draaien\r\n- Middenmuisknop: Object 15\xB0 draaien\r\n- (Ctrl +) I/K:
     Lengte object aanpassen\r\n- (Ctrl +) O/L: Breedteobject aanpassen\r\n- P/M:
     Hoogte aanpassen\r\n- Pg up/pg dn: Verdiep aanpassen\r\n- Delete: geselecteerd
-    object verwijderen\r\n- Shift: perspectief aanpassen\r\n- H: UI tonen/verbergen"
+    object verwijderen\r\n- Shift: perspectief aanpassen\r\n- H: UI tonen/verbergen\n-
+    R: alle geplaatste objecten verwijderen\n- Ctrl + R: volledig herbeginnen"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10504,7 +10505,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30.1
+  m_fontSize: 25.8
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
