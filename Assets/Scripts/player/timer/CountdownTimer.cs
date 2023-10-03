@@ -92,7 +92,7 @@ public class CountdownTimer : MonoBehaviour
             countdownText.gameObject.SetActive(false);
             EventSystem.current.SetSelectedGameObject(result ? homeButton.gameObject : tryAgainBtn.gameObject);
             playerControl.enabled = false;
-
+            playerControl.rb.velocity = Vector3.zero;
 
             if (result)
             {
