@@ -165,9 +165,10 @@ public class PlayerControl : MonoBehaviour
     {
         if (other.gameObject.tag == "finish")
         {
+            Debug.Log("endpoint reached");
             GameObject.Find("TimerCanvas").GetComponent<CountdownTimer>().EndGame(true);
             //LevelState.endPointReached(winScreen);
-            Debug.Log("endpoint reached");
+            
             print("test");
         }
         if (other.gameObject.tag == "checkpoint"){
