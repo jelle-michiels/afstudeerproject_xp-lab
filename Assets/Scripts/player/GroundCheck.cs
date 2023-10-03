@@ -11,7 +11,7 @@ public class GroundCheck : MonoBehaviour
     {
         if(other.gameObject != player.gameObject)
         {
-            player.SetGrounded(true);
+           /* player.SetGrounded(true);*/
         }
     }
 
@@ -19,7 +19,7 @@ public class GroundCheck : MonoBehaviour
     {
         if(other.gameObject != player.gameObject)
         {
-            player.SetGrounded(false);
+            /*player.SetGrounded(false);*/
         }
     }
 
@@ -27,7 +27,7 @@ public class GroundCheck : MonoBehaviour
     {
         if(other.gameObject != player.gameObject)
         {
-            player.SetGrounded(true);
+          /*  player.SetGrounded(true);*/
         }
     }
 }
