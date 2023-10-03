@@ -47,7 +47,7 @@ public class PlacementController : MonoBehaviour
     public Button heightButton;
     public Button deleteButton;
 
-    private TextMeshProUGUI heightText;
+    public TextMeshProUGUI heightText;
     private float heightForText;
     private float displayHeight;
 
