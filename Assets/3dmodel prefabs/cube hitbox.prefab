@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5458125541185599518}
   - component: {fileID: 5515029910384029995}
   m_Layer: 0
-  m_Name: Cube Green
+  m_Name: cube hitbox
   m_TagString: CheckPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,7 +83,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6554995643554309868}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 882d56be6503fb54295c0dcd2bf8ad58, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
