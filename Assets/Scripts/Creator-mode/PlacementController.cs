@@ -24,34 +24,34 @@ public class PlacementController : MonoBehaviour
 
     public LevelEditor level;
 
-    private Button heightPlusButton;
-    private Button heightMinusButton;
-    private Button smallRotateButton;
-    private Button largeRotateButton;
-    private Button widthPlusButton;
-    private Button widthMinusButton;
-    private Button lengthPlusButton;
-    private Button lengthMinusButton;
+    public Button heightPlusButton;
+    public Button heightMinusButton;
+    public Button smallRotateButton;
+    public Button largeRotateButton;
+    public Button widthPlusButton;
+    public Button widthMinusButton;
+    public Button lengthPlusButton;
+    public Button lengthMinusButton;
 
-    private Button wall;
-    private Button floor;
-    private Button wallPart;
-    private Button stairs;
-    private Button checkpoint;
-    private Button realCheckpoint;
-    private Button damagePoint;
-    private Button endpoint;
-    private Button wrongDoor;
-    private Button correctDoor;
-
-    private Button heightButton;
-    private Button deleteButton;
+    public Button wall;
+    public Button floor;
+    public Button wallPart;
+    public Button stairs;
+    public Button checkpoint;
+    public Button realCheckpoint;
+    public Button damagePoint;
+    public Button endpoint;
+    public Button wrongDoor;
+    public Button correctDoor;
+    
+    public Button heightButton;
+    public Button deleteButton;
 
     private TextMeshProUGUI heightText;
     private float heightForText;
     private float displayHeight;
 
-    private GameObject selected;
+    public GameObject selected;
     private Vector3 selectedPosition;
 
     private GameObject selectedObject;
@@ -62,54 +62,24 @@ public class PlacementController : MonoBehaviour
 
     void Start()
     {
+
         UI = GameObject.Find("UI");
 
-        heightPlusButton = GameObject.Find("HeightPlusButton").GetComponent<Button>();
-        heightMinusButton = GameObject.Find("HeightMinusButton").GetComponent<Button>();
-
-
-        smallRotateButton = GameObject.Find("RotateSmall").GetComponent<Button>();
-        largeRotateButton = GameObject.Find("RotateLarge").GetComponent<Button>();
-
-        widthPlusButton = GameObject.Find("WidthPlusButton").GetComponent<Button>();
-        widthMinusButton = GameObject.Find("WidthMinusButton").GetComponent<Button>();
-
-
-        lengthPlusButton = GameObject.Find("LengthPlusButton").GetComponent<Button>();
-        lengthMinusButton = GameObject.Find("LengthMinusButton").GetComponent<Button>();
-
-
-        selected = GameObject.Find("Selected");
-        selectedPosition = selected.transform.position;
-        selected.SetActive(false);
-
-        wall = GameObject.Find("Wall").GetComponent<Button>();
-        floor = GameObject.Find("Floor").GetComponent<Button>();
-        wallPart = GameObject.Find("WallPart").GetComponent<Button>();
-        stairs = GameObject.Find("Stairs").GetComponent<Button>();
-        checkpoint = GameObject.Find("Checkpoint").GetComponent<Button>();
-        endpoint = GameObject.Find("Endpoint").GetComponent<Button>();
-        wrongDoor = GameObject.Find("WrongDoor").GetComponent<Button>();
-        correctDoor = GameObject.Find("CorrectDoor").GetComponent<Button>();
-        if (GameObject.Find("DamagePoint") != null)
-        { damagePoint = GameObject.Find("DamagePoint").GetComponent<Button>(); }
-
-        realCheckpoint = GameObject.Find("RealCheckpoint").GetComponent<Button>();
-
-
-        heightButton = GameObject.Find("HeightButton").GetComponent<Button>();
-        heightText = heightButton.GetComponentInChildren<TextMeshProUGUI>();
-
-        deleteButton = GameObject.Find("Delete").GetComponent<Button>();
-
+        //Height buttons
         heightPlusButton.onClick.AddListener(IncreaseHeight);
         heightMinusButton.onClick.AddListener(DecreaseHeight);
+
+        //Rotation buttons
         smallRotateButton.onClick.AddListener(RotateObject);
         largeRotateButton.onClick.AddListener(RotateObjectQuick);
+
+        //Transform object buttons
         widthPlusButton.onClick.AddListener(IncreaseWidth);
         widthMinusButton.onClick.AddListener(DecreaseWidth);
         lengthPlusButton.onClick.AddListener(IncreaseLength);
         lengthMinusButton.onClick.AddListener(DecreaseLength);
+
+        //Objects
         wall.onClick.AddListener(() => { ChangeObject(0); });
         floor.onClick.AddListener(() => { ChangeObject(1); });
         wallPart.onClick.AddListener(() => { ChangeObject(2); });
@@ -121,7 +91,70 @@ public class PlacementController : MonoBehaviour
         damagePoint.onClick.AddListener(() => { ChangeObject(8); });
         realCheckpoint.onClick.AddListener(() => { ChangeObject(9); });
 
+        //Delete button
         deleteButton.onClick.AddListener(() => { DestroyObject(selectedObject); });
+
+
+
+
+        //    heightPlusButton = GameObject.Find("HeightPlusButton").GetComponent<Button>();
+        //    heightMinusButton = GameObject.Find("HeightMinusButton").GetComponent<Button>();
+
+
+        //    smallRotateButton = GameObject.Find("RotateSmall").GetComponent<Button>();
+        //    largeRotateButton = GameObject.Find("RotateLarge").GetComponent<Button>();
+
+        //    widthPlusButton = GameObject.Find("WidthPlusButton").GetComponent<Button>();
+        //    widthMinusButton = GameObject.Find("WidthMinusButton").GetComponent<Button>();
+
+
+        //    lengthPlusButton = GameObject.Find("LengthPlusButton").GetComponent<Button>();
+        //    lengthMinusButton = GameObject.Find("LengthMinusButton").GetComponent<Button>();
+
+
+        //selected = GameObject.Find("Selected");
+        selectedPosition = selected.transform.position;
+        selected.SetActive(false);
+
+        //    wall = GameObject.Find("Wall").GetComponent<Button>();
+        //    floor = GameObject.Find("Floor").GetComponent<Button>();
+        //    wallPart = GameObject.Find("WallPart").GetComponent<Button>();
+        //    stairs = GameObject.Find("Stairs").GetComponent<Button>();
+        //    checkpoint = GameObject.Find("Checkpoint").GetComponent<Button>();
+        //    endpoint = GameObject.Find("Endpoint").GetComponent<Button>();
+        //    wrongDoor = GameObject.Find("WrongDoor").GetComponent<Button>();
+        //    correctDoor = GameObject.Find("CorrectDoor").GetComponent<Button>();
+        //    if (GameObject.Find("DamagePoint") != null)
+        //    { damagePoint = GameObject.Find("DamagePoint").GetComponent<Button>(); }
+
+        //    realCheckpoint = GameObject.Find("RealCheckpoint").GetComponent<Button>();
+
+
+        //    heightButton = GameObject.Find("HeightButton").GetComponent<Button>();
+        //    heightText = heightButton.GetComponentInChildren<TextMeshProUGUI>();
+
+        //    deleteButton = GameObject.Find("Delete").GetComponent<Button>();
+
+        //    heightPlusButton.onClick.AddListener(IncreaseHeight);
+        //    heightMinusButton.onClick.AddListener(DecreaseHeight);
+        //    smallRotateButton.onClick.AddListener(RotateObject);
+        //    largeRotateButton.onClick.AddListener(RotateObjectQuick);
+        //    widthPlusButton.onClick.AddListener(IncreaseWidth);
+        //    widthMinusButton.onClick.AddListener(DecreaseWidth);
+        //    lengthPlusButton.onClick.AddListener(IncreaseLength);
+        //    lengthMinusButton.onClick.AddListener(DecreaseLength);
+        //    wall.onClick.AddListener(() => { ChangeObject(0); });
+        //    floor.onClick.AddListener(() => { ChangeObject(1); });
+        //    wallPart.onClick.AddListener(() => { ChangeObject(2); });
+        //    stairs.onClick.AddListener(() => { ChangeObject(3); });
+        //    checkpoint.onClick.AddListener(() => { ChangeObject(4); });
+        //    endpoint.onClick.AddListener(() => { ChangeObject(5); });
+        //    wrongDoor.onClick.AddListener(() => { ChangeObject(6); });
+        //    correctDoor.onClick.AddListener(() => { ChangeObject(7); });
+        //    damagePoint.onClick.AddListener(() => { ChangeObject(8); });
+        //    realCheckpoint.onClick.AddListener(() => { ChangeObject(9); });
+
+        //    deleteButton.onClick.AddListener(() => { DestroyObject(selectedObject); });
 
     }
 

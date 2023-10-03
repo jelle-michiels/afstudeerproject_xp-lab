@@ -128,4 +128,9 @@ public class TextureUploadController : MonoBehaviour
             Upload();
         }
     }
+
+    //void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.name == )
+    //}
 }

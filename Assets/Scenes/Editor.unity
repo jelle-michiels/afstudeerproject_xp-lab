@@ -4307,6 +4307,27 @@ MonoBehaviour:
     createdObjectsData: []
     floors: []
     createdObjects: []
+  heightPlusButton: {fileID: 541299796}
+  heightMinusButton: {fileID: 634011811}
+  smallRotateButton: {fileID: 2071532766}
+  largeRotateButton: {fileID: 829171127}
+  widthPlusButton: {fileID: 1263127522}
+  widthMinusButton: {fileID: 1074852656}
+  lengthPlusButton: {fileID: 818905479}
+  lengthMinusButton: {fileID: 1570458838}
+  wall: {fileID: 1796921621}
+  floor: {fileID: 777182074}
+  wallPart: {fileID: 1618175975}
+  stairs: {fileID: 22546179}
+  checkpoint: {fileID: 969675712}
+  realCheckpoint: {fileID: 1630519412}
+  damagePoint: {fileID: 122458619}
+  endpoint: {fileID: 302679142}
+  wrongDoor: {fileID: 1353323871}
+  correctDoor: {fileID: 1617498752}
+  heightButton: {fileID: 1000297427}
+  deleteButton: {fileID: 1574516882}
+  selected: {fileID: 995231110}
 --- !u!4 &983908376
 Transform:
   m_ObjectHideFlags: 0
@@ -5310,7 +5331,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1147436881
 RectTransform:
   m_ObjectHideFlags: 0
