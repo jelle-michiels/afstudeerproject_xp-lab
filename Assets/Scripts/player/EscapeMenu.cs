@@ -29,12 +29,18 @@ public class EscapeMenu : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button7))
         {
-            if (!playerTipsMenu.activeSelf && !optionsMenu.activeSelf)
+            if (optionsMenu.activeSelf)
+            {
+                optionsMenu.SetActive(false);
+                escapeMenu.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(optionMenuButton);
+
+            }
+            else if (!playerTipsMenu.activeSelf) // If options menu is not open, then handle the escape behavior
             {
                 OnEscape(isPaused);
                 if (isPaused)
@@ -46,10 +52,9 @@ public class EscapeMenu : MonoBehaviour
                     Pause();
                 }
             }
-            /*optionsMenu.SetActive(!optionsMenu.activeSelf);*/
         }
-        
     }
+
 
     void OnEscape(bool shown)
     {
