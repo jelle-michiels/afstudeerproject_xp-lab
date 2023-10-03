@@ -93,7 +93,7 @@ public class PlacementController : MonoBehaviour
 
         //Delete button
         deleteButton.onClick.AddListener(() => { DestroyObject(selectedObject); });
-        
+       
         //Selected object
         selectedPosition = selected.transform.position;
         selected.SetActive(false);
