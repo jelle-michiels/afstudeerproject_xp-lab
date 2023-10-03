@@ -4327,6 +4327,7 @@ MonoBehaviour:
   correctDoor: {fileID: 1617498752}
   heightButton: {fileID: 1000297427}
   deleteButton: {fileID: 1574516882}
+  heightText: {fileID: 1423335120}
   selected: {fileID: 995231110}
 --- !u!4 &983908376
 Transform:
