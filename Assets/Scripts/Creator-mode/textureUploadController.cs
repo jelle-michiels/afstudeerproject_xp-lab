@@ -26,6 +26,13 @@ public class TextureUploadController : MonoBehaviour
 
     public TMP_Dropdown prefabDropdown;
 
+<<<<<<< HEAD
+=======
+    public Slider scaleSlider;
+
+    public Toggle toggleCamera;
+
+>>>>>>> 8c8adc0b7dcad783ef91fc5327cb67aaa1dd5215
     private void Start()
     {
         // No need to set up currentFloorPlane here, as it's not used in this script
@@ -88,16 +95,17 @@ public class TextureUploadController : MonoBehaviour
                 newModel = Instantiate(modelPrefab, spawnPosition, Quaternion.identity); // Store it in newModel
 
                 // Optionally, you can set the parent of the new model to the ground to keep the hierarchy organized
-                newModel.transform.parent = ground.transform;
+                newModel.transform.parent = GameObject.Find("Floors").transform;
 
                 // Set a specific name for the new model
                 newModel.name = "Modeltest";
 
                 // Find the 'camera' child object under 'Modeltest'
                 Transform cameraTransform = newModel.transform.Find("Camera");
-
+                
                 if (cameraTransform != null)
                 {
+                    MoveCameraToGround();
                     // Attach the SandboxCameraController script to the 'camera' child object
                     SandboxCameraController cameraController = cameraTransform.gameObject.AddComponent<SandboxCameraController>();
                 }
@@ -139,6 +147,35 @@ public class TextureUploadController : MonoBehaviour
         }
     }
 
+
+    public void MoveCameraToGround()
+    {
+        if (newModel != null && ground != null)
+        {
+            // Find the 'camera' child object under 'Modeltest'
+            Transform cameraTransform = newModel.transform.Find("Camera");
+
+            if (cameraTransform != null)
+            {
+                // Make the camera a child of the ground
+                cameraTransform.parent = ground.transform;
+
+                // Reset the camera's local position to (0, 0, 0) to keep its relative position
+                cameraTransform.localPosition = new Vector3(0.002746391f, 2.070468f, 1.126868f);
+
+            // Set the camera's rotation
+            cameraTransform.localRotation = Quaternion.Euler(9.444f, 179.8f, -0.001f);
+            }
+            else
+            {
+                Debug.LogError("No 'camera' child object found under 'Modeltest'.");
+            }
+        }
+        else
+        {
+            Debug.LogError("No new model or ground exists to move the camera to.");
+        }
+    }
     public void OpenFileExplorer()
     {
         StartCoroutine(ShowLoadDialogCoroutine());
@@ -159,6 +196,44 @@ public class TextureUploadController : MonoBehaviour
         }
     }
 
+<<<<<<< HEAD
+=======
+    public void ScaleModel()
+    {
+        GameObject scalableModel = GameObject.Find("Modeltest");
+        if (scalableModel != null && scaleSlider.value > 0.0f)
+        {
+            // Scale the model uniformly using the scaleValue.
+            scalableModel.transform.localScale = Vector3.one * scaleSlider.value;
+        }
+    }
+
+    public void ToggleCamera()
+    {
+        GameObject camera = GameObject.Find("Camera");
+
+        if (camera != null)
+        {
+            SandboxCameraController cameraController = camera.GetComponent<SandboxCameraController>();
+
+            if (cameraController != null)
+            {
+                // Enable or disable camera movement based on the Toggle state.
+                cameraController.enabled = toggleCamera.isOn;
+            }
+            else
+            {
+                Debug.LogError("SandboxCameraController script not found on the camera.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Camera object not found.");
+        }
+    }
+
+
+>>>>>>> 8c8adc0b7dcad783ef91fc5327cb67aaa1dd5215
     //void OnTriggerEnter(Collider other)
     //{
     //    if (other.gameObject.name == )
