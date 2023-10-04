@@ -13,7 +13,7 @@ public class TextureUploadController : MonoBehaviour
     public Button uploadButton;
     public GameObject ground; // Reference to the ground plane in your scene
     public GameObject UI;
-    public GameObject selectedHitboxPrefab = null; // Define a class-level variable to store the selected hitbox prefab
+    public GameObject selectedHitboxPrefab;
 
     private int clickCount = 0;
     private float cameraMoveSpeed = 5.0f; // Adjust this value to control camera movement speed
@@ -36,7 +36,6 @@ public class TextureUploadController : MonoBehaviour
         // No need to set up currentFloorPlane here, as it's not used in this script
         // CurrentFloorPlane should be set up in the Unity Editor or your other scripts.
         // Instead, reference the ground plane directly.
-        UpdateDropdownOptions();
 
         string[] fileNames = Directory.GetFiles("Assets/3dmodel prefabs");
 
@@ -151,8 +150,9 @@ public class TextureUploadController : MonoBehaviour
         prefabDropdown.AddOptions(prefabOptions);
     }
 
-    public void OnDropdownValueChanged(int value)
+    public void OnDropdownValueChanged()
     {
+        int value = prefabDropdown.value;
         // Get the selected prefab name from the dropdown
         string selectedPrefabName = prefabDropdown.options[value].text;
         Debug.Log("Selected prefab 1: " + selectedPrefabName);
@@ -181,7 +181,6 @@ public class TextureUploadController : MonoBehaviour
     {
         if (selectedHitboxPrefab != null && newModel != null)
         {
-            Debug.Log("Adding hitbox: " + selectedHitboxPrefab.name);
             // Instantiate the selected hitbox prefab and set its parent to the newModel
             GameObject newHitbox = Instantiate(selectedHitboxPrefab, newModel.transform);
 
@@ -290,10 +289,4 @@ public class TextureUploadController : MonoBehaviour
             Debug.LogError("Camera object not found.");
         }
     }
-
-
-    //void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.name == )
-    //}
 }
