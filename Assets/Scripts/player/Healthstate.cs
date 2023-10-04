@@ -36,7 +36,7 @@ public class HealthState : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("Update method called."); // Add this line
+        //Debug.Log("Update method called."); // Add this line
         if (healthText != null) // Ensure the reference is not null
         {
             healthText.text = "X " + health.ToString();
