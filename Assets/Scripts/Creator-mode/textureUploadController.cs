@@ -10,6 +10,7 @@ public class TextureUploadController : MonoBehaviour
     public Button uploadButton;
     public GameObject ground; // Reference to the ground plane in your scene
     public GameObject UI;
+    public GameObject selectedHitboxPrefab;
 
     private int clickCount = 0;
     private float cameraMoveSpeed = 5.0f; // Adjust this value to control camera movement speed
@@ -19,8 +20,7 @@ public class TextureUploadController : MonoBehaviour
     private bool isLeftDragging = false;
     private bool isRightDragging = false;
 
-
-
+    private GameObject newModel; // Define a class-level variable to store the new model
 
     private void Start()
     {
@@ -31,7 +31,7 @@ public class TextureUploadController : MonoBehaviour
 
     private void Update()
     {
-        
+        // You can access newModel here or in other functions
     }
 
     IEnumerator ClickTimer()
@@ -66,7 +66,7 @@ public class TextureUploadController : MonoBehaviour
             {
                 // Instantiate the 3D model on the ground plane
                 Vector3 spawnPosition = ground.transform.position + Vector3.up; // Adjust the height
-                GameObject newModel = Instantiate(modelPrefab, spawnPosition, Quaternion.identity);
+                newModel = Instantiate(modelPrefab, spawnPosition, Quaternion.identity); // Store it in newModel
 
                 // Optionally, you can set the parent of the new model to the ground to keep the hierarchy organized
                 newModel.transform.parent = ground.transform;
@@ -107,7 +107,18 @@ public class TextureUploadController : MonoBehaviour
         }
     }
 
+    public void AddSelectedHitbox()
+    {
+        if (selectedHitboxPrefab != null && newModel != null)
+        {
+            // Instantiate the selected hitbox prefab and set its parent to the newModel
+            GameObject newHitbox = Instantiate(selectedHitboxPrefab, newModel.transform);
 
+            // Optionally, adjust the position and rotation of the new hitbox
+            newHitbox.transform.localPosition = Vector3.zero; // Adjust the position as needed
+            newHitbox.transform.localRotation = Quaternion.identity; // Adjust the rotation as needed
+        }
+    }
 
     public void OpenFileExplorer()
     {
