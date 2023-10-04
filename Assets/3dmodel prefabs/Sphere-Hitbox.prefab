@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -7224429470200886206}
   m_Layer: 0
   m_Name: Sphere-Hitbox
-  m_TagString: CheckPoint
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
