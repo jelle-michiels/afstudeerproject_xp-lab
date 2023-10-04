@@ -26,6 +26,8 @@ public class TextureUploadController : MonoBehaviour
 
     public TMP_Dropdown prefabDropdown;
 
+    public Slider scaleSlider;
+
     private void Start()
     {
         // No need to set up currentFloorPlane here, as it's not used in this script
@@ -198,6 +200,16 @@ public class TextureUploadController : MonoBehaviour
             // Assign the selected model path to the modelPath variable before calling Upload
             modelPath = FileBrowser.Result[0];
             Upload();
+        }
+    }
+
+    public void ScaleModel()
+    {
+        GameObject scalableModel = GameObject.Find("Modeltest");
+        if (scalableModel != null && scaleSlider.value > 0.0f)
+        {
+            // Scale the model uniformly using the scaleValue.
+            scalableModel.transform.localScale = Vector3.one * scaleSlider.value;
         }
     }
 
