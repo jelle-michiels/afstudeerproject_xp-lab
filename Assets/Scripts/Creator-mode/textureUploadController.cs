@@ -26,6 +26,10 @@ public class TextureUploadController : MonoBehaviour
 
     public TMP_Dropdown prefabDropdown;
 
+    public Slider scaleSlider;
+
+    public Toggle toggleCamera;
+
     private void Start()
     {
         // No need to set up currentFloorPlane here, as it's not used in this script
@@ -230,6 +234,41 @@ public class TextureUploadController : MonoBehaviour
             Upload();
         }
     }
+
+    public void ScaleModel()
+    {
+        GameObject scalableModel = GameObject.Find("Modeltest");
+        if (scalableModel != null && scaleSlider.value > 0.0f)
+        {
+            // Scale the model uniformly using the scaleValue.
+            scalableModel.transform.localScale = Vector3.one * scaleSlider.value;
+        }
+    }
+
+    public void ToggleCamera()
+    {
+        GameObject camera = GameObject.Find("Camera");
+
+        if (camera != null)
+        {
+            SandboxCameraController cameraController = camera.GetComponent<SandboxCameraController>();
+
+            if (cameraController != null)
+            {
+                // Enable or disable camera movement based on the Toggle state.
+                cameraController.enabled = toggleCamera.isOn;
+            }
+            else
+            {
+                Debug.LogError("SandboxCameraController script not found on the camera.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Camera object not found.");
+        }
+    }
+
 
     //void OnTriggerEnter(Collider other)
     //{
