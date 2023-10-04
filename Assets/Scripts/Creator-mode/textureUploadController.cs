@@ -4,6 +4,8 @@ using UnityEditor;
 using SimpleFileBrowser;
 using System.Collections;
 using System.IO;
+using System.Collections.Generic;
+using TMPro;
 
 public class TextureUploadController : MonoBehaviour
 {
@@ -22,11 +24,28 @@ public class TextureUploadController : MonoBehaviour
 
     private GameObject newModel; // Define a class-level variable to store the new model
 
+    public TMP_Dropdown prefabDropdown;
+
     private void Start()
     {
         // No need to set up currentFloorPlane here, as it's not used in this script
         // CurrentFloorPlane should be set up in the Unity Editor or your other scripts.
         // Instead, reference the ground plane directly.
+
+        string[] fileNames = Directory.GetFiles("Assets/3dmodel prefabs");
+
+        prefabDropdown.ClearOptions();
+
+        List<TMP_Dropdown.OptionData> prefabOptions = new List<TMP_Dropdown.OptionData>();
+
+        foreach (string fileName in fileNames)
+        {
+            if (fileName.EndsWith(".meta")) continue;
+            prefabOptions.Add(new TMP_Dropdown.OptionData(Path.GetFileNameWithoutExtension(fileName)));
+        }
+
+        prefabDropdown.AddOptions(prefabOptions);
+
     }
 
     private void Update()
