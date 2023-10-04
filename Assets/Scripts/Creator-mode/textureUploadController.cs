@@ -26,13 +26,10 @@ public class TextureUploadController : MonoBehaviour
 
     public TMP_Dropdown prefabDropdown;
 
-<<<<<<< HEAD
-=======
     public Slider scaleSlider;
 
     public Toggle toggleCamera;
 
->>>>>>> 8c8adc0b7dcad783ef91fc5327cb67aaa1dd5215
     private void Start()
     {
         // No need to set up currentFloorPlane here, as it's not used in this script
@@ -196,8 +193,6 @@ public class TextureUploadController : MonoBehaviour
         }
     }
 
-<<<<<<< HEAD
-=======
     public void ScaleModel()
     {
         GameObject scalableModel = GameObject.Find("Modeltest");
@@ -231,11 +226,4 @@ public class TextureUploadController : MonoBehaviour
             Debug.LogError("Camera object not found.");
         }
     }
-
-
->>>>>>> 8c8adc0b7dcad783ef91fc5327cb67aaa1dd5215
-    //void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.name == )
-    //}
 }
