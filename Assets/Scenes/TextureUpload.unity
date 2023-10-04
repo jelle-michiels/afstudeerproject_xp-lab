@@ -5896,11 +5896,8 @@ MonoBehaviour:
   UI: {fileID: 690490725}
   selectedHitboxPrefab: {fileID: 810691234}
   prefabDropdown: {fileID: 810691237}
-<<<<<<< HEAD
-=======
   scaleSlider: {fileID: 1596007357}
   toggleCamera: {fileID: 93551847}
->>>>>>> 8c8adc0b7dcad783ef91fc5327cb67aaa1dd5215
 --- !u!1 &1181334662
 GameObject:
   m_ObjectHideFlags: 0
