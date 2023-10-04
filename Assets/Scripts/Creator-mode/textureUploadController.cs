@@ -12,7 +12,7 @@ public class TextureUploadController : MonoBehaviour
     public Button uploadButton;
     public GameObject ground; // Reference to the ground plane in your scene
     public GameObject UI;
-    public GameObject selectedHitboxPrefab = null; // Define a class-level variable to store the selected hitbox prefab
+    public GameObject selectedHitboxPrefab;
 
     private int clickCount = 0;
     private float cameraMoveSpeed = 5.0f; // Adjust this value to control camera movement speed
@@ -26,14 +26,11 @@ public class TextureUploadController : MonoBehaviour
 
     public TMP_Dropdown prefabDropdown;
 
-    public Slider scaleSlider;
-
     private void Start()
     {
         // No need to set up currentFloorPlane here, as it's not used in this script
         // CurrentFloorPlane should be set up in the Unity Editor or your other scripts.
         // Instead, reference the ground plane directly.
-        UpdateDropdownOptions();
 
         string[] fileNames = Directory.GetFiles("Assets/3dmodel prefabs");
 
@@ -129,51 +126,10 @@ public class TextureUploadController : MonoBehaviour
         }
     }
 
-
-    private void UpdateDropdownOptions()
-    {
-        // Load all prefabs from the "3DModelPrefabs" folder in the "Resources" folder
-        GameObject[] prefabs = Resources.LoadAll<GameObject>("3DModelPrefabs");
-
-        prefabDropdown.ClearOptions();
-
-        List<TMP_Dropdown.OptionData> prefabOptions = new List<TMP_Dropdown.OptionData>();
-
-        foreach (GameObject prefab in prefabs)
-        {
-            prefabOptions.Add(new TMP_Dropdown.OptionData(prefab.name));
-        }
-
-        prefabDropdown.AddOptions(prefabOptions);
-    }
-
-    public void OnDropdownValueChanged(int value)
-    {
-        // Get the selected prefab name from the dropdown
-        string selectedPrefabName = prefabDropdown.options[value].text;
-        Debug.Log("Selected prefab 1: " + selectedPrefabName);
-        Debug.Log("Selected prefab 2: " + "Assets/3dmodel prefabs/" + selectedPrefabName + ".prefab");
-        // Load the selected prefab from the "Resources" folder
-        string prefabPath = "Assets/3dmodel prefabs/" + selectedPrefabName + ".prefab";
-        selectedHitboxPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
-        if (selectedHitboxPrefab != null)
-        {
-            AddSelectedHitbox( selectedHitboxPrefab);
-            Debug.Log("Selected prefab: " + selectedHitboxPrefab.name);
-        }
-        else
-        {
-           /* Debug.Log("Selected prefab: " + selectedHitboxPrefab.name);*/
-            Debug.LogError("Failed to load selected prefab: " + selectedPrefabName);
-            Debug.LogError("Make sure the prefab is in the 'Resources/3DModelPrefabs' folder.");
-        }
-    }
-
-    public void AddSelectedHitbox(GameObject selectedHitboxPrefab)
+    public void AddSelectedHitbox()
     {
         if (selectedHitboxPrefab != null && newModel != null)
         {
-            Debug.Log("Adding hitbox: " + selectedHitboxPrefab.name);
             // Instantiate the selected hitbox prefab and set its parent to the newModel
             GameObject newHitbox = Instantiate(selectedHitboxPrefab, newModel.transform);
 
@@ -200,16 +156,6 @@ public class TextureUploadController : MonoBehaviour
             // Assign the selected model path to the modelPath variable before calling Upload
             modelPath = FileBrowser.Result[0];
             Upload();
-        }
-    }
-
-    public void ScaleModel()
-    {
-        GameObject scalableModel = GameObject.Find("Modeltest");
-        if (scalableModel != null && scaleSlider.value > 0.0f)
-        {
-            // Scale the model uniformly using the scaleValue.
-            scalableModel.transform.localScale = Vector3.one * scaleSlider.value;
         }
     }
 
