@@ -7,6 +7,9 @@ public class PlayerControl : MonoBehaviour
 {
     public Rigidbody rb;
     public GameObject camHolder;
+    public GameObject rdPersonCam;
+
+    public GameObject stPersonCam;
     public float speed;
     public static float sensitivity = 1;
     public float maxForce;
@@ -81,6 +84,22 @@ public class PlayerControl : MonoBehaviour
         camHolder.transform.eulerAngles = new Vector3(lookrotation, camHolder.transform.eulerAngles.y, camHolder.transform.eulerAngles.z);
     }
 
+    void Look3rd(){
+        // Get the horizontal and vertical input for camera movement
+    //float horizontalInput = Input.GetAxis("HorizontalLook");  // Horizontal input for orbiting horizontally
+    //float verticalInput = Input.GetAxis("VerticalLook");      // Vertical input for orbiting vertically
+
+    // Rotate the camera horizontally around the player
+    transform.Rotate(Vector3.up * look.x * sensitivity);
+
+    // Calculate the new vertical rotation
+    lookrotation += -look.y * sensitivity;
+    lookrotation = Mathf.Clamp(lookrotation, -90, 90);
+
+    // Rotate the camera holder (the object holding the camera) vertically around the player
+    camHolder.transform.localEulerAngles = new Vector3(lookrotation, 0, 0);
+    }
+
     void Jump()
     {
         Vector3 jumpForces = Vector3.zero;
@@ -97,6 +116,8 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+        this.camHolder = stPersonCam;
         //Mouse lock
         //Cursor.lockState = CursorLockMode.Locked;
         /*gameIsPaused = true;
@@ -106,6 +127,15 @@ public class PlayerControl : MonoBehaviour
 
     void LateUpdate()
     {
+        /*if (stPersonCam.activeSelf == true)
+        {
+            Look();
+        }
+        else
+        {
+            Look3rd();
+        }
+        //Look();*/
         Look();
     }
 
@@ -142,6 +172,26 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {
         PauseGame();
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            changeCam();
+        }
+    }
+
+    void changeCam(){
+        Debug.Log("changeCam");
+        if (rdPersonCam.activeSelf == true)
+        {
+            this.camHolder = stPersonCam;
+            stPersonCam.SetActive(true);
+            rdPersonCam.SetActive(false);
+        }
+        else
+        {
+            this.camHolder = rdPersonCam;
+            stPersonCam.SetActive(false);
+            rdPersonCam.SetActive(true);
+        }
     }
 
     void PauseGame()
