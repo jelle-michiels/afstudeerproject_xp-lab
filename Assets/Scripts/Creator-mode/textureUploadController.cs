@@ -27,7 +27,7 @@ public class TextureUploadController : MonoBehaviour
 
     public TMP_Dropdown prefabDropdown;
 
-    public Slider scaleSlider;
+    public Slider scaleSlider, xAxisSlider, yAxisSlider, zAxisSlider;
 
     public Toggle toggleCamera;
 
@@ -287,6 +287,23 @@ public class TextureUploadController : MonoBehaviour
         else
         {
             Debug.LogError("Camera object not found.");
+        }
+    }
+
+    public void ScaleHitbox()
+    {
+        GameObject[] wallObjects = GameObject.FindGameObjectsWithTag("Wall");
+
+        foreach (GameObject wallObject in wallObjects)
+        {
+            Vector3 currentScale = wallObject.transform.localScale;
+
+            // Adjust the scaling based on the values of the X, Y, and Z sliders
+            currentScale.x = xAxisSlider.value;
+            currentScale.y = yAxisSlider.value;
+            currentScale.z = zAxisSlider.value;
+
+            wallObject.transform.localScale = currentScale;
         }
     }
 }
