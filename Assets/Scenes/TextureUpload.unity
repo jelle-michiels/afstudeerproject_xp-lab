@@ -2455,12 +2455,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1166253651}
         m_TargetAssemblyTypeName: TextureUploadController, Assembly-CSharp
-        m_MethodName: AddSelectedHitbox
-        m_Mode: 1
+        m_MethodName: OnDropdownValueChanged
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -7789,6 +7789,14 @@ PrefabInstance:
     - target: {fileID: 1893173988952568611, guid: cf088889d6b6cc047a82b4718c2e12f3, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893173988952568611, guid: cf088889d6b6cc047a82b4718c2e12f3, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893173988952568611, guid: cf088889d6b6cc047a82b4718c2e12f3, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1893173988952568611, guid: cf088889d6b6cc047a82b4718c2e12f3, type: 3}
       propertyPath: m_LocalPosition.x
