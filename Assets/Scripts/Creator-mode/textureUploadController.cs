@@ -6,6 +6,7 @@ using System.Collections;
 using System.IO;
 using System.Collections.Generic;
 using TMPro;
+using System.Linq;
 
 public class TextureUploadController : MonoBehaviour
 {
@@ -161,12 +162,16 @@ public class TextureUploadController : MonoBehaviour
         selectedHitboxPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
         if (selectedHitboxPrefab != null)
         {
-            AddSelectedHitbox( selectedHitboxPrefab);
+            // Remove existing hitboxes
+            RemoveExistingHitboxes();
+
+            // Add the newly selected hitbox
+            AddSelectedHitbox(selectedHitboxPrefab);
             Debug.Log("Selected prefab: " + selectedHitboxPrefab.name);
         }
         else
         {
-           /* Debug.Log("Selected prefab: " + selectedHitboxPrefab.name);*/
+            /* Debug.Log("Selected prefab: " + selectedHitboxPrefab.name);*/
             Debug.LogError("Failed to load selected prefab: " + selectedPrefabName);
             Debug.LogError("Make sure the prefab is in the 'Resources/3DModelPrefabs' folder.");
         }
@@ -183,9 +188,26 @@ public class TextureUploadController : MonoBehaviour
             // Optionally, adjust the position and rotation of the new hitbox
             newHitbox.transform.localPosition = Vector3.zero; // Adjust the position as needed
             newHitbox.transform.localRotation = Quaternion.identity; // Adjust the rotation as needed
+
+            // Add a tag to the newHitbox to identify it as a hitbox
+            newHitbox.tag = "Wall";
         }
     }
 
+
+    private void RemoveExistingHitboxes()
+    {
+        if (newModel != null)
+        {
+            // Find all child objects with the tag "Hitbox" and destroy them
+            Transform[] hitboxes = newModel.GetComponentsInChildren<Transform>().Where(child => child.CompareTag("Wall")).ToArray();
+
+            foreach (Transform hitbox in hitboxes)
+            {
+                Destroy(hitbox.gameObject);
+            }
+        }
+    }
 
     public void MoveCameraToGround()
     {
