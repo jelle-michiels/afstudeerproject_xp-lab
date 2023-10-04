@@ -2851,8 +2851,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 488526826}
-        m_TargetAssemblyTypeName: HitboxToggle, Assembly-CSharp
+      - m_Target: {fileID: 1166253651}
+        m_TargetAssemblyTypeName: TextureUploadController, Assembly-CSharp
         m_MethodName: ToggleHitbox
         m_Mode: 1
         m_Arguments:
@@ -2863,7 +2863,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_IsOn: 0
+  m_IsOn: 1
 --- !u!114 &488526826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5925,6 +5925,7 @@ MonoBehaviour:
   yAxisSlider: {fileID: 27388142}
   zAxisSlider: {fileID: 405647939}
   toggleCamera: {fileID: 93551847}
+  hitboxToggle: {fileID: 488526825}
 --- !u!1 &1181334662
 GameObject:
   m_ObjectHideFlags: 0
