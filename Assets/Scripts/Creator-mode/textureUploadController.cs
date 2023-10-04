@@ -131,7 +131,48 @@ public class TextureUploadController : MonoBehaviour
         }
     }
 
-    public void AddSelectedHitbox()
+
+    private void UpdateDropdownOptions()
+    {
+        // Load all prefabs from the "3DModelPrefabs" folder in the "Resources" folder
+        GameObject[] prefabs = Resources.LoadAll<GameObject>("3DModelPrefabs");
+
+        prefabDropdown.ClearOptions();
+
+        List<TMP_Dropdown.OptionData> prefabOptions = new List<TMP_Dropdown.OptionData>();
+
+        foreach (GameObject prefab in prefabs)
+        {
+            prefabOptions.Add(new TMP_Dropdown.OptionData(prefab.name));
+        }
+
+        prefabDropdown.AddOptions(prefabOptions);
+    }
+
+    public void OnDropdownValueChanged()
+    {
+        int value = prefabDropdown.value;
+        // Get the selected prefab name from the dropdown
+        string selectedPrefabName = prefabDropdown.options[value].text;
+        Debug.Log("Selected prefab 1: " + selectedPrefabName);
+        Debug.Log("Selected prefab 2: " + "Assets/3dmodel prefabs/" + selectedPrefabName + ".prefab");
+        // Load the selected prefab from the "Resources" folder
+        string prefabPath = "Assets/3dmodel prefabs/" + selectedPrefabName + ".prefab";
+        selectedHitboxPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+        if (selectedHitboxPrefab != null)
+        {
+            AddSelectedHitbox( selectedHitboxPrefab);
+            Debug.Log("Selected prefab: " + selectedHitboxPrefab.name);
+        }
+        else
+        {
+           /* Debug.Log("Selected prefab: " + selectedHitboxPrefab.name);*/
+            Debug.LogError("Failed to load selected prefab: " + selectedPrefabName);
+            Debug.LogError("Make sure the prefab is in the 'Resources/3DModelPrefabs' folder.");
+        }
+    }
+
+    public void AddSelectedHitbox(GameObject selectedHitboxPrefab)
     {
         if (selectedHitboxPrefab != null && newModel != null)
         {
