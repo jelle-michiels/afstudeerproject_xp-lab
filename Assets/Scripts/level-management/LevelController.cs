@@ -41,34 +41,6 @@ public class LevelController : MonoBehaviour
             Debug.Log(data.tag);
         }
 
-        Debug.Log("Saving.");
-
-
-        string json = JsonUtility.ToJson(level);
-        string folder = UnityEngine.Application.dataPath + "/Saved/";
-        string levelFile = levelName + ".json";
-
-        Debug.Log("Saving..");
-
-        //Create new directory if LevelData directory does not yet exist.
-        if (!Directory.Exists(folder))
-            Directory.CreateDirectory(folder);
-
-        Debug.Log("Saving...");
-
-        string path = Path.Combine(folder, levelFile); // set filepath
-
-        //Overwrite file with same name, if applicable
-        if (File.Exists(path))
-            File.Delete(path);
-
-        Debug.Log("Saving....");
-
-        // create and save file
-        File.WriteAllText(path, json);
-
-        Debug.Log("Saved succesfully");
-
         Debug.Log("Saving to DB");
 
         GetComponent<EditorDatabase>().SaveLevel(level, levelName);
@@ -92,10 +64,6 @@ public class LevelController : MonoBehaviour
             Debug.Log("File deleted after waiting for 1 second.");
         }
     }
-
-
-
-
 
     // Loading a level
     public void LoadLevel(string levelName)
