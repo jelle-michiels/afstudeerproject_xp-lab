@@ -142,52 +142,6 @@ public class LevelController : MonoBehaviour
 
             Debug.Log("Level loaded");
         }
-
-
-
-        string folder = UnityEngine.Application.dataPath + "/Saved/";
-        string levelFile = levelName + ".json";
-
-        string path = Path.Combine(folder, levelFile); // set filepath
-
-        if (File.Exists(path)) // if the file could be found in LevelData
-        {
-            Debug.Log("Loading level");
-
-
-            CreatedObject[] foundObjects = FindObjectsOfType<CreatedObject>();
-            foreach (CreatedObject obj in foundObjects)
-                Destroy(obj.gameObject);
-
-            GameObject.Find("Floors").GetComponent<FloorplanController>().ClearFloors();
-
-            Debug.Log("Loading level.");
-
-            string json = File.ReadAllText(path); // provide text from json file
-            level = JsonUtility.FromJson<LevelEditor>(json); // level information filled from json file
-
-            Debug.Log("Loading level..");
-
-            CreateFromFile(); // create objects from level data.
-
-            Debug.Log("Loading floors");
-
-            List<FloorData.Data> floors = level.floors;
-
-            foreach (FloorData.Data floor in floors)
-                GameObject.Find("Floors").GetComponent<FloorplanController>().LoadFloorplanFromSave(floor.floorNumber, floor.floorPlanPath);
-
-            GameObject.Find("Floors").GetComponent<FloorplanController>().ActivateGroundFloor();
-
-            Debug.Log("Level loaded");
-        }
-        else // if the file could not be found
-        {
-            Debug.Log("File not found");
-            UI.GetComponent<UIController>().messagePanel.SetActive(true);
-            UI.GetComponent<UIController>().message.text = "Level " + levelName + " bestaat niet!";
-            StartCoroutine(UI.GetComponent<UIController>().CloseMessagePanel());
-        }
     }
 
     void CreateFromFile()
