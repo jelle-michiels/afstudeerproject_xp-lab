@@ -125,6 +125,10 @@ public class PlacementController : MonoBehaviour
 
                 if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.LeftShift))
                 {
+                    if (selectedObject != null)
+                    {
+                        DestroyObject(selectedObject);
+                    }
                     Destroy(currentPlaceableObject);
                     heightText.text = "Hoogte";
                     selected.SetActive(false);
