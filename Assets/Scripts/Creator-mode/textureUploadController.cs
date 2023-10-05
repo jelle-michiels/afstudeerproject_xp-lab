@@ -31,6 +31,8 @@ public class TextureUploadController : MonoBehaviour
 
     public Toggle toggleCamera;
 
+    public Toggle hitboxToggle;
+
     private void Start()
     {
         // No need to set up currentFloorPlane here, as it's not used in this script
@@ -100,7 +102,7 @@ public class TextureUploadController : MonoBehaviour
 
                 // Find the 'camera' child object under 'Modeltest'
                 Transform cameraTransform = newModel.transform.Find("Camera");
-                
+
                 if (cameraTransform != null)
                 {
                     MoveCameraToGround();
@@ -223,8 +225,8 @@ public class TextureUploadController : MonoBehaviour
                 // Reset the camera's local position to (0, 0, 0) to keep its relative position
                 cameraTransform.localPosition = new Vector3(0.002746391f, 2.070468f, 1.126868f);
 
-            // Set the camera's rotation
-            cameraTransform.localRotation = Quaternion.Euler(9.444f, 179.8f, -0.001f);
+                // Set the camera's rotation
+                cameraTransform.localRotation = Quaternion.Euler(9.444f, 179.8f, -0.001f);
             }
             else
             {
@@ -305,5 +307,29 @@ public class TextureUploadController : MonoBehaviour
 
             wallObject.transform.localScale = currentScale;
         }
+    }
+
+    public void ToggleHitbox()
+    {
+        GameObject wallObject = GameObject.FindGameObjectWithTag("Wall");
+
+        MeshRenderer renderer = wallObject.GetComponent<MeshRenderer>();
+
+
+                if (hitboxToggle != null)
+                {
+                    if (renderer != null)
+                    {
+                        // Toggle the visibility of the MeshRenderer based on the Toggle's state
+                        renderer.enabled = hitboxToggle.isOn;
+                    }   
+                    else
+                    {
+                        Debug.LogError("MeshRenderer not found on object with the 'Wall' tag.");
+                    }
+                } else
+                {
+                    Debug.Log("Toggle is not found");
+                }        
     }
 }
