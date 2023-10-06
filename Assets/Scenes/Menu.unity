@@ -662,17 +662,10 @@ RectTransform:
   - {fileID: 1008439273}
   m_Father: {fileID: 684328883}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-=======
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 504.83997, y: -107.895}
   m_SizeDelta: {x: 746.46, y: 215.79}
->>>>>>> 7eee5f2 (min timer removed)
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &84648392
 MonoBehaviour:
@@ -1423,7 +1416,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 279429116}
   m_CullTransparentMesh: 1
-<<<<<<< HEAD
 --- !u!1 &330217864
 GameObject:
   m_ObjectHideFlags: 0
@@ -1547,8 +1539,6 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
-=======
->>>>>>> 7eee5f2 (min timer removed)
 --- !u!1 &340050231
 GameObject:
   m_ObjectHideFlags: 0
@@ -3456,8 +3446,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
-<<<<<<< HEAD
-=======
 --- !u!114 &1220140082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3472,7 +3460,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSlider: {fileID: 1422106494}
   maxSliderValue: {fileID: 1424798}
->>>>>>> 7eee5f2 (min timer removed)
 --- !u!114 &1220140083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3512,7 +3499,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSlider: {fileID: 1422106494}
-<<<<<<< HEAD
   downArrowButton: {fileID: 1748477814}
   upArrowButton: {fileID: 1587422882}
   minSliderValue: {fileID: 1190999434}
@@ -3599,9 +3585,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1227814213}
   m_CullTransparentMesh: 1
-=======
-  maxSliderValue: {fileID: 1424798}
->>>>>>> 7eee5f2 (min timer removed)
 --- !u!1 &1286312033
 GameObject:
   m_ObjectHideFlags: 0
@@ -3750,11 +3733,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 504.83997, y: -785.265}
-<<<<<<< HEAD
-  m_SizeDelta: {x: 0, y: 0}
-=======
   m_SizeDelta: {x: 600.31, y: 215.79}
->>>>>>> 7eee5f2 (min timer removed)
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1324590176
 MonoBehaviour:
@@ -5882,11 +5861,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 504.83997, y: -559.475}
-<<<<<<< HEAD
-  m_SizeDelta: {x: 0, y: 0}
-=======
   m_SizeDelta: {x: 1009.67993, y: 215.79}
->>>>>>> 7eee5f2 (min timer removed)
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1772120821
 MonoBehaviour:
@@ -6142,7 +6117,6 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
-<<<<<<< HEAD
 --- !u!1 &1802597291
 GameObject:
   m_ObjectHideFlags: 0
@@ -6426,8 +6400,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1817450657}
   m_CullTransparentMesh: 1
-=======
->>>>>>> 7eee5f2 (min timer removed)
 --- !u!1 &1828102921
 GameObject:
   m_ObjectHideFlags: 0
@@ -6811,11 +6783,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 504.83997, y: -333.685}
-<<<<<<< HEAD
-  m_SizeDelta: {x: 0, y: 0}
-=======
   m_SizeDelta: {x: 688.88, y: 215.79}
->>>>>>> 7eee5f2 (min timer removed)
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1947173413
 MonoBehaviour:
