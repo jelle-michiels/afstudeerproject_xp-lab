@@ -7,9 +7,10 @@ using TMPro;
 
 public class SettingsMenu : MonoBehaviour
 {
-    public Slider minSlider, maxSlider;
+
+    public Slider maxSlider;
     public Button downArrowButton, upArrowButton;
-    public TextMeshProUGUI minSliderValue, maxSliderValue, levelTextField;
+    public TextMeshProUGUI maxSliderValue, levelTextField;
     public Sprite disabledDownArrowImage, disabledUpArrowImage, enabledDownArrowImage, enabledUpArrowImage;
     public Image downArrowImage, upArrowImage;
 
@@ -54,37 +55,18 @@ public class SettingsMenu : MonoBehaviour
 
     public void addTimer()
     {
-/*        maxTimeText = maxTime.text;
-        minTimeText = minTime.text;*/
-
         Debug.Log("Max time: " + maxTimeText);
-        Debug.Log("Min time: " + minTimeText);
         string level = GetComponent<DropdownHandler>().value;
         Debug.Log("Selected: " + level);
 
         GetComponent<EditorDatabase>().addTimers(int.Parse(maxTimeText), int.Parse(minTimeText), level);
-        /*SceneManager.LoadScene("Menu");*/
     }
 
     public void SetActiveLevel()
     {
-        /*if (setActive.isOn)
-        {*/
-            string level = GetComponent<DropdownHandler>().value;
-            Debug.Log("Selected: " + level);
-            PlayerPrefs.SetString("ActiveLevel", level);
-        /*}
-        else if (!setActive.isOn)
-        {
-            PlayerPrefs.SetString("ActiveLevel", "");
-        }*/
-
-    }
-
-    public void UpdateMinSlider()
-    {
-        minSliderValue.text = minSlider.value.ToString();
-        minTimeText = minSlider.value.ToString();
+        string level = GetComponent<DropdownHandler>().value;
+        Debug.Log("Selected: " + level);
+        PlayerPrefs.SetString("ActiveLevel", level);
     }
 
     public void UpdateMaxSlider()
