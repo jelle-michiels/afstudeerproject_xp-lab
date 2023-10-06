@@ -58,6 +58,8 @@ public class PlacementController : MonoBehaviour
 
     private GameObject UI;
 
+
+
     void Start()
     {
 
@@ -108,16 +110,41 @@ public class PlacementController : MonoBehaviour
                 HandleNewObjectHotkey();
             }
 
-            if (!EventSystem.current.IsPointerOverGameObject()) // if not over UI
+
+            if (currentPlaceableObject != null)
             {
+
+
                 MoveCurrentObjectToMouse();
 
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButtonDown(0))
                 {
-                    if (currentPlaceableObject != null)
+                    CreateObject();
+
+                }
+
+                if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.LeftShift))
+                {
+                    if (selectedObject != null)
                     {
-                        CreateObject();
+                        DestroyObject(selectedObject);
                     }
+                    Destroy(currentPlaceableObject);
+                    heightText.text = "Hoogte";
+                    selected.SetActive(false);
+                }
+            }
+
+            if (!selected.activeSelf)
+            {
+                if (!EventSystem.current.IsPointerOverGameObject()) // if not over UI
+                {
+
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        ToggleSelection();
+                    }
+
                 }
             }
 
@@ -223,28 +250,13 @@ public class PlacementController : MonoBehaviour
 
     private void MoveCurrentObjectToMouse()
     {
-        if (currentPlaceableObject != null)
-        {
-            Vector3 mousePosition = Input.mousePosition;
-            Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-            RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
-            {
-                Vector3 position = hit.point;
-
-                // Calculate the snapped position based on your gridSize
-                position.x = Mathf.Round(position.x / gridSize) * gridSize;
-                position.z = Mathf.Round(position.z / gridSize) * gridSize;
-
-                // Maintain the same height as the initial height
-                position.y = currentPlaceableObject.transform.position.y;
-
-                // Set the object's position to the snapped position
-                currentPlaceableObject.transform.position = position;
-            }
-        }
+        Vector3 mousePosition = Input.mousePosition;
+        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition) * 2;
+        Vector3 position = new Vector3(SnapToGrid(mousePosition.x), height, SnapToGrid(mousePosition.z));
+        currentPlaceableObject.transform.position = Vector3.Lerp(transform.position, position, 1f);
     }
+
     void CreateObject()
     {
         if (!EventSystem.current.IsPointerOverGameObject()) // if not over UI
