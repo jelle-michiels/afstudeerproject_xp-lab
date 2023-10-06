@@ -225,12 +225,27 @@ public class PlacementController : MonoBehaviour
 
     private void MoveCurrentObjectToMouse()
     {
-
         Vector3 mousePosition = Input.mousePosition;
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition) * 2;
-        Vector3 position = new Vector3(SnapToGrid(mousePosition.x), height, SnapToGrid(mousePosition.z));
-        currentPlaceableObject.transform.position = Vector3.Lerp(transform.position, position, 1f);
+        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            Vector3 position = hit.point;
+
+            // Calculate the snapped position based on your gridSize
+            position.x = Mathf.Round(position.x / gridSize) * gridSize;
+            position.z = Mathf.Round(position.z / gridSize) * gridSize;
+
+            // Maintain the same height as the initial height
+            position.y = currentPlaceableObject.transform.position.y;
+
+            // Set the object's position to the snapped position
+            currentPlaceableObject.transform.position = position;
+        }
     }
+
+
 
     void CreateObject()
     {
