@@ -10,6 +10,13 @@ public class CloseNavigationHelp : MonoBehaviour
     public PlayerControl movement;
 
     public CountdownTimer countDownTimer;
+    
+
+    void Start()
+    {
+        playerTips.SetActive(true);
+        movement.enabled = false;
+    }
 
     void Update()
     {

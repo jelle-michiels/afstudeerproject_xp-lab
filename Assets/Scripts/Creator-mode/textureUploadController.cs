@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
 using SimpleFileBrowser;
 using System.Collections;
 using System.IO;
 using System.Collections.Generic;
 using TMPro;
 using System.Linq;
+using UnityEngine.Networking;
+using System;
+
 
 public class TextureUploadController : MonoBehaviour
 {
@@ -14,7 +16,7 @@ public class TextureUploadController : MonoBehaviour
     public GameObject ground; // Reference to the ground plane in your scene
     public GameObject UI;
     public GameObject selectedHitboxPrefab;
-
+    public YourFBXLoader fbxLoader;
     private int clickCount = 0;
     private float cameraMoveSpeed = 5.0f; // Adjust this value to control camera movement speed
     private float cameraRotationSpeed = 2.0f; // Adjust this value to control camera rotation speed
@@ -32,9 +34,14 @@ public class TextureUploadController : MonoBehaviour
     public Toggle toggleCamera;
 
     public Toggle hitboxToggle;
-
+    private string fbxModelPath;
     private void Start()
     {
+
+        // Ensure that the target folder in Application.persistentDataPath exists
+        string targetFolderPath = Path.Combine(Application.persistentDataPath, "3DModels");
+        Directory.CreateDirectory(targetFolderPath);
+
         // No need to set up currentFloorPlane here, as it's not used in this script
         // CurrentFloorPlane should be set up in the Unity Editor or your other scripts.
         // Instead, reference the ground plane directly.
@@ -72,59 +79,8 @@ public class TextureUploadController : MonoBehaviour
 
         if (!string.IsNullOrEmpty(modelPath))
         {
-            // Get the filename from the full path
-            string fileName = Path.GetFileName(modelPath);
-
-            // Define the target path within the "3dModels" folder in the Assets directory
-            string targetPath = "Assets/3dModels/" + fileName;
-
-            // Check if the file already exists at the target location
-            if (!File.Exists(targetPath))
-            {
-                // Copy the selected 3D model file to the target path
-                FileUtil.CopyFileOrDirectory(modelPath, targetPath);
-            }
-
-            // Load the 3D model from the relative file path
-            GameObject modelPrefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(targetPath);
-
-            if (modelPrefab != null)
-            {
-                // Instantiate the 3D model on the ground plane
-                Vector3 spawnPosition = ground.transform.position + Vector3.up; // Adjust the height
-                newModel = Instantiate(modelPrefab, spawnPosition, Quaternion.identity); // Store it in newModel
-
-                // Optionally, you can set the parent of the new model to the ground to keep the hierarchy organized
-                newModel.transform.parent = GameObject.Find("Floors").transform;
-
-                // Set a specific name for the new model
-                newModel.name = "Modeltest";
-
-                // Find the 'camera' child object under 'Modeltest'
-                Transform cameraTransform = newModel.transform.Find("Camera");
-
-                if (cameraTransform != null)
-                {
-                    MoveCameraToGround();
-                    // Attach the SandboxCameraController script to the 'camera' child object
-                    SandboxCameraController cameraController = cameraTransform.gameObject.AddComponent<SandboxCameraController>();
-                }
-                else
-                {
-                    Debug.LogError("No 'camera' child object found under 'Modeltest'.");
-                }
-
-                // Display a success message
-                UI.GetComponent<UIController>().messagePanel.SetActive(true);
-                UI.GetComponent<UIController>().message.text = "Model successfully uploaded";
-                StartCoroutine(UI.GetComponent<UIController>().CloseMessagePanel());
-                // Disable upload button
-                uploadButton.gameObject.SetActive(false);
-            }
-            else
-            {
-                Debug.LogError("Failed to load the 3D model.");
-            }
+            // Call the LoadFBXModel function of the YourFBXLoader instance
+            fbxLoader.LoadFBXModel(modelPath);
         }
         else
         {
@@ -133,6 +89,71 @@ public class TextureUploadController : MonoBehaviour
             StartCoroutine(UI.GetComponent<UIController>().CloseMessagePanel());
         }
     }
+    private IEnumerator LoadModelFromPath(string assetPath)
+    {
+        GameObject modelPrefab = null;
+
+        // Load the 3D model using UnityWebRequest
+        string streamingPath = Path.Combine(Application.streamingAssetsPath, assetPath);
+        UriBuilder uriBuilder = new UriBuilder("file:///" + streamingPath);
+        uriBuilder.Scheme = Uri.UriSchemeFile;
+        uriBuilder.Host = "";
+
+        using (UnityWebRequest www = UnityWebRequestAssetBundle.GetAssetBundle(uriBuilder.Uri))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.result == UnityWebRequest.Result.Success)
+            {
+                AssetBundle assetBundle = DownloadHandlerAssetBundle.GetContent(www);
+                modelPrefab = assetBundle.LoadAsset<GameObject>(Path.GetFileName(assetPath));
+                assetBundle.Unload(false);
+            }
+            else
+            {
+                Debug.LogError("Error loading model: " + www.error);
+            }
+        }
+
+        if (modelPrefab != null)
+        {
+            // Instantiate the 3D model on the ground plane
+            Vector3 spawnPosition = ground.transform.position + Vector3.up; // Adjust the height
+            newModel = Instantiate(modelPrefab, spawnPosition, Quaternion.identity);
+
+            // Optionally, set the parent of the new model to the ground to keep the hierarchy organized
+            newModel.transform.parent = GameObject.Find("Floors").transform;
+
+            // Set a specific name for the new model
+            newModel.name = "Modeltest";
+
+            // Find the 'camera' child object under 'Modeltest'
+            Transform cameraTransform = newModel.transform.Find("Camera");
+
+            if (cameraTransform != null)
+            {
+                MoveCameraToGround();
+                // Attach the SandboxCameraController script to the 'camera' child object
+                SandboxCameraController cameraController = cameraTransform.gameObject.AddComponent<SandboxCameraController>();
+            }
+            else
+            {
+                Debug.LogError("No 'camera' child object found under 'Modeltest'.");
+            }
+
+            // Display a success message
+            UI.GetComponent<UIController>().messagePanel.SetActive(true);
+            UI.GetComponent<UIController>().message.text = "Model successfully uploaded";
+            StartCoroutine(UI.GetComponent<UIController>().CloseMessagePanel());
+            // Disable upload button
+            uploadButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("Failed to load the 3D model.");
+        }
+    }
+
 
 
     private void UpdateDropdownOptions()
@@ -154,7 +175,7 @@ public class TextureUploadController : MonoBehaviour
 
     public void OnDropdownValueChanged()
     {
-        int value = prefabDropdown.value;
+        /*int value = prefabDropdown.value;
         // Get the selected prefab name from the dropdown
         string selectedPrefabName = prefabDropdown.options[value].text;
         Debug.Log("Selected prefab 1: " + selectedPrefabName);
@@ -173,10 +194,10 @@ public class TextureUploadController : MonoBehaviour
         }
         else
         {
-            /* Debug.Log("Selected prefab: " + selectedHitboxPrefab.name);*/
+            *//* Debug.Log("Selected prefab: " + selectedHitboxPrefab.name);*//*
             Debug.LogError("Failed to load selected prefab: " + selectedPrefabName);
             Debug.LogError("Make sure the prefab is in the 'Resources/3DModelPrefabs' folder.");
-        }
+        }*/
     }
 
     public void AddSelectedHitbox(GameObject selectedHitboxPrefab)
