@@ -110,45 +110,20 @@ public class PlacementController : MonoBehaviour
                 HandleNewObjectHotkey();
             }
 
-
-            if (currentPlaceableObject != null)
+            if (!EventSystem.current.IsPointerOverGameObject()) // if not over UI
             {
-
-
                 MoveCurrentObjectToMouse();
 
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButton(0))
                 {
-                    CreateObject();
-
-                }
-
-                if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.LeftShift))
-                {
-                    if (selectedObject != null)
+                    if (currentPlaceableObject != null)
                     {
-                        DestroyObject(selectedObject);
+                        CreateObject();
                     }
-                    Destroy(currentPlaceableObject);
-                    heightText.text = "Hoogte";
-                    selected.SetActive(false);
                 }
             }
 
-            if (!selected.activeSelf)
-            {
-                if (!EventSystem.current.IsPointerOverGameObject()) // if not over UI
-                {
-
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        ToggleSelection();
-                    }
-
-                }
-            }
-
-            if(Input.GetKey(KeyCode.R))
+            if (Input.GetKey(KeyCode.R))
             {
                 RemoveAllCreatedObjects();
             }
