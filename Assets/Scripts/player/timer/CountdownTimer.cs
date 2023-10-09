@@ -28,6 +28,8 @@ public class CountdownTimer : MonoBehaviour
 
     public GameObject dmgScreen;
 
+    public GameObject UI;
+
     public Button tryAgainBtn, homeButton;
 
     public static bool gameFinished = false;
@@ -48,6 +50,8 @@ public class CountdownTimer : MonoBehaviour
         checkpointText.enabled = false;
         checkpointFlash.SetActive(false);
         dmgScreen.SetActive(false);
+        UI.SetActive(false);
+        //GameObject.Find("Player").GetComponent<HealthState>().Health = 3;
     }
 
     void Update()
@@ -175,6 +179,7 @@ public class CountdownTimer : MonoBehaviour
     public void startTimer()
     {
         timeStarted = true;
+        UI.SetActive(true);
     }
 
 }

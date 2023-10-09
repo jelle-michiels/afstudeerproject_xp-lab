@@ -3157,7 +3157,7 @@ MonoBehaviour:
   rb: {fileID: 1372965468}
   camHolder: {fileID: 510289310}
   rdPersonCam: {fileID: 0}
-  stPersonCam: {fileID: 0}
+  stPersonCam: {fileID: 303312673}
   speed: 4
   maxForce: 1
   jumpForce: 1
@@ -3290,7 +3290,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1372965465}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f0d2542a952f41d4a83b87c39d0f3d9, type: 3}
   m_Name: 
@@ -3304,7 +3304,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1372965465}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb0e73de33ec95b4bbb7dae91695ef70, type: 3}
   m_Name: 

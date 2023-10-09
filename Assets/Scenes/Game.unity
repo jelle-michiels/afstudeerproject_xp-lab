@@ -258,6 +258,7 @@ MonoBehaviour:
   checkpointText: {fileID: 473147312}
   checkpointFlash: {fileID: 1354289889}
   dmgScreen: {fileID: 1987680431}
+  UI: {fileID: 2054478608}
   tryAgainBtn: {fileID: 583123797}
   homeButton: {fileID: 512482631}
   playerControl: {fileID: 1645697007}
@@ -7928,7 +7929,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2054478609
 MonoBehaviour:
   m_ObjectHideFlags: 0
