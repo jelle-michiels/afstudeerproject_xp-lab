@@ -42,6 +42,8 @@ public class CountdownTimer : MonoBehaviour
         homeButton.gameObject.SetActive(false);
         gameFinished = false;
         timeTaken = int.Parse(SettingsMenu.maxTimeText);
+        checkpointText.enabled = false;
+        checkpointFlash.SetActive(false);
     }
 
     void Update()
@@ -108,7 +110,7 @@ public class CountdownTimer : MonoBehaviour
 
     public void checkpointReached()
     {
-        checkpointText.gameObject.SetActive(true);
+        checkpointText.enabled = true;
         checkpointFlash.SetActive(true);
         StartCoroutine(checkpointDelay());
     }
@@ -118,7 +120,7 @@ public class CountdownTimer : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         checkpointFlash.SetActive(false);
         yield return new WaitForSeconds(0.5f);
-        checkpointText.gameObject.SetActive(false);
+        checkpointText.enabled = false;
     }
 
     /*public void GameOver()

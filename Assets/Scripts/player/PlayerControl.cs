@@ -221,7 +221,7 @@ public class PlayerControl : MonoBehaviour
             
             print("test");
         }
-        if (other.gameObject.tag == "checkpoint"){
+        if (other.gameObject.tag == "CheckPoint"){
             GameObject.Find("TimerCanvas").GetComponent<CountdownTimer>().checkpointReached();
         }
     }
