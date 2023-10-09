@@ -51,7 +51,6 @@ public class CountdownTimer : MonoBehaviour
         checkpointFlash.SetActive(false);
         dmgScreen.SetActive(false);
         UI.SetActive(false);
-        //GameObject.Find("Player").GetComponent<HealthState>().Health = 3;
     }
 
     void Update()

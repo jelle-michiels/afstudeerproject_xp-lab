@@ -5760,22 +5760,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthText: {fileID: 1712280411}
---- !u!114 &1645697004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1645697001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13e9b7aa123c1489e83a737fd543c81d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  winScreen: {fileID: 0}
-  loseScreen: {fileID: 0}
-  checkpoint: {fileID: 0}
-  dmgScreen: {fileID: 0}
 --- !u!114 &1645697005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5944,6 +5928,8 @@ MonoBehaviour:
   winScreen: {fileID: 0}
   loseScreen: {fileID: 0}
   checkpoint: {fileID: 0}
+  healthState: {fileID: 1645697003}
+  countdownTimer: {fileID: 139613909}
 --- !u!54 &1645697008
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6392,9 +6378,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1782702501690864755, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1645697005}
-    - targetCorrespondingSourceObject: {fileID: 1782702501690864755, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1645697004}
     - targetCorrespondingSourceObject: {fileID: 1782702501690864755, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1645697003}
@@ -7531,7 +7514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e0d897a82313c345a3557db1a242e45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scriptNameToFind: CountdownTimer
+  scriptNameToFind: HealthState
 --- !u!1 &1982159240
 GameObject:
   m_ObjectHideFlags: 0

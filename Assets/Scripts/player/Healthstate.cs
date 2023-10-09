@@ -8,6 +8,12 @@ public class HealthState : MonoBehaviour
 
     public TextMeshProUGUI healthText;
     private int health = 3;
+
+    void Start()
+    {
+        health = 3; // Set the initial health value here
+    }
+
     public int Health{
         get { return health; }
         set {

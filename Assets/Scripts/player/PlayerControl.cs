@@ -23,6 +23,10 @@ public class PlayerControl : MonoBehaviour
 
     public GameObject checkpoint;
 
+    public HealthState healthState;
+
+    public CountdownTimer countdownTimer;
+
     public static bool gameIsPaused;
 
     private Vector2 move;
@@ -118,6 +122,7 @@ public class PlayerControl : MonoBehaviour
     {
         
         this.camHolder = stPersonCam;
+        healthState.Health = 3;
         //Mouse lock
         //Cursor.lockState = CursorLockMode.Locked;
         /*gameIsPaused = true;
@@ -216,23 +221,23 @@ public class PlayerControl : MonoBehaviour
         if (other.gameObject.tag == "finish")
         {
             Debug.Log("endpoint reached");
-            GameObject.Find("TimerCanvas").GetComponent<CountdownTimer>().EndGame(true);
+            countdownTimer.EndGame(true);
             //LevelState.endPointReached(winScreen);
             
             print("test");
         }
         if (other.gameObject.tag == "CheckPoint"){
             other.gameObject.SetActive(false);
-            GameObject.Find("TimerCanvas").GetComponent<CountdownTimer>().checkpointReached();
+            countdownTimer.checkpointReached();
         }
 
         if (other.gameObject.tag == "Damage" || other.gameObject.tag == "WrongDoor"){
-            if (!GameObject.Find("Player").GetComponent<HealthState>().damaged()){
-                GameObject.Find("TimerCanvas").GetComponent<CountdownTimer>().damageTaken();
+            if (!healthState.damaged()){
+                countdownTimer.damageTaken();
                 Debug.Log("damage");
             } else {
                 
-                GameObject.Find("TimerCanvas").GetComponent<CountdownTimer>().died();
+                countdownTimer.died();
                 Debug.Log("dead");
             };
         }
