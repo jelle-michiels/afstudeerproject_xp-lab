@@ -8,11 +8,11 @@ using System.Collections.Generic;
 using TMPro;
 using System.Linq;
 using Dummiesman;
+using Unity.VisualScripting;
 
 public class TextureUploadController : MonoBehaviour
 {
     public Button uploadButton;
-    public GameObject ground; // Reference to the ground plane in your scene
     public GameObject UI;
     public GameObject selectedHitboxPrefab;
   
@@ -108,31 +108,14 @@ public class TextureUploadController : MonoBehaviour
             yield return null;
         }
         GameObject newModel = GameObject.Find("Modeltest");
+
         if (newModel != null)
         {
-            // setspawnposition
-            Vector3 spawnPosition = ground.transform.position + Vector3.up; // Adjust the height
-            newModel.transform.position = spawnPosition;
-            // Optionally, you can set the parent of the new model to the ground to keep the hierarchy organized
-            newModel.transform.parent = GameObject.Find("Floors").transform;
+            // Set the position to(0, 0, -5)
+             newModel.transform.position = new Vector3(0f, 0f, -5f);
 
-            // Find the 'camera' child object under 'Modeltest'
-            Transform cameraTransform = newModel.transform.Find("Camera");
-            if (cameraTransform != null)
-            {
-                MoveCameraToGround();
-                // Attach the SandboxCameraController script to the 'camera' child object
-                SandboxCameraController cameraController = cameraTransform.gameObject.AddComponent<SandboxCameraController>();
-            }
-            else
-            {
-                // Create a new camera object as a child of newModel
-                GameObject newCamera = new GameObject("Camera");
-                newCamera.transform.SetParent(newModel.transform);
-                MoveCameraToGround();
-                newCamera.gameObject.AddComponent<SandboxCameraController>();
-            }
-
+            // Set the rotation to (0, 180, 0)
+            newModel.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
             // Display a success message
             UI.GetComponent<UIController>().messagePanel.SetActive(true);
             UI.GetComponent<UIController>().message.text = "Model successfully uploaded";
@@ -231,32 +214,7 @@ public class TextureUploadController : MonoBehaviour
 
     public void MoveCameraToGround()
     {
-        GameObject newModel = GameObject.Find("Modeltest");
-        if (newModel != null && ground != null)
-        {
-            // Find the 'camera' child object under 'Modeltest'
-            Transform cameraTransform = newModel.transform.Find("Camera");
-
-            if (cameraTransform != null)
-            {
-                // Make the camera a child of the ground
-                cameraTransform.parent = ground.transform;
-
-                // Reset the camera's local position to (0, 0, 0) to keep its relative position
-                cameraTransform.localPosition = new Vector3(0.002746391f, 2.070468f, 1.126868f);
-
-                // Set the camera's rotation
-                cameraTransform.localRotation = Quaternion.Euler(9.444f, 179.8f, -0.001f);
-            }
-            else
-            {
-                Debug.LogError("No 'camera' child object found under 'Modeltest'.");
-            }
-        }
-        else
-        {
-            Debug.LogError("No new model or ground exists to move the camera to.");
-        }
+       
     }
     public void OpenFileExplorer()
     {
