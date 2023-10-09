@@ -43,7 +43,7 @@ public class PlacementController : MonoBehaviour
     public Button endpoint;
     public Button wrongDoor;
     public Button correctDoor;
-    
+
     public Button heightButton;
     public Button deleteButton;
 
@@ -57,8 +57,6 @@ public class PlacementController : MonoBehaviour
     private GameObject selectedObject;
 
     private GameObject UI;
-
-
 
     void Start()
     {
@@ -93,7 +91,7 @@ public class PlacementController : MonoBehaviour
 
         //Delete button
         deleteButton.onClick.AddListener(() => { DestroyObject(selectedObject); });
-       
+
         //Selected object
         selectedPosition = selected.transform.position;
         selected.SetActive(false);
@@ -110,41 +108,20 @@ public class PlacementController : MonoBehaviour
                 HandleNewObjectHotkey();
             }
 
-
-            if (currentPlaceableObject != null)
+            if (!EventSystem.current.IsPointerOverGameObject()) // if not over UI
             {
-
-
                 MoveCurrentObjectToMouse();
 
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButton(0))
                 {
-                    CreateObject();
-
-                }
-
-                if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.LeftShift))
-                {
-                    Destroy(currentPlaceableObject);
-                    heightText.text = "Hoogte";
-                    selected.SetActive(false);
-                }
-            }
-
-            if (!selected.activeSelf)
-            {
-                if (!EventSystem.current.IsPointerOverGameObject()) // if not over UI
-                {
-
-                    if (Input.GetMouseButtonDown(0))
+                    if (currentPlaceableObject != null)
                     {
-                        ToggleSelection();
+                        CreateObject();
                     }
-
                 }
             }
 
-            if(Input.GetKey(KeyCode.R))
+            if (Input.GetKey(KeyCode.R))
             {
                 RemoveAllCreatedObjects();
             }
@@ -246,13 +223,28 @@ public class PlacementController : MonoBehaviour
 
     private void MoveCurrentObjectToMouse()
     {
+        if (currentPlaceableObject != null)
+        {
+            Vector3 mousePosition = Input.mousePosition;
+            Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+            RaycastHit hit;
 
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition) * 2;
-        Vector3 position = new Vector3(SnapToGrid(mousePosition.x), height, SnapToGrid(mousePosition.z));
-        currentPlaceableObject.transform.position = Vector3.Lerp(transform.position, position, 1f);
+            if (Physics.Raycast(ray, out hit))
+            {
+                Vector3 position = hit.point;
+
+                // Calculate the snapped position based on your gridSize
+                position.x = Mathf.Round(position.x / gridSize) * gridSize;
+                position.z = Mathf.Round(position.z / gridSize) * gridSize;
+
+                // Maintain the same height as the initial height
+                position.y = currentPlaceableObject.transform.position.y;
+
+                // Set the object's position to the snapped position
+                currentPlaceableObject.transform.position = position;
+            }
+        }
     }
-
     void CreateObject()
     {
         if (!EventSystem.current.IsPointerOverGameObject()) // if not over UI
@@ -625,7 +617,7 @@ public class PlacementController : MonoBehaviour
 
     private bool AreCreatedObjectDataEqual(CreatedObject.Data data1, CreatedObject.Data data2)
     {
-        return data1.position == data2.position && data1.rotation == data2.rotation 
+        return data1.position == data2.position && data1.rotation == data2.rotation
             && data1.scale == data2.scale && data1.tag == data2.tag;
     }
 

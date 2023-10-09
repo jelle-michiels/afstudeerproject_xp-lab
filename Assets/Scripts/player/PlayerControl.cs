@@ -11,7 +11,7 @@ public class PlayerControl : MonoBehaviour
 
     public GameObject stPersonCam;
     public float speed;
-    public static float sensitivity = 1;
+    public static float sensitivity = 0.5f;
     public float maxForce;
     public float jumpForce;
     public bool grounded;

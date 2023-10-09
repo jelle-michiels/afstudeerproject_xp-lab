@@ -47,9 +47,4 @@ public class HitboxToggle : MonoBehaviour
     {
         toggle.onValueChanged.RemoveListener(OnSwitch);
     }
-
-    public void ToggleHitbox()
-    {
-        Debug.Log("Hitbox toggled");
-    }
 }
