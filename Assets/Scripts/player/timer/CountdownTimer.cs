@@ -21,9 +21,12 @@ public class CountdownTimer : MonoBehaviour
     public TextMeshProUGUI youWinText;
     public TextMeshProUGUI scoreText;
 
+    public TextMeshProUGUI healthText;
     public TextMeshProUGUI checkpointText;
 
     public GameObject checkpointFlash;
+
+    public GameObject dmgScreen;
 
     public Button tryAgainBtn, homeButton;
 
@@ -44,6 +47,7 @@ public class CountdownTimer : MonoBehaviour
         timeTaken = int.Parse(SettingsMenu.maxTimeText);
         checkpointText.enabled = false;
         checkpointFlash.SetActive(false);
+        dmgScreen.SetActive(false);
     }
 
     void Update()
@@ -122,6 +126,23 @@ public class CountdownTimer : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         checkpointText.enabled = false;
     }
+
+        private IEnumerator damageDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        dmgScreen.SetActive(false);
+    }
+
+    public void damageTaken(){
+        dmgScreen.SetActive(true);
+        StartCoroutine(damageDelay());
+    }
+
+    public void died(){
+        EndGame(false);
+    }
+
+
 
     /*public void GameOver()
     {

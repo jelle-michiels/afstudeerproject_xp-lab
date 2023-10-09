@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FindGameObjectWithScript : MonoBehaviour
 {
-    public string scriptNameToFind = "PlacementController"; // Replace with the name of the script you're looking for
+    public string scriptNameToFind = "CountdownTimer"; // Replace with the name of the script you're looking for
 
     void Start()
     {

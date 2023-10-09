@@ -225,12 +225,17 @@ public class PlayerControl : MonoBehaviour
             other.gameObject.SetActive(false);
             GameObject.Find("TimerCanvas").GetComponent<CountdownTimer>().checkpointReached();
         }
-    }
 
-    private IEnumerator checkpointDelay()
-    {
-        yield return new WaitForSeconds(0.5f);
-        LevelState.disableCheckpointscreen(checkpoint);
+        if (other.gameObject.tag == "Damage" || other.gameObject.tag == "WrongDoor"){
+            if (!GameObject.Find("Player").GetComponent<HealthState>().damaged()){
+                GameObject.Find("TimerCanvas").GetComponent<CountdownTimer>().damageTaken();
+                Debug.Log("damage");
+            } else {
+                
+                GameObject.Find("TimerCanvas").GetComponent<CountdownTimer>().died();
+                Debug.Log("dead");
+            };
+        }
     }
 
 }
