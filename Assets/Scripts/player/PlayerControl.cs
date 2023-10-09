@@ -222,7 +222,14 @@ public class PlayerControl : MonoBehaviour
             print("test");
         }
         if (other.gameObject.tag == "checkpoint"){
-            
+            GameObject.Find("TimerCanvas").GetComponent<CountdownTimer>().checkpointReached();
         }
     }
+
+    private IEnumerator checkpointDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        LevelState.disableCheckpointscreen(checkpoint);
+    }
+
 }

@@ -21,6 +21,10 @@ public class CountdownTimer : MonoBehaviour
     public TextMeshProUGUI youWinText;
     public TextMeshProUGUI scoreText;
 
+    public TextMeshProUGUI checkpointText;
+
+    public GameObject checkpointFlash;
+
     public Button tryAgainBtn, homeButton;
 
     public static bool gameFinished = false;
@@ -100,6 +104,21 @@ public class CountdownTimer : MonoBehaviour
             }
         }
             
+    }
+
+    public void checkpointReached()
+    {
+        checkpointText.gameObject.SetActive(true);
+        checkpointFlash.SetActive(true);
+        StartCoroutine(checkpointDelay());
+    }
+
+    private IEnumerator checkpointDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        checkpointFlash.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
+        checkpointText.gameObject.SetActive(false);
     }
 
     /*public void GameOver()
