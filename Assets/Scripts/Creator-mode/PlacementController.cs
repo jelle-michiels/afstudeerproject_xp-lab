@@ -7,6 +7,7 @@ using TMPro;
 using System.Linq;
 using UnityEditor;
 using System;
+using System.Text;
 
 public class PlacementController : MonoBehaviour
 {
@@ -67,7 +68,6 @@ public class PlacementController : MonoBehaviour
 
     void Start()
     {
-
         UI = GameObject.Find("UI");
 
         //Height buttons
@@ -83,18 +83,6 @@ public class PlacementController : MonoBehaviour
         widthMinusButton.onClick.AddListener(DecreaseWidth);
         lengthPlusButton.onClick.AddListener(IncreaseLength);
         lengthMinusButton.onClick.AddListener(DecreaseLength);
-
-        //Objects
-        /*wall.onClick.AddListener(() => { ChangeObject(0); });
-        floor.onClick.AddListener(() => { ChangeObject(1); });
-        wallPart.onClick.AddListener(() => { ChangeObject(2); });
-        stairs.onClick.AddListener(() => { ChangeObject(3); });
-        checkpoint.onClick.AddListener(() => { ChangeObject(4); });
-        endpoint.onClick.AddListener(() => { ChangeObject(5); });
-        wrongDoor.onClick.AddListener(() => { ChangeObject(6); });
-        correctDoor.onClick.AddListener(() => { ChangeObject(7); });
-        damagePoint.onClick.AddListener(() => { ChangeObject(8); });
-        realCheckpoint.onClick.AddListener(() => { ChangeObject(9); });*/
 
         //Delete button
         deleteButton.onClick.AddListener(() => { DestroyObject(selectedObject); });
@@ -245,19 +233,6 @@ public class PlacementController : MonoBehaviour
 
 
     }
-
-    /*private void HandleNewObjectHotkey()
-    {
-
-        for (int i = 0; i < placeableObjectPrefabs.Length; i++)
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha0 + 1 + i))
-            {
-                ChangeObject(i);
-
-            }
-        }
-    }*/
 
     private void HandleNewObjectHotkey()
     {
@@ -424,95 +399,6 @@ public class PlacementController : MonoBehaviour
         }
 
     }
-
-    /*void ChangeObject(int i)
-    {
-
-
-        if (currentPlaceableObject != null && selectedObject == null)
-        {
-            Destroy(currentPlaceableObject);
-        }
-
-        if (selectedObject != null)
-        {
-            selectedObject.GetComponent<MeshRenderer>().material = objectMaterial;
-
-            if (currentPlaceableObject.tag == "Stairs" || currentPlaceableObject.tag == "CorrectDoor" || currentPlaceableObject.tag == "WrongDoor")
-            {
-                foreach (Transform child in currentPlaceableObject.transform)
-                {
-                    child.GetComponent<MeshRenderer>().material = selectedObject.GetComponent<MeshRenderer>().material;
-                }
-            }
-
-            selectedObject = null;
-        }
-
-
-
-        currentPlaceableObject = Instantiate(placeableObjectPrefabs[i]);
-        objectMaterial = currentPlaceableObject.GetComponent<MeshRenderer>().material;
-        currentPlaceableObject.GetComponent<MeshRenderer>().material = placing;
-        placing.SetColor("_Color", new Color(0.3f, 0.8f, 1f, 0.5f));
-
-        selected.SetActive(true);
-        selected.transform.position = selectedPosition + new Vector3(80 * i, 0, 0);
-
-        if (currentPlaceableObject.tag == "Floor")
-        {
-
-            height = 0;
-            initialHeight = 0;
-            heightForText = 0;
-
-        }
-        else if (currentPlaceableObject.tag == "WallPart")
-        {
-            height = 0.25f;
-            initialHeight = 0.25f;
-            heightForText = 0;
-
-        }
-        else if (currentPlaceableObject.tag == "Stairs" || currentPlaceableObject.tag == "WrongDoor" || currentPlaceableObject.tag == "CorrectDoor")
-        {
-            foreach (Transform child in currentPlaceableObject.transform)
-            {
-                child.GetComponent<MeshRenderer>().material = currentPlaceableObject.GetComponent<MeshRenderer>().material;
-            }
-
-            if (currentPlaceableObject.tag == "Stairs")
-            {
-                height = 0.3f;
-                initialHeight = 0.3f;
-                heightForText = 0;
-            }
-            else
-            {
-                height = 0;
-                initialHeight = 0;
-                heightForText = 0;
-            }
-
-
-        }
-        else if (currentPlaceableObject.tag == "Spawnpoint" || currentPlaceableObject.tag == "Endpoint")
-        {
-            height = 0.5f;
-            initialHeight = 0.5f;
-            heightForText = 0;
-        }
-        else
-        {
-            height = 1.5f;
-            initialHeight = 1.5f;
-            heightForText = 0;
-
-        }
-
-        heightText.text = "Hoogte: " + heightForText.ToString();
-
-    }*/
 
     void ChangeObject(GameObject prefabToInstantiate)
     {
@@ -747,7 +633,8 @@ public class PlacementController : MonoBehaviour
 
             TextMeshProUGUI buttonText = buttonGO.GetComponentInChildren<TextMeshProUGUI>();
 
-            buttonText.text = prefab.name;
+            string prefabNameWithSpaces = AddSpacesToPrefabName(prefab.name);
+            buttonText.text = prefabNameWithSpaces;
 
             buttonGO.GetComponent<Button>().onClick.AddListener(() => { ChangeObject(prefab); });
         }
@@ -755,5 +642,20 @@ public class PlacementController : MonoBehaviour
         Destroy(buttonTemplate);
     }
 
+    private string AddSpacesToPrefabName(string prefabName)
+    {
+        StringBuilder spacedName = new StringBuilder();
+        spacedName.Append(prefabName[0]);
 
+        for (int i = 1; i < prefabName.Length; i++)
+        {
+            if (char.IsUpper(prefabName[i]))
+            {
+                spacedName.Append(' ');
+            }
+            spacedName.Append(prefabName[i]);
+        }
+
+        return spacedName.ToString();
+    }
 }
