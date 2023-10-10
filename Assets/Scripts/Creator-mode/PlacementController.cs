@@ -5,10 +5,13 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using UnityEditor;
+using System;
+using System.Text;
 
 public class PlacementController : MonoBehaviour
 {
-    public GameObject[] placeableObjectPrefabs;
+    public List<GameObject> placeableObjectPrefabs = new List<GameObject>();
 
     private GameObject currentPlaceableObject;
 
@@ -58,9 +61,13 @@ public class PlacementController : MonoBehaviour
 
     private GameObject UI;
 
+    public Transform buttonPanel;
+
+    public GameObject buttonTemplate;
+
+
     void Start()
     {
-
         UI = GameObject.Find("UI");
 
         //Height buttons
@@ -77,24 +84,18 @@ public class PlacementController : MonoBehaviour
         lengthPlusButton.onClick.AddListener(IncreaseLength);
         lengthMinusButton.onClick.AddListener(DecreaseLength);
 
-        //Objects
-        wall.onClick.AddListener(() => { ChangeObject(0); });
-        floor.onClick.AddListener(() => { ChangeObject(1); });
-        wallPart.onClick.AddListener(() => { ChangeObject(2); });
-        stairs.onClick.AddListener(() => { ChangeObject(3); });
-        checkpoint.onClick.AddListener(() => { ChangeObject(4); });
-        endpoint.onClick.AddListener(() => { ChangeObject(5); });
-        wrongDoor.onClick.AddListener(() => { ChangeObject(6); });
-        correctDoor.onClick.AddListener(() => { ChangeObject(7); });
-        damagePoint.onClick.AddListener(() => { ChangeObject(8); });
-        realCheckpoint.onClick.AddListener(() => { ChangeObject(9); });
-
         //Delete button
         deleteButton.onClick.AddListener(() => { DestroyObject(selectedObject); });
 
         //Selected object
         selectedPosition = selected.transform.position;
         selected.SetActive(false);
+
+        // Load prefabs for building
+        placeableObjectPrefabs = Resources.LoadAll<GameObject>("BuilderPrefabs").ToList();
+
+        // Create buttons for prefabs
+        CreatePrefabButtons();
     }
 
 
@@ -108,16 +109,41 @@ public class PlacementController : MonoBehaviour
                 HandleNewObjectHotkey();
             }
 
-            if (!EventSystem.current.IsPointerOverGameObject()) // if not over UI
+
+            if (currentPlaceableObject != null)
             {
+
+
                 MoveCurrentObjectToMouse();
 
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButtonDown(0))
                 {
-                    if (currentPlaceableObject != null)
+                    CreateObject();
+
+                }
+
+                if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.LeftShift))
+                {
+                    if (selectedObject != null)
                     {
-                        CreateObject();
+                        DestroyObject(selectedObject);
                     }
+                    Destroy(currentPlaceableObject);
+                    heightText.text = "Hoogte";
+                    selected.SetActive(false);
+                }
+            }
+
+            if (!selected.activeSelf)
+            {
+                if (!EventSystem.current.IsPointerOverGameObject()) // if not over UI
+                {
+
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        ToggleSelection();
+                    }
+
                 }
             }
 
@@ -210,41 +236,25 @@ public class PlacementController : MonoBehaviour
 
     private void HandleNewObjectHotkey()
     {
-
-        for (int i = 0; i < placeableObjectPrefabs.Length; i++)
+        for (int i = 0; i < placeableObjectPrefabs.Count; i++)
         {
             if (Input.GetKeyDown(KeyCode.Alpha0 + 1 + i))
             {
-                ChangeObject(i);
-
+                ChangeObject(placeableObjectPrefabs[i]); // Pass the selected prefab.
             }
         }
     }
+
 
     private void MoveCurrentObjectToMouse()
     {
-        if (currentPlaceableObject != null)
-        {
-            Vector3 mousePosition = Input.mousePosition;
-            Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-            RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
-            {
-                Vector3 position = hit.point;
-
-                // Calculate the snapped position based on your gridSize
-                position.x = Mathf.Round(position.x / gridSize) * gridSize;
-                position.z = Mathf.Round(position.z / gridSize) * gridSize;
-
-                // Maintain the same height as the initial height
-                position.y = currentPlaceableObject.transform.position.y;
-
-                // Set the object's position to the snapped position
-                currentPlaceableObject.transform.position = position;
-            }
-        }
+        Vector3 mousePosition = Input.mousePosition;
+        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition) * 2;
+        Vector3 position = new Vector3(SnapToGrid(mousePosition.x), height, SnapToGrid(mousePosition.z));
+        currentPlaceableObject.transform.position = Vector3.Lerp(transform.position, position, 1f);
     }
+
     void CreateObject()
     {
         if (!EventSystem.current.IsPointerOverGameObject()) // if not over UI
@@ -390,10 +400,8 @@ public class PlacementController : MonoBehaviour
 
     }
 
-    void ChangeObject(int i)
+    void ChangeObject(GameObject prefabToInstantiate)
     {
-
-
         if (currentPlaceableObject != null && selectedObject == null)
         {
             Destroy(currentPlaceableObject);
@@ -403,7 +411,7 @@ public class PlacementController : MonoBehaviour
         {
             selectedObject.GetComponent<MeshRenderer>().material = objectMaterial;
 
-            if (currentPlaceableObject.tag == "Stairs" || currentPlaceableObject.tag == "CorrectDoor" || currentPlaceableObject.tag == "WrongDoor")
+            if (currentPlaceableObject.tag == "Stairs" || currentPlaceableObject.tag == "WrongDoor" || currentPlaceableObject.tag == "CorrectDoor")
             {
                 foreach (Transform child in currentPlaceableObject.transform)
                 {
@@ -414,30 +422,28 @@ public class PlacementController : MonoBehaviour
             selectedObject = null;
         }
 
-
-
-        currentPlaceableObject = Instantiate(placeableObjectPrefabs[i]);
+        currentPlaceableObject = Instantiate(prefabToInstantiate);
         objectMaterial = currentPlaceableObject.GetComponent<MeshRenderer>().material;
         currentPlaceableObject.GetComponent<MeshRenderer>().material = placing;
         placing.SetColor("_Color", new Color(0.3f, 0.8f, 1f, 0.5f));
 
         selected.SetActive(true);
-        selected.transform.position = selectedPosition + new Vector3(80 * i, 0, 0);
+        int prefabIndex = Array.IndexOf(placeableObjectPrefabs.ToArray(), prefabToInstantiate);
+        float xPos = 80 * prefabIndex;
+        selected.transform.position = selectedPosition + new Vector3(xPos, 0, 0);
+
 
         if (currentPlaceableObject.tag == "Floor")
         {
-
             height = 0;
             initialHeight = 0;
             heightForText = 0;
-
         }
         else if (currentPlaceableObject.tag == "WallPart")
         {
             height = 0.25f;
             initialHeight = 0.25f;
             heightForText = 0;
-
         }
         else if (currentPlaceableObject.tag == "Stairs" || currentPlaceableObject.tag == "WrongDoor" || currentPlaceableObject.tag == "CorrectDoor")
         {
@@ -458,8 +464,6 @@ public class PlacementController : MonoBehaviour
                 initialHeight = 0;
                 heightForText = 0;
             }
-
-
         }
         else if (currentPlaceableObject.tag == "Spawnpoint" || currentPlaceableObject.tag == "Endpoint")
         {
@@ -472,12 +476,11 @@ public class PlacementController : MonoBehaviour
             height = 1.5f;
             initialHeight = 1.5f;
             heightForText = 0;
-
         }
 
         heightText.text = "Hoogte: " + heightForText.ToString();
-
     }
+
 
     void ToggleSelection()
     {
@@ -621,7 +624,38 @@ public class PlacementController : MonoBehaviour
             && data1.scale == data2.scale && data1.tag == data2.tag;
     }
 
+    private void CreatePrefabButtons()
+    {
+        foreach (GameObject prefab in placeableObjectPrefabs)
+        {
+            GameObject buttonGO = Instantiate(buttonTemplate);
+            buttonGO.transform.SetParent(buttonPanel, false);
 
+            TextMeshProUGUI buttonText = buttonGO.GetComponentInChildren<TextMeshProUGUI>();
 
+            string prefabNameWithSpaces = AddSpacesToPrefabName(prefab.name);
+            buttonText.text = prefabNameWithSpaces;
 
+            buttonGO.GetComponent<Button>().onClick.AddListener(() => { ChangeObject(prefab); });
+        }
+
+        Destroy(buttonTemplate);
+    }
+
+    private string AddSpacesToPrefabName(string prefabName)
+    {
+        StringBuilder spacedName = new StringBuilder();
+        spacedName.Append(prefabName[0]);
+
+        for (int i = 1; i < prefabName.Length; i++)
+        {
+            if (char.IsUpper(prefabName[i]))
+            {
+                spacedName.Append(' ');
+            }
+            spacedName.Append(prefabName[i]);
+        }
+
+        return spacedName.ToString();
+    }
 }

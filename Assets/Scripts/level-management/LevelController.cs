@@ -9,7 +9,7 @@ using System.IO;
 public class LevelController : MonoBehaviour
 {
     public List<CreatedObject.Data> createdObjects;
-    private GameObject[] placeableObjectPrefabs;
+    private List<GameObject> placeableObjectPrefabs;
 
     private LevelEditor level;
 
@@ -119,7 +119,7 @@ public class LevelController : MonoBehaviour
         foreach (CreatedObject.Data data in level.createdObjectsData)
         {
             Debug.Log("Loading object..");
-            for (int i = 0; i < placeableObjectPrefabs.Length; i++)
+            for (int i = 0; i < placeableObjectPrefabs.Count; i++)
             {
                 if (placeableObjectPrefabs[i].tag == data.tag)
                 {

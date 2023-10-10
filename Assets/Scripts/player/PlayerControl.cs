@@ -7,6 +7,9 @@ public class PlayerControl : MonoBehaviour
 {
     public Rigidbody rb;
     public GameObject camHolder;
+    public GameObject rdPersonCam;
+
+    public GameObject stPersonCam;
     public float speed;
     public static float sensitivity = 0.5f;
     public float maxForce;
@@ -19,6 +22,10 @@ public class PlayerControl : MonoBehaviour
     public GameObject loseScreen;
 
     public GameObject checkpoint;
+
+    public HealthState healthState;
+
+    public CountdownTimer countdownTimer;
 
     public static bool gameIsPaused;
 
@@ -81,6 +88,22 @@ public class PlayerControl : MonoBehaviour
         camHolder.transform.eulerAngles = new Vector3(lookrotation, camHolder.transform.eulerAngles.y, camHolder.transform.eulerAngles.z);
     }
 
+    void Look3rd(){
+        // Get the horizontal and vertical input for camera movement
+    //float horizontalInput = Input.GetAxis("HorizontalLook");  // Horizontal input for orbiting horizontally
+    //float verticalInput = Input.GetAxis("VerticalLook");      // Vertical input for orbiting vertically
+
+    // Rotate the camera horizontally around the player
+    transform.Rotate(Vector3.up * look.x * sensitivity);
+
+    // Calculate the new vertical rotation
+    lookrotation += -look.y * sensitivity;
+    lookrotation = Mathf.Clamp(lookrotation, -90, 90);
+
+    // Rotate the camera holder (the object holding the camera) vertically around the player
+    camHolder.transform.localEulerAngles = new Vector3(lookrotation, 0, 0);
+    }
+
     void Jump()
     {
         Vector3 jumpForces = Vector3.zero;
@@ -97,6 +120,9 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+        this.camHolder = stPersonCam;
+        healthState.Health = 3;
         //Mouse lock
         //Cursor.lockState = CursorLockMode.Locked;
         /*gameIsPaused = true;
@@ -106,6 +132,15 @@ public class PlayerControl : MonoBehaviour
 
     void LateUpdate()
     {
+        /*if (stPersonCam.activeSelf == true)
+        {
+            Look();
+        }
+        else
+        {
+            Look3rd();
+        }
+        //Look();*/
         Look();
     }
 
@@ -142,6 +177,26 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {
         PauseGame();
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            changeCam();
+        }
+    }
+
+    void changeCam(){
+        Debug.Log("changeCam");
+        if (rdPersonCam.activeSelf == true)
+        {
+            this.camHolder = stPersonCam;
+            stPersonCam.SetActive(true);
+            rdPersonCam.SetActive(false);
+        }
+        else
+        {
+            this.camHolder = rdPersonCam;
+            stPersonCam.SetActive(false);
+            rdPersonCam.SetActive(true);
+        }
     }
 
     void PauseGame()
@@ -166,13 +221,26 @@ public class PlayerControl : MonoBehaviour
         if (other.gameObject.tag == "finish")
         {
             Debug.Log("endpoint reached");
-            GameObject.Find("TimerCanvas").GetComponent<CountdownTimer>().EndGame(true);
+            countdownTimer.EndGame(true);
             //LevelState.endPointReached(winScreen);
             
             print("test");
         }
-        if (other.gameObject.tag == "checkpoint"){
-            
+        if (other.gameObject.tag == "CheckPoint"){
+            other.gameObject.SetActive(false);
+            countdownTimer.checkpointReached();
+        }
+
+        if (other.gameObject.tag == "Damage" || other.gameObject.tag == "WrongDoor"){
+            if (!healthState.damaged()){
+                countdownTimer.damageTaken();
+                Debug.Log("damage");
+            } else {
+                
+                countdownTimer.died();
+                Debug.Log("dead");
+            };
         }
     }
+
 }
