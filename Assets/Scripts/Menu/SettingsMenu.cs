@@ -14,8 +14,8 @@ public class SettingsMenu : MonoBehaviour
     public Sprite disabledDownArrowImage, disabledUpArrowImage, enabledDownArrowImage, enabledUpArrowImage;
     public Image downArrowImage, upArrowImage;
 
-    public static string maxTimeText = "3600";
-    public static string minTimeText = "0";
+/*    public static string maxTimeText = "3600";
+    public static string minTimeText = "0";*/
 
     private List<string> levels;
     private int levelIndex;
@@ -53,14 +53,14 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.SetString("ActiveLevel", levelText);
     }
 
-    public void addTimer()
+/*    public void addTimer()
     {
         Debug.Log("Max time: " + maxTimeText);
         string level = GetComponent<DropdownHandler>().value;
         Debug.Log("Selected: " + level);
 
         GetComponent<EditorDatabase>().addTimers(int.Parse(maxTimeText), int.Parse(minTimeText), level);
-    }
+    }*/
 
     public void SetActiveLevel()
     {
@@ -69,11 +69,11 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.SetString("ActiveLevel", level);
     }
 
-    public void UpdateMaxSlider()
+/*    public void UpdateMaxSlider()
     {
         maxSliderValue.text = maxSlider.value.ToString();
         maxTimeText = maxSlider.value.ToString();
-    }
+    }*/
 
     public void getNextLevel()
     {
