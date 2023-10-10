@@ -77,7 +77,14 @@ namespace Dummiesman
 
         public static Material CreateNullMaterial()
         {
-            return new Material(Shader.Find("Standard (Specular setup)"));
+            Shader shader = Shader.Find("Standard (Specular setup)");
+            if (shader == null)
+            {
+                Debug.LogError("Shader 'Standard (Specular setup)' not found.");
+                return null;
+            }
+
+            return new Material(shader);
         }
 
         public static Vector3 VectorFromStrArray(string[] cmps)

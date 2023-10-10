@@ -36,13 +36,13 @@ public class TextureUploadController : MonoBehaviour
 
     private void Start()
     {
-        // No need to set up currentFloorPlane here, as it's not used in this script
+/*        // No need to set up currentFloorPlane here, as it's not used in this script
         // CurrentFloorPlane should be set up in the Unity Editor or your other scripts.
         // Instead, reference the ground plane directly.
 
         string[] fileNames = Directory.GetFiles("Assets/3dmodel prefabs");
 
-        prefabDropdown.ClearOptions();
+        //prefabDropdown.ClearOptions();
 
         List<TMP_Dropdown.OptionData> prefabOptions = new List<TMP_Dropdown.OptionData>();
 
@@ -52,7 +52,7 @@ public class TextureUploadController : MonoBehaviour
             prefabOptions.Add(new TMP_Dropdown.OptionData(Path.GetFileNameWithoutExtension(fileName)));
         }
 
-        prefabDropdown.AddOptions(prefabOptions);
+        prefabDropdown.AddOptions(prefabOptions);*/
 
     }
 
@@ -73,21 +73,8 @@ public class TextureUploadController : MonoBehaviour
 
         if (!string.IsNullOrEmpty(modelPath))
         {
-            // Get the filename from the full path
-            string fileName = Path.GetFileName(modelPath);
-
-            // Define the target path within the "3dModels" folder in the Assets directory
-            string targetPath = "Assets/3dModels/" + fileName;
-
-            // Check if the file already exists at the target location
-            if (!File.Exists(targetPath))
-            {
-                // Copy the selected 3D model file to the target path
-                FileUtil.CopyFileOrDirectory(modelPath, targetPath);
-            }
-
             // Use a coroutine to load the 3D model asynchronously
-            StartCoroutine(LoadModelAsync(targetPath));
+            StartCoroutine(LoadModelAsync(modelPath));
         }
         else
         {
@@ -101,12 +88,14 @@ public class TextureUploadController : MonoBehaviour
     {
         // Load the 3D model from the relative file path asynchronously
         GameObject test = new OBJLoader().Load(modelPath);
-
+        UI.GetComponent<UIController>().messagePanel.SetActive(true);
+        UI.GetComponent<UIController>().message.text = "start loading object!";
         // Wait until the model is loaded
         while (!test)
         {
             yield return null;
         }
+        StartCoroutine(UI.GetComponent<UIController>().CloseMessagePanel());
         GameObject newModel = GameObject.Find("Modeltest");
 
         if (newModel != null)
