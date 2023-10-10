@@ -3484,13 +3484,13 @@ MonoBehaviour:
   uploadButton: {fileID: 730924596}
   UI: {fileID: 690490725}
   selectedHitboxPrefab: {fileID: 0}
-  prefabDropdown: {fileID: 0}
+  prefabDropdown: {fileID: 810691237}
   scaleSlider: {fileID: 0}
-  xAxisSlider: {fileID: 0}
-  yAxisSlider: {fileID: 0}
-  zAxisSlider: {fileID: 0}
-  toggleCamera: {fileID: 0}
-  hitboxToggle: {fileID: 0}
+  xAxisSlider: {fileID: 1956395911}
+  yAxisSlider: {fileID: 27388142}
+  zAxisSlider: {fileID: 405647939}
+  toggleCamera: {fileID: 93551847}
+  hitboxToggle: {fileID: 488526825}
 --- !u!1 &714516873
 GameObject:
   m_ObjectHideFlags: 0
