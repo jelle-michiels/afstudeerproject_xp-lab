@@ -5323,22 +5323,11 @@ MonoBehaviour:
   widthMinusButton: {fileID: 1074852656}
   lengthPlusButton: {fileID: 818905479}
   lengthMinusButton: {fileID: 1570458838}
-  wall: {fileID: 1796921621}
-  floor: {fileID: 777182074}
-  wallPart: {fileID: 1618175975}
-  stairs: {fileID: 22546179}
-  checkpoint: {fileID: 969675712}
-  realCheckpoint: {fileID: 1630519412}
-  damagePoint: {fileID: 122458619}
-  endpoint: {fileID: 302679142}
-  wrongDoor: {fileID: 1353323871}
-  correctDoor: {fileID: 1617498752}
-  heightButton: {fileID: 0}
   deleteButton: {fileID: 1574516882}
   heightText: {fileID: 643219627}
   selected: {fileID: 995231110}
-  buttonPanel: {fileID: 1052797587}
   buttonTemplate: {fileID: 1200775485}
+  buttonPanel: {fileID: 1052797587}
 --- !u!4 &983908376
 Transform:
   m_ObjectHideFlags: 0

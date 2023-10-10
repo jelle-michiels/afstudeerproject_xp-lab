@@ -111,7 +111,7 @@ public class PlacementController : MonoBehaviour
                     Debug.Log(level.createdObjectsData.Count);
                     if (selectedObject != null)
                     {
-                        Destroy(selectedObject);
+                        DestroyObject(selectedObject);
                     }
                     Destroy(currentPlaceableObject);
                     heightText.text = "Hoogte";
