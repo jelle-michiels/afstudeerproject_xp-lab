@@ -10,75 +10,43 @@ using UnityEditor;
 
 public class UIController : MonoBehaviour
 {
-
     public GameObject controlsText;
     public GameObject mainUI;
-
-    private GameObject saveAndLoadUI;
-    private GameObject saveMenu;
-    private GameObject loadMenu;
-    private GameObject loadPanel;
-    private GameObject saveNameInputObject;
-    private InputField saveNameInput;
-    private Button saveFileButton;
-
-    private Button saveButton;
-    private Button loadButton;
-
-    private Button closeSave;
-    private Button closeLoad;
-
-    private GameObject mouse;
-
-
-    public bool allowInput;
+    public GameObject saveAndLoadUI;
+    public GameObject saveMenu;
+    public GameObject loadMenu;
+    public GameObject loadPanel;
+    public GameObject saveNameInputObject;
     public GameObject levelButtonPrefab;
     public GameObject deleteIconPrefab;
-
+    public GameObject buttonTemplate;
     public GameObject messagePanel;
+    public GameObject mouse;
+
+    public InputField saveNameInput;
+
+    public Button saveFileButton;
+    public Button saveButton;
+    public Button loadButton;
+    public Button closeSave;
+    public Button closeLoad;
+
+    public bool allowInput;
+
     public TextMeshProUGUI message;
 
     List<string> levels;
 
     private string activeLevel;
 
-
     // Start is called before the first frame update
     void Start()
     {
-        mouse = GameObject.Find("Mouse");
-        if (controlsText != null) { 
         controlsText.SetActive(false);
-            }
-        mainUI = GameObject.Find("MainUI");
-       /* controls = GameObject.Find("Controls").GetComponent<Button>();
-        controls.onClick.AddListener(ToggleControls);*/
-
-        saveAndLoadUI = GameObject.Find("SaveAndLoadMenu");
-        saveMenu = GameObject.Find("SaveMenu");
-        loadMenu = GameObject.Find("LoadMenu");
-        saveButton = GameObject.Find("SaveButton").GetComponent<Button>();
-        loadButton = GameObject.Find("LoadButton").GetComponent<Button>();
-        if (saveAndLoadUI != null) { 
         saveAndLoadUI.SetActive(false);
-            }
-        if (saveMenu != null) { 
-        saveMenu.SetActive(false);
-            }
-        if (loadMenu != null) { 
+        saveMenu.SetActive(false); 
         loadMenu.SetActive(false);
-            }
-
-        saveButton.onClick.AddListener(OpenSaveMenu);
-        loadButton.onClick.AddListener(OpenLoadMenu);
-
-        messagePanel = GameObject.Find("MessagePanel");
-
-        message = GameObject.Find("Message").GetComponent<TextMeshProUGUI>();
-        
-        if (messagePanel != null) { 
         messagePanel.SetActive(false);
-            }
 
         allowInput = true;
     }
@@ -115,8 +83,6 @@ public class UIController : MonoBehaviour
         {
             OpenLoadMenu();
         }
-
-
     }
 
     void ToggleControls()
@@ -129,48 +95,33 @@ public class UIController : MonoBehaviour
         mainUI.SetActive(!mainUI.activeSelf);
     }
 
-    void OpenSaveMenu()
+    public void OpenSaveMenu()
     {
         allowInput = false;
-        mainUI.SetActive(false);
 
+        mainUI.SetActive(false);
         saveAndLoadUI.SetActive(true);
         saveMenu.SetActive(true);
         loadMenu.SetActive(false);
 
-        closeSave = GameObject.Find("CloseSave").GetComponent<Button>();
-        closeSave.onClick.AddListener(CloseSaveMenu);
-
-        saveNameInputObject = GameObject.Find("SaveName");
-        saveNameInput = saveNameInputObject.GetComponent<InputField>();
         saveNameInput.text = activeLevel;
-
-
-        saveFileButton = GameObject.Find("SaveFileButton").GetComponent<Button>();
-        saveFileButton.onClick.AddListener(SaveLevel);
-
     }
 
-    void OpenLoadMenu()
+    public void OpenLoadMenu()
     {
         allowInput = false;
-        mainUI.SetActive(false);
 
+        mainUI.SetActive(false);
         saveAndLoadUI.SetActive(true);
         saveMenu.SetActive(false);
         loadMenu.SetActive(true);
-
-        loadPanel = GameObject.Find("LoadPanel");
-
-        closeLoad = GameObject.Find("CloseLoad").GetComponent<Button>();
-        closeLoad.onClick.AddListener(CloseLoadMenu);
 
         levels = GetLevels();
 
         CreateButtons();
     }
 
-    void SaveLevel()
+    public void SaveLevel()
     {
         string levelName = "Untitled";
 
@@ -188,47 +139,33 @@ public class UIController : MonoBehaviour
         StartCoroutine(CloseMessagePanel());
     }
 
-    void CloseSaveMenu()
+    public void CloseSaveMenu()
     {
         allowInput = true;
-        mainUI.SetActive(true);
 
+        mainUI.SetActive(true);
         saveAndLoadUI.SetActive(false);
         saveMenu.SetActive(false);
         loadMenu.SetActive(false);
     }
 
-    void CloseLoadMenu()
+    public void CloseLoadMenu()
     {
         DeleteButtons();
 
         allowInput = true;
-        mainUI.SetActive(true);
 
+        mainUI.SetActive(true);
         saveAndLoadUI.SetActive(false);
         saveMenu.SetActive(false);
-        loadMenu.SetActive(false);
-        
+        loadMenu.SetActive(false);        
     }
 
     List<string> GetLevels()
     {
-        /*string folder = UnityEngine.Application.dataPath + "/Saved/";
-        List<string> files = new List<string>(System.IO.Directory.GetFiles(folder, "*.json"));
-
-        for (int i = 0; i < files.Count; i++)
-        {
-            files[i] = files[i].Replace(folder, "");
-            files[i] = files[i].Replace(".json", "");
-        }
-
-        return files;*/
-
         List<string> files =  mouse.GetComponent<EditorDatabase>().GetLevels();
 
         return files;
-
-
     }
 
     void LoadLevel(string levelName)
@@ -258,6 +195,7 @@ public class UIController : MonoBehaviour
         System.IO.File.Delete(file + ".meta");
         GameObject levelButton = GameObject.Find(levelName + "Button");
         Destroy(levelButton);
+
         CloseLoadMenu();
         OpenLoadMenu();
 
@@ -270,44 +208,45 @@ public class UIController : MonoBehaviour
 
     void CreateButtons()
     {
-
-        for (int i = 0; i < levels.Count; i++)
+        buttonTemplate.SetActive(true);
+        foreach (string levelName in levels)
         {
-            GameObject levelButton = Instantiate(levelButtonPrefab, loadPanel.transform);
-            levelButton.name = levels[i] + "Button";
-            if (i < 6)
-            {
-                levelButton.transform.position = new Vector3(levelButton.transform.position.x - 160, levelButton.transform.position.y + 60, levelButton.transform.position.z);
-                levelButton.transform.position = new Vector3(levelButton.transform.position.x, levelButton.transform.position.y - (i * 30), levelButton.transform.position.z);
-            }
-            else if (i < 12)
-            {
-                levelButton.transform.position = new Vector3(levelButton.transform.position.x +10, levelButton.transform.position.y + 60, levelButton.transform.position.z);
-                levelButton.transform.position = new Vector3(levelButton.transform.position.x, levelButton.transform.position.y - ((i - 6) * 30), levelButton.transform.position.z);
+            // Instantiate the ButtonTemplate prefab
+            GameObject buttonInstance = Instantiate(buttonTemplate, loadPanel.transform);
 
+            // Set the name of the group (ButtonTemplate) to the level name
+            buttonInstance.name = levelName;
+
+            // Find the TextMeshProUGUI component in the group to display the level name
+            TextMeshProUGUI levelNameText = buttonInstance.GetComponentInChildren<TextMeshProUGUI>();
+            if (levelNameText != null)
+            {
+                levelNameText.text = levelName;
             }
             else
             {
-                levelButton.transform.position = new Vector3(levelButton.transform.position.x + 140, levelButton.transform.position.y + 60, levelButton.transform.position.z);
-                levelButton.transform.position = new Vector3(levelButton.transform.position.x, levelButton.transform.position.y - ((i - 12) * 30), levelButton.transform.position.z);
+                Debug.LogError("TextMeshProUGUI component not found in ButtonTemplate.");
+                continue; // Skip to the next level if the text component is not found.
             }
 
-            GameObject deleteButton = Instantiate(deleteIconPrefab, levelButton.transform);
-            deleteButton.name = "Delete" + levels[i];
-            deleteButton.transform.position = new Vector3(levelButton.transform.position.x + 70, levelButton.transform.position.y, levelButton.transform.position.z);
+            // Find the LevelButton and DeleteButton in the group
+            Button levelButton = buttonInstance.transform.Find("LevelButton").GetComponent<Button>();
+            Button deleteButton = buttonInstance.transform.Find("DeleteButton").GetComponent<Button>();
 
-            levelButton.GetComponentInChildren<TextMeshProUGUI>().text = levels[i];
-            string name = levels[i];
-            levelButton.GetComponent<Button>().onClick.AddListener(() => LoadLevel(name));
-            deleteButton.GetComponent<Button>().onClick.AddListener(() => DeleteLevel(name));
+            // Add onClick listeners to the LevelButton and DeleteButton
+            levelButton.onClick.AddListener(() => LoadLevel(levelName));
+            deleteButton.onClick.AddListener(() => DeleteLevel(levelName));
         }
+
+        // Deactivate the template button
+        buttonTemplate.SetActive(false);
     }
 
     void DeleteButtons()
     {
         for (int i = 0; i < levels.Count; i++)
         {
-            GameObject levelButton = GameObject.Find(levels[i] + "Button");
+            GameObject levelButton = GameObject.Find(levels[i]);
             Destroy(levelButton);
         }
     }
@@ -316,6 +255,15 @@ public class UIController : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         messagePanel.SetActive(false);
+    }
+
+    public void RefreshButtons()
+    {
+        // Clear existing buttons
+        DeleteButtons();
+
+        // Recreate buttons with the updated list of levels
+        CreateButtons();
     }
 
 }
