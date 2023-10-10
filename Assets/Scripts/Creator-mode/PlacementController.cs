@@ -35,18 +35,6 @@ public class PlacementController : MonoBehaviour
     public Button widthMinusButton;
     public Button lengthPlusButton;
     public Button lengthMinusButton;
-
-    public Button wall;
-    public Button floor;
-    public Button wallPart;
-    public Button stairs;
-    public Button checkpoint;
-    public Button realCheckpoint;
-    public Button damagePoint;
-    public Button endpoint;
-    public Button wrongDoor;
-    public Button correctDoor;
-
     public Button heightButton;
     public Button deleteButton;
 
@@ -209,9 +197,7 @@ public class PlacementController : MonoBehaviour
         widthMinusButton.interactable = UI.GetComponent<UIController>().allowInput;
         lengthPlusButton.interactable = UI.GetComponent<UIController>().allowInput;
         lengthMinusButton.interactable = UI.GetComponent<UIController>().allowInput;
-        wall.interactable = UI.GetComponent<UIController>().allowInput;
-        floor.interactable = UI.GetComponent<UIController>().allowInput;
-        wallPart.interactable = UI.GetComponent<UIController>().allowInput;
+
         if (heightButton != null)
         {
             heightButton.interactable = UI.GetComponent<UIController>().allowInput;
