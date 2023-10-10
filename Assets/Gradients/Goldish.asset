@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Goldish
   m_EditorClassIdentifier: 
   colorMode: 3
-  topLeft: {r: 0, g: 0, b: 0, a: 1}
-  topRight: {r: 0, g: 0, b: 0, a: 1}
-  bottomLeft: {r: 0, g: 0, b: 0, a: 1}
-  bottomRight: {r: 0, g: 0, b: 0, a: 1}
+  topLeft: {r: 0.9137255, g: 0.76862746, b: 0.41568628, a: 1}
+  topRight: {r: 0.9137255, g: 0.76862746, b: 0.41568628, a: 1}
+  bottomLeft: {r: 0.764151, g: 0.6322796, b: 0.3135903, a: 1}
+  bottomRight: {r: 0.7647059, g: 0.6313726, b: 0.3137255, a: 1}
