@@ -20,6 +20,8 @@ public class PlacementController : MonoBehaviour
 
     private float height;
     private float initialHeight;
+    private float heightForText;
+    private float displayHeight;
 
     private Material objectMaterial;
 
@@ -35,24 +37,18 @@ public class PlacementController : MonoBehaviour
     public Button widthMinusButton;
     public Button lengthPlusButton;
     public Button lengthMinusButton;
-    public Button heightButton;
     public Button deleteButton;
 
     public TextMeshProUGUI heightText;
-    private float heightForText;
-    private float displayHeight;
 
     public GameObject selected;
-    private Vector3 selectedPosition;
-
+    public GameObject buttonTemplate;
     private GameObject selectedObject;
-
     private GameObject UI;
 
+    private Vector3 selectedPosition;
+
     public Transform buttonPanel;
-
-    public GameObject buttonTemplate;
-
 
     void Start()
     {
@@ -112,6 +108,7 @@ public class PlacementController : MonoBehaviour
 
                 if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.LeftShift))
                 {
+                    Debug.Log(level.createdObjectsData.Count);
                     if (selectedObject != null)
                     {
                         DestroyObject(selectedObject);
@@ -119,6 +116,7 @@ public class PlacementController : MonoBehaviour
                     Destroy(currentPlaceableObject);
                     heightText.text = "Hoogte";
                     selected.SetActive(false);
+                    Debug.Log(level.createdObjectsData.Count);
                 }
             }
 
@@ -197,17 +195,7 @@ public class PlacementController : MonoBehaviour
         widthMinusButton.interactable = UI.GetComponent<UIController>().allowInput;
         lengthPlusButton.interactable = UI.GetComponent<UIController>().allowInput;
         lengthMinusButton.interactable = UI.GetComponent<UIController>().allowInput;
-
-        if (heightButton != null)
-        {
-            heightButton.interactable = UI.GetComponent<UIController>().allowInput;
-        }
-        if (deleteButton != null)
-        {
-            deleteButton.interactable = UI.GetComponent<UIController>().allowInput;
-        }
-
-
+        deleteButton.interactable = UI.GetComponent<UIController>().allowInput;
 
         if (!UI.GetComponent<UIController>().allowInput)
         {
@@ -215,9 +203,6 @@ public class PlacementController : MonoBehaviour
             currentPlaceableObject = null;
             selected.SetActive(false);
         }
-
-
-
     }
 
     private void HandleNewObjectHotkey()
@@ -230,7 +215,6 @@ public class PlacementController : MonoBehaviour
             }
         }
     }
-
 
     private void MoveCurrentObjectToMouse()
     {
@@ -580,6 +564,7 @@ public class PlacementController : MonoBehaviour
 
     public void RemoveAllCreatedObjects()
     {
+        Debug.Log(level.createdObjectsData.Count);
         foreach (CreatedObject.Data createdObjectData in level.createdObjectsData)
         {
             GameObject objectToRemove = FindGameObjectByCreatedObjectData(createdObjectData);
@@ -588,6 +573,7 @@ public class PlacementController : MonoBehaviour
         }
 
         level.createdObjectsData.Clear();
+        Debug.Log(level.createdObjectsData.Count);
     }
 
     private GameObject FindGameObjectByCreatedObjectData(CreatedObject.Data createdObjectData)
