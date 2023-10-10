@@ -77,7 +77,7 @@ namespace Dummiesman
 
         public static Material CreateNullMaterial()
         {
-            Shader shader = Shader.Find("Standard (Specular setup)");
+            Shader shader = Shader.Find("Standard");
             if (shader == null)
             {
                 Debug.LogError("Shader 'Standard (Specular setup)' not found.");
