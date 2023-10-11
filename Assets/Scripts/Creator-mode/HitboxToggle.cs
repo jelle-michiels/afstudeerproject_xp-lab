@@ -40,7 +40,6 @@ public class HitboxToggle : MonoBehaviour
         hitboxToggle.DOAnchorPos(on ? handlePosition * -1 : handlePosition, .4f).SetEase(Ease.InOutBack);
         backgroundImage.DOColor(on ? backgroundActiveColor : backgroundDefaultColor, .6f);
         /*buttonCanvas.SetActive(on ? false : true);*/
-
     }
 
     void OnDestroy()

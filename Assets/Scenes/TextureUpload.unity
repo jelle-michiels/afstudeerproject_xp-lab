@@ -234,7 +234,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 690490732}
         m_TargetAssemblyTypeName: TextureUploadController, Assembly-CSharp
         m_MethodName: ScaleHitbox
         m_Mode: 1
@@ -479,7 +479,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 690490732}
         m_TargetAssemblyTypeName: TextureUploadController, Assembly-CSharp
         m_MethodName: ToggleCamera
         m_Mode: 1
@@ -2442,7 +2442,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 690490732}
         m_TargetAssemblyTypeName: TextureUploadController, Assembly-CSharp
         m_MethodName: ScaleHitbox
         m_Mode: 1
@@ -2846,7 +2846,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 690490732}
         m_TargetAssemblyTypeName: TextureUploadController, Assembly-CSharp
         m_MethodName: ToggleHitbox
         m_Mode: 1
@@ -3485,7 +3485,7 @@ MonoBehaviour:
   UI: {fileID: 690490725}
   selectedHitboxPrefab: {fileID: 0}
   prefabDropdown: {fileID: 810691237}
-  scaleSlider: {fileID: 0}
+  scaleSlider: {fileID: 1596007357}
   xAxisSlider: {fileID: 1956395911}
   yAxisSlider: {fileID: 27388142}
   zAxisSlider: {fileID: 405647939}
@@ -4028,7 +4028,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 690490732}
         m_TargetAssemblyTypeName: TextureUploadController, Assembly-CSharp
         m_MethodName: OnDropdownValueChanged
         m_Mode: 1
@@ -5894,7 +5894,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: <color=white>Disable camera (movement)</color>
+  m_Text: <color=white>Enable camera (movement)</color>
 --- !u!222 &1152377862
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7753,7 +7753,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 690490732}
         m_TargetAssemblyTypeName: TextureUploadController, Assembly-CSharp
         m_MethodName: ScaleModel
         m_Mode: 1
@@ -9358,7 +9358,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 690490732}
         m_TargetAssemblyTypeName: TextureUploadController, Assembly-CSharp
         m_MethodName: ScaleHitbox
         m_Mode: 1

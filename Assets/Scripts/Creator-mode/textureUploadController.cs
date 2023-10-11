@@ -15,7 +15,7 @@ public class TextureUploadController : MonoBehaviour
     public Button uploadButton;
     public GameObject UI;
     public GameObject selectedHitboxPrefab;
-  
+
 
     private int clickCount = 0;
     private float cameraMoveSpeed = 5.0f; // Adjust this value to control camera movement speed
@@ -36,13 +36,10 @@ public class TextureUploadController : MonoBehaviour
 
     private void Start()
     {
-/*        // No need to set up currentFloorPlane here, as it's not used in this script
-        // CurrentFloorPlane should be set up in the Unity Editor or your other scripts.
-        // Instead, reference the ground plane directly.
+        // Clear the existing options in the dropdown
+        prefabDropdown.ClearOptions();
 
-        string[] fileNames = Directory.GetFiles("Assets/3dmodel prefabs");
-
-        //prefabDropdown.ClearOptions();
+        string[] fileNames = Directory.GetFiles("Assets/Resources/HitboxPrefabs");
 
         List<TMP_Dropdown.OptionData> prefabOptions = new List<TMP_Dropdown.OptionData>();
 
@@ -52,9 +49,9 @@ public class TextureUploadController : MonoBehaviour
             prefabOptions.Add(new TMP_Dropdown.OptionData(Path.GetFileNameWithoutExtension(fileName)));
         }
 
-        prefabDropdown.AddOptions(prefabOptions);*/
-
+        prefabDropdown.AddOptions(prefabOptions);
     }
+
 
     private void Update()
     {
@@ -101,7 +98,7 @@ public class TextureUploadController : MonoBehaviour
         if (newModel != null)
         {
             // Set the position to(0, 0, -5)
-             newModel.transform.position = new Vector3(0f, 0f, -5f);
+            newModel.transform.position = new Vector3(0f, 0f, -5f);
 
             // Set the rotation to (0, 180, 0)
             newModel.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
@@ -119,7 +116,7 @@ public class TextureUploadController : MonoBehaviour
             UI.GetComponent<UIController>().message.text = "Failed to upload model";
             StartCoroutine(UI.GetComponent<UIController>().CloseMessagePanel());
         }
-        
+
     }
 
 
@@ -147,7 +144,10 @@ public class TextureUploadController : MonoBehaviour
         string selectedPrefabName = prefabDropdown.options[value].text;
 
         // Load the selected prefab from the "Resources" folder
-        string prefabPath = "3dmodel prefabs/" + selectedPrefabName;
+        string prefabPath = "HitboxPrefabs/" + selectedPrefabName;
+
+        Debug.Log(prefabPath);
+
         GameObject selectedHitboxPrefab = Resources.Load<GameObject>(prefabPath);
 
         if (selectedHitboxPrefab != null)
@@ -169,7 +169,7 @@ public class TextureUploadController : MonoBehaviour
 
     public void AddSelectedHitbox(GameObject selectedHitboxPrefab)
     {
-          GameObject newModel = GameObject.Find("Modeltest");   
+        GameObject newModel = GameObject.Find("Modeltest");
         if (selectedHitboxPrefab != null && newModel != null)
         {
             // Instantiate the selected hitbox prefab and set its parent to the newModel
@@ -202,7 +202,7 @@ public class TextureUploadController : MonoBehaviour
 
     public void MoveCameraToGround()
     {
-       
+
     }
     public void OpenFileExplorer()
     {
@@ -236,7 +236,7 @@ public class TextureUploadController : MonoBehaviour
 
     public void ToggleCamera()
     {
-        GameObject camera = GameObject.Find("Camera");
+        GameObject camera = GameObject.Find("Main Camera");
 
         if (camera != null)
         {
@@ -281,21 +281,21 @@ public class TextureUploadController : MonoBehaviour
 
         MeshRenderer renderer = wallObject.GetComponent<MeshRenderer>();
 
-
-                if (hitboxToggle != null)
-                {
-                    if (renderer != null)
-                    {
-                        // Toggle the visibility of the MeshRenderer based on the Toggle's state
-                        renderer.enabled = hitboxToggle.isOn;
-                    }   
-                    else
-                    {
-                        Debug.LogError("MeshRenderer not found on object with the 'Wall' tag.");
-                    }
-                } else
-                {
-                    Debug.Log("Toggle is not found");
-                }        
+        if (hitboxToggle != null)
+        {
+            if (renderer != null)
+            {
+                // Toggle the visibility of the MeshRenderer based on the Toggle's state
+                renderer.enabled = hitboxToggle.isOn;
+            }
+            else
+            {
+                Debug.LogError("MeshRenderer not found on object with the 'Wall' tag.");
+            }
+        }
+        else
+        {
+            Debug.Log("Toggle is not found");
+        }
     }
 }
