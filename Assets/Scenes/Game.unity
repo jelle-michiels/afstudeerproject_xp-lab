@@ -6645,6 +6645,7 @@ MonoBehaviour:
   - {fileID: 8130921515360841392, guid: 39868262e399a4c48bf3739708613d2b, type: 3}
   - {fileID: 6554995643554309868, guid: f86e40690fab040f19fb5ab98be375be, type: 3}
   - {fileID: 7596822624527837103, guid: ea9f40cfca5b54114b53ebf9263714ea, type: 3}
+  - {fileID: 5762143052197826267, guid: b54e8f857e58c9d4d83536d9994f66e9, type: 3}
   playerControl: {fileID: 1645697007}
 --- !u!114 &1706903793
 MonoBehaviour:
