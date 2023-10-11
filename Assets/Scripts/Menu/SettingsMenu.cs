@@ -7,15 +7,11 @@ using TMPro;
 
 public class SettingsMenu : MonoBehaviour
 {
-
     public Slider maxSlider;
     public Button downArrowButton, upArrowButton;
     public TextMeshProUGUI maxSliderValue, levelTextField;
     public Sprite disabledDownArrowImage, disabledUpArrowImage, enabledDownArrowImage, enabledUpArrowImage;
     public Image downArrowImage, upArrowImage;
-
-/*    public static string maxTimeText = "3600";
-    public static string minTimeText = "0";*/
 
     private List<string> levels;
     private int levelIndex;
@@ -51,29 +47,9 @@ public class SettingsMenu : MonoBehaviour
         levelTextField.text = levelText;
 
         PlayerPrefs.SetString("ActiveLevel", levelText);
+
+        GetComponent<EditorDatabase>().LoadLevel(levelText);
     }
-
-/*    public void addTimer()
-    {
-        Debug.Log("Max time: " + maxTimeText);
-        string level = GetComponent<DropdownHandler>().value;
-        Debug.Log("Selected: " + level);
-
-        GetComponent<EditorDatabase>().addTimers(int.Parse(maxTimeText), int.Parse(minTimeText), level);
-    }*/
-
-    public void SetActiveLevel()
-    {
-        string level = GetComponent<DropdownHandler>().value;
-        Debug.Log("Selected: " + level);
-        PlayerPrefs.SetString("ActiveLevel", level);
-    }
-
-/*    public void UpdateMaxSlider()
-    {
-        maxSliderValue.text = maxSlider.value.ToString();
-        maxTimeText = maxSlider.value.ToString();
-    }*/
 
     public void getNextLevel()
     {

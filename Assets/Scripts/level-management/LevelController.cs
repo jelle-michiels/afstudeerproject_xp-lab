@@ -25,7 +25,7 @@ public class LevelController : MonoBehaviour
     {
     }
 
-    public void SaveLevel(string levelName)
+    public void SaveLevel(string levelName, string maxTime)
     {
         level = GetComponent<PlacementController>().level;
 
@@ -43,7 +43,7 @@ public class LevelController : MonoBehaviour
 
         Debug.Log("Saving to DB");
 
-        GetComponent<EditorDatabase>().SaveLevel(level, levelName);
+        GetComponent<EditorDatabase>().SaveLevel(level, levelName, maxTime);
 
         StartCoroutine(WaitAndDeleteFile(levelName));
 

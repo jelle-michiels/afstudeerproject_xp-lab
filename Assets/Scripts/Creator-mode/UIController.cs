@@ -130,7 +130,7 @@ public class UIController : MonoBehaviour
             levelName = saveNameInput.text;
         }
 
-        mouse.GetComponent<LevelController>().SaveLevel(levelName);
+        mouse.GetComponent<LevelController>().SaveLevel(levelName, TimerSettings.maxTimeText);
 
         CloseSaveMenu();
         
