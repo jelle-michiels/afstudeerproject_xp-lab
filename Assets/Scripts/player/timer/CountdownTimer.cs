@@ -21,9 +21,14 @@ public class CountdownTimer : MonoBehaviour
     public TextMeshProUGUI youWinText;
     public TextMeshProUGUI scoreText;
 
+    public TextMeshProUGUI healthText;
     public TextMeshProUGUI checkpointText;
 
     public GameObject checkpointFlash;
+
+    public GameObject dmgScreen;
+
+    public GameObject UI;
 
     public Button tryAgainBtn, homeButton;
 
@@ -41,9 +46,11 @@ public class CountdownTimer : MonoBehaviour
         tryAgainBtn.gameObject.SetActive(false);
         homeButton.gameObject.SetActive(false);
         gameFinished = false;
-        timeTaken = int.Parse(SettingsMenu.maxTimeText);
+        timeTaken = int.Parse(TimerSettings.maxTimeText);
         checkpointText.enabled = false;
         checkpointFlash.SetActive(false);
+        dmgScreen.SetActive(false);
+        UI.SetActive(false);
     }
 
     void Update()
@@ -56,7 +63,7 @@ public class CountdownTimer : MonoBehaviour
             }
             /*timeTaken -= Time.deltaTime;*/ // update the time taken while the game is running
 
-            if (timeTaken <= int.Parse(SettingsMenu.minTimeText))
+            if (timeTaken <= 0)
             {
                 /*CalculateScore();*/
                 EndGame(false);
@@ -69,7 +76,7 @@ public class CountdownTimer : MonoBehaviour
     private void CalculateScore()
     {
         // Calculate the score as a percentage using the formula
-        score = (int.Parse(SettingsMenu.maxTimeText) + timeTaken) / 5;
+        score = (int.Parse(TimerSettings.maxTimeText) + timeTaken) / 5;
         if (score < 0)
         {
             score = 0;
@@ -123,6 +130,23 @@ public class CountdownTimer : MonoBehaviour
         checkpointText.enabled = false;
     }
 
+        private IEnumerator damageDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        dmgScreen.SetActive(false);
+    }
+
+    public void damageTaken(){
+        dmgScreen.SetActive(true);
+        StartCoroutine(damageDelay());
+    }
+
+    public void died(){
+        EndGame(false);
+    }
+
+
+
     /*public void GameOver()
     {
         gameFinished = true;
@@ -154,6 +178,6 @@ public class CountdownTimer : MonoBehaviour
     public void startTimer()
     {
         timeStarted = true;
+        UI.SetActive(true);
     }
-
 }

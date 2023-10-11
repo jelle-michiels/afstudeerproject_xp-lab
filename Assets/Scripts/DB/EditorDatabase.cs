@@ -33,7 +33,7 @@ public class EditorDatabase : MonoBehaviour
         }
     }
 
-    public void SaveLevel(LevelEditor level, string name)
+    public void SaveLevel(LevelEditor level, string name, string maxTime)
     {
         Debug.Log("Saving level " + name + " to database...");
 
@@ -78,9 +78,10 @@ public class EditorDatabase : MonoBehaviour
                 reader.Close();
                 //Save level
 
-                using (SqlCommand command = new SqlCommand("INSERT INTO Level (levelname) VALUES (@levelname)", dbconn))
+                using (SqlCommand command = new SqlCommand("INSERT INTO Level (levelname, maximumTime) VALUES (@levelname, @maximumTime)", dbconn))
                 {
                     command.Parameters.AddWithValue("@levelname", name);
+                    command.Parameters.AddWithValue("@maximumTime", maxTime);
                     command.ExecuteNonQuery();
                 }
 
@@ -177,6 +178,8 @@ public class EditorDatabase : MonoBehaviour
                     int maxTime = reader.GetInt32(reader.GetOrdinal("maximumTime"));
                     int minTime = reader.GetInt32(reader.GetOrdinal("minimumTime"));
                     Debug.Log("Max time: " + maxTime + " Min time: " + minTime);
+
+                    TimerSettings.maxTimeText = maxTime.ToString();
 
                     reader.Close();
 
