@@ -17,8 +17,6 @@ public class UIController : MonoBehaviour
     public GameObject loadMenu;
     public GameObject loadPanel;
     public GameObject saveNameInputObject;
-    public GameObject levelButtonPrefab;
-    public GameObject deleteIconPrefab;
     public GameObject buttonTemplate;
     public GameObject messagePanel;
     public GameObject mouse;
