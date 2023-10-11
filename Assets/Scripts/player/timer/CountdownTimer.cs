@@ -63,7 +63,7 @@ public class CountdownTimer : MonoBehaviour
             }
             /*timeTaken -= Time.deltaTime;*/ // update the time taken while the game is running
 
-            if (timeTaken <= int.Parse(TimerSettings.minTimeText))
+            if (timeTaken <= 0)
             {
                 /*CalculateScore();*/
                 EndGame(false);
@@ -180,5 +180,4 @@ public class CountdownTimer : MonoBehaviour
         timeStarted = true;
         UI.SetActive(true);
     }
-
 }
