@@ -2374,7 +2374,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press 'E' to Open
+  m_Text: 
 --- !u!222 &763192960
 CanvasRenderer:
   m_ObjectHideFlags: 0
