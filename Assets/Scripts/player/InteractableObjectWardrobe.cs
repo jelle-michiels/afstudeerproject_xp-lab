@@ -1,15 +1,18 @@
+using Microsoft.Unity.VisualStudio.Editor;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using Image = UnityEngine.UI.Image;
 
 public class InteractableObjectWardrobe : MonoBehaviour
 {
     public GameObject[] boxes;
 
     public GameObject attachedObject;
+    public Image keybboardE;
     
     private GameObject txtToDisplay;
     private bool playerInZone;
@@ -23,10 +26,9 @@ public class InteractableObjectWardrobe : MonoBehaviour
 
     void Start()
     {
-        GameObject canvasObject = GameObject.Find("InteractableCanvas");
-        if (canvasObject != null)
+        if (keybboardE != null)
         {
-            txtToDisplay = canvasObject.transform.Find("ObjectText").gameObject;
+            keybboardE.gameObject.SetActive(false);
         }
     }
 
@@ -34,7 +36,8 @@ public class InteractableObjectWardrobe : MonoBehaviour
     // any trigger laat het afgaan
     private void OnTriggerEnter(Collider other)
     {
-        txtToDisplay.GetComponent<Text>().text = "Press 'E' to interact";
+        //interactableCanvas.SetActive(true);
+        //txtToDisplay.GetComponent<Text>().text = "Press 'E' or 'X' on the controller to interact";
         playerInZone = true;
     }
 
@@ -46,7 +49,7 @@ public class InteractableObjectWardrobe : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && playerInZone)
+        if (Input.GetKeyDown(KeyCode.E) && playerInZone || Input.GetKeyDown(KeyCode.JoystickButton0) && playerInZone)
         {
             toggleBoxes();
         }
