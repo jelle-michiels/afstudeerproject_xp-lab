@@ -3119,6 +3119,7 @@ GameObject:
   - component: {fileID: 1372965474}
   - component: {fileID: 1372965475}
   - component: {fileID: 1372965476}
+  - component: {fileID: 1372965477}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3449,6 +3450,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthText: {fileID: 1192337558}
+--- !u!114 &1372965477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372965465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac2240c7b8653e14cbafea95fc11fb36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomPrefabs: []
 --- !u!1 &1380386485
 GameObject:
   m_ObjectHideFlags: 0

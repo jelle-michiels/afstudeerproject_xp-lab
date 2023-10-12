@@ -2153,7 +2153,7 @@ Transform:
   m_GameObject: {fileID: 689045372}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.1127872, y: 1.02, z: -0.54}
+  m_LocalPosition: {x: 1.1127872, y: 1.187, z: -0.345}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6166,6 +6166,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
   m_PrefabInstance: {fileID: 1689739903}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1645697013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645697001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e0d897a82313c345a3557db1a242e45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scriptNameToFind: HealthState
 --- !u!1 &1659153594
 GameObject:
   m_ObjectHideFlags: 0
@@ -6565,6 +6578,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1782702501690864755, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1645697002}
+    - targetCorrespondingSourceObject: {fileID: 1782702501690864755, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1645697013}
   m_SourcePrefab: {fileID: 100100000, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
 --- !u!1 &1695684474
 GameObject:
@@ -7616,7 +7632,6 @@ GameObject:
   - component: {fileID: 1958655440}
   - component: {fileID: 1958655439}
   - component: {fileID: 1958655441}
-  - component: {fileID: 1958655442}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -7684,19 +7699,6 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
---- !u!114 &1958655442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1958655437}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e0d897a82313c345a3557db1a242e45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scriptNameToFind: HealthState
 --- !u!1 &1982159240
 GameObject:
   m_ObjectHideFlags: 0
@@ -8087,7 +8089,6 @@ GameObject:
   - component: {fileID: 2054478612}
   - component: {fileID: 2054478611}
   - component: {fileID: 2054478610}
-  - component: {fileID: 2054478609}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -8095,19 +8096,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2054478609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2054478608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8079330d3ba83e4990129f9cfb2478d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthText: {fileID: 1712280411}
 --- !u!114 &2054478610
 MonoBehaviour:
   m_ObjectHideFlags: 0
