@@ -1181,7 +1181,6 @@ MonoBehaviour:
   toggle: {fileID: 168283292}
   backgroundImage: {fileID: 1455212576}
   controlMenu: {fileID: 1842664361}
-  buttonCanvas: {fileID: 0}
 --- !u!1 &179556843
 GameObject:
   m_ObjectHideFlags: 0
@@ -13671,9 +13670,9 @@ RectTransform:
   - {fileID: 1740611074}
   - {fileID: 1050935345}
   - {fileID: 184852437}
-  - {fileID: 1207582046}
   - {fileID: 1355356527}
   - {fileID: 339099157}
+  - {fileID: 1207582046}
   m_Father: {fileID: 690490729}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

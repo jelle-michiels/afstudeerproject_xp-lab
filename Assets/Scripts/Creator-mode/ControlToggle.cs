@@ -15,7 +15,7 @@ public class ControlToggle : MonoBehaviour
 
     public Image backgroundImage;
 
-    public GameObject controlMenu, buttonCanvas;
+    public GameObject controlMenu;
 
     Vector2 handlePosition;
 
@@ -40,8 +40,6 @@ public class ControlToggle : MonoBehaviour
     {
         controlToggle.DOAnchorPos(on ? handlePosition * -1 : handlePosition, .4f).SetEase(Ease.InOutBack);
         backgroundImage.DOColor(on ? backgroundActiveColor : backgroundDefaultColor, .6f);
-        buttonCanvas.SetActive(on ? false : true);
-
     }
 
     void OnDestroy()
