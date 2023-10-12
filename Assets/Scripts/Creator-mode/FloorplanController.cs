@@ -10,6 +10,8 @@ public class FloorplanController : MonoBehaviour
 {
     public Button uploadButton;
     public Button scratchButton;
+    public Button uploadButtonMini;
+
     public GameObject floors;
 
     public GameObject floorPlane;
@@ -58,7 +60,7 @@ public class FloorplanController : MonoBehaviour
 
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit))
+            /*if (Physics.Raycast(ray, out hit))
             {
                 if (hit.collider.gameObject == currentFloorPlane)
                 {
@@ -77,7 +79,7 @@ public class FloorplanController : MonoBehaviour
                         }
                     }
                 }
-            }
+            }*/
 
             if (Input.GetKeyDown(KeyCode.PageUp))
             {
@@ -122,6 +124,8 @@ public class FloorplanController : MonoBehaviour
             currentFloorPlane.GetComponent<MeshRenderer>().material = floorplan;
 
             uploadButton.gameObject.SetActive(false);
+            scratchButton.gameObject.SetActive(false);
+            uploadButtonMini.gameObject.SetActive(true);
 
 
             currentFloorPlane.GetComponent<FloorData>().data.floorPlanPath = imagePath;
@@ -147,6 +151,7 @@ public class FloorplanController : MonoBehaviour
     {
         uploadButton.gameObject.SetActive(false);
         scratchButton.gameObject.SetActive(false);
+        uploadButtonMini.gameObject.SetActive(true);
     }
 
     public void LoadFloorplanFromSave(int floor, string imagePath)
