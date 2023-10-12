@@ -645,7 +645,7 @@ GameObject:
   - component: {fileID: 4279641562113092657}
   - component: {fileID: 8610859036949203563}
   m_Layer: 0
-  m_Name: Warderobe
+  m_Name: Wardrobe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
