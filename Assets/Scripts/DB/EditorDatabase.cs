@@ -180,6 +180,7 @@ public class EditorDatabase : MonoBehaviour
                     Debug.Log("Max time: " + maxTime + " Min time: " + minTime);
 
                     TimerSettings.maxTimeText = maxTime.ToString();
+                    CountdownTimer.timeTaken = maxTime;
 
                     reader.Close();
 

@@ -12,7 +12,6 @@ public class CountdownTimer : MonoBehaviour
 {
     private float maxTimeAllowed;
     private float minTimeRequired;
-    private float timeTaken;
     private float score;
 
     public TextMeshProUGUI countdownText;
@@ -37,6 +36,8 @@ public class CountdownTimer : MonoBehaviour
     private bool timeStarted = false;
 
     public PlayerControl playerControl;
+
+    public static float timeTaken;
 
     void Start()
     {
