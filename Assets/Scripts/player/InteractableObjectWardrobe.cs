@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
-public class InteractableObjectWarderobe : MonoBehaviour
+public class InteractableObjectWardrobe : MonoBehaviour
 {
     public GameObject[] boxes;
 
@@ -19,9 +19,15 @@ public class InteractableObjectWarderobe : MonoBehaviour
         empty
     }
 
-    void Start(){
-        txtToDisplay = GameObject.Find("InteractableCanvas").transform.Find("ObjectText").gameObject;
+    void Start()
+    {
+        GameObject canvasObject = GameObject.Find("InteractableCanvas");
+        if (canvasObject != null)
+        {
+            txtToDisplay = canvasObject.transform.Find("ObjectText").gameObject;
+        }
     }
+
 
     // any trigger laat het afgaan
     private void OnTriggerEnter(Collider other)
