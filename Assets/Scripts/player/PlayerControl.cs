@@ -177,7 +177,7 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {
         PauseGame();
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Joystick1Button5))
         {
             changeCam();
         }
