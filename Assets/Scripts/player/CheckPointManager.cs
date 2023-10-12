@@ -28,7 +28,7 @@ public class CheckPointManager : MonoBehaviour
         LevelState.damagescreenOff(dmgScreen);
     }
 
-    void OnCollisionEnter(Collision other)
+    /*void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "CheckPoint"){
             LevelState.enableCheckpointScreen(checkpoint);
@@ -37,7 +37,7 @@ public class CheckPointManager : MonoBehaviour
         }
 
         if (other.gameObject.tag == "Damage" || other.gameObject.tag == "WrongDoor"){
-            if (GameObject.Find("Player").GetComponent<HealthState>().damaged()){
+            if (GameObject.Find("Player").GetComponent<HealthStateT>().damaged()){
                 LevelState.died(loseScreen);
                 Debug.Log("damage");
             } else {
@@ -51,5 +51,5 @@ public class CheckPointManager : MonoBehaviour
             Debug.Log("finish");
             LevelState.endPointReached(winScreen);            
         }
-    }
+    }*/
 }
