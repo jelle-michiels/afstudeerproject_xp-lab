@@ -19,7 +19,6 @@ public class MouseSensitivityController : MonoBehaviour
 
     public void UpdateSensitivity()
     {
-        Debug.Log(sensitivitySlider.value);
         PlayerControl.sensitivity = sensitivitySlider.value;
         sensitivityValueText.text = sensitivitySlider.value.ToString("F2");
     }
