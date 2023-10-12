@@ -75,9 +75,9 @@ public class TextureUploadController : MonoBehaviour
         }
         else
         {
-            UI.GetComponent<UIController>().messagePanel.SetActive(true);
-            UI.GetComponent<UIController>().message.text = "No 3D model selected";
-            StartCoroutine(UI.GetComponent<UIController>().CloseMessagePanel());
+            UI.GetComponent<TextureUIController>().messagePanel.SetActive(true);
+            UI.GetComponent<TextureUIController>().message.text = "No 3D model selected";
+            StartCoroutine(UI.GetComponent<TextureUIController>().CloseMessagePanel());
         }
     }
 
@@ -85,14 +85,14 @@ public class TextureUploadController : MonoBehaviour
     {
         // Load the 3D model from the relative file path asynchronously
         GameObject test = new OBJLoader().Load(modelPath);
-        UI.GetComponent<UIController>().messagePanel.SetActive(true);
-        UI.GetComponent<UIController>().message.text = "start loading object!";
+        UI.GetComponent<TextureUIController>().messagePanel.SetActive(true);
+        UI.GetComponent<TextureUIController>().message.text = "start loading object!";
         // Wait until the model is loaded
         while (!test)
         {
             yield return null;
         }
-        StartCoroutine(UI.GetComponent<UIController>().CloseMessagePanel());
+        StartCoroutine(UI.GetComponent<TextureUIController>().CloseMessagePanel());
         GameObject newModel = GameObject.Find("Modeltest");
 
         if (newModel != null)
@@ -103,18 +103,18 @@ public class TextureUploadController : MonoBehaviour
             // Set the rotation to (0, 180, 0)
             newModel.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
             // Display a success message
-            UI.GetComponent<UIController>().messagePanel.SetActive(true);
-            UI.GetComponent<UIController>().message.text = "Model successfully uploaded";
-            StartCoroutine(UI.GetComponent<UIController>().CloseMessagePanel());
+            UI.GetComponent<TextureUIController>().messagePanel.SetActive(true);
+            UI.GetComponent<TextureUIController>().message.text = "Model successfully uploaded";
+            StartCoroutine(UI.GetComponent<TextureUIController>().CloseMessagePanel());
             // Disable upload button
             uploadButton.gameObject.SetActive(false);
         }
         else
         {
             // Display an error message
-            UI.GetComponent<UIController>().messagePanel.SetActive(true);
-            UI.GetComponent<UIController>().message.text = "Failed to upload model";
-            StartCoroutine(UI.GetComponent<UIController>().CloseMessagePanel());
+            UI.GetComponent<TextureUIController>().messagePanel.SetActive(true);
+            UI.GetComponent<TextureUIController>().message.text = "Failed to upload model";
+            StartCoroutine(UI.GetComponent<TextureUIController>().CloseMessagePanel());
         }
 
     }
