@@ -27,12 +27,15 @@ public class TextureUploadController : MonoBehaviour
 
 
     public TMP_Dropdown prefabDropdown;
+    public TMP_Dropdown moveDropdown;
 
     public Slider scaleSlider, xAxisSlider, yAxisSlider, zAxisSlider;
+    public Slider movementSlider;
 
     public Toggle toggleCamera;
-
     public Toggle hitboxToggle;
+
+    private float moveSpeed = 1.0f;
 
     private void Start()
     {
@@ -260,19 +263,16 @@ public class TextureUploadController : MonoBehaviour
 
     public void ScaleHitbox()
     {
-        GameObject[] wallObjects = GameObject.FindGameObjectsWithTag("Wall");
+        GameObject hitbox = GameObject.FindGameObjectWithTag("Wall");
 
-        foreach (GameObject wallObject in wallObjects)
-        {
-            Vector3 currentScale = wallObject.transform.localScale;
+        Vector3 currentScale = hitbox.transform.localScale;
 
-            // Adjust the scaling based on the values of the X, Y, and Z sliders
-            currentScale.x = xAxisSlider.value;
-            currentScale.y = yAxisSlider.value;
-            currentScale.z = zAxisSlider.value;
+        // Adjust the scaling based on the values of the X, Y, and Z sliders
+        currentScale.x = xAxisSlider.value;
+        currentScale.y = yAxisSlider.value;
+        currentScale.z = zAxisSlider.value;
 
-            wallObject.transform.localScale = currentScale;
-        }
+        hitbox.transform.localScale = currentScale;
     }
 
     public void ToggleHitbox()
@@ -297,5 +297,118 @@ public class TextureUploadController : MonoBehaviour
         {
             Debug.Log("Toggle is not found");
         }
+    }
+
+    private void MoveHitboxXLeft()
+    {
+        GameObject hitbox = GameObject.FindGameObjectWithTag("Wall");
+
+        Vector3 currentPosition = hitbox.transform.position;
+
+        // Adjust the position based on the X slider value
+        currentPosition.x -= moveSpeed * Time.deltaTime;
+
+        hitbox.transform.position = currentPosition;
+    }
+    
+    private void MoveHitboxXRight()
+    {
+        GameObject hitbox = GameObject.FindGameObjectWithTag("Wall");
+
+        Vector3 currentPosition = hitbox.transform.position;
+
+        // Adjust the position based on the X slider value
+        currentPosition.x += moveSpeed * Time.deltaTime;
+
+        hitbox.transform.position = currentPosition;
+    }
+
+    private void MoveHitboxYLeft()
+    {
+        GameObject hitbox = GameObject.FindGameObjectWithTag("Wall");
+
+        Vector3 currentPosition = hitbox.transform.position;
+
+        // Adjust the position based on the Y slider value
+        currentPosition.y -= moveSpeed * Time.deltaTime;
+
+        hitbox.transform.position = currentPosition;
+    }
+    
+    private void MoveHitboxYRight()
+    {
+        GameObject hitbox = GameObject.FindGameObjectWithTag("Wall");
+
+        Vector3 currentPosition = hitbox.transform.position;
+
+        // Adjust the position based on the Y slider value
+        currentPosition.y += moveSpeed * Time.deltaTime;
+
+        hitbox.transform.position = currentPosition;
+    }
+
+    private void MoveHitboxZLeft()
+    {
+        GameObject hitbox = GameObject.FindGameObjectWithTag("Wall");
+
+        Vector3 currentPosition = hitbox.transform.position;
+
+        // Adjust the position based on the Z slider value
+        currentPosition.z -= moveSpeed * Time.deltaTime;
+
+        hitbox.transform.position = currentPosition;
+    }
+
+    private void MoveHitboxZRight()
+    {
+        GameObject hitbox = GameObject.FindGameObjectWithTag("Wall");
+
+        Vector3 currentPosition = hitbox.transform.position;
+
+        // Adjust the position based on the Z slider value
+        currentPosition.z += moveSpeed * Time.deltaTime;
+
+        hitbox.transform.position = currentPosition;
+    }
+
+    public void MoveHitboxLeftArrow()
+    {
+        int selectedOption = moveDropdown.value;
+
+        switch (selectedOption)
+        {
+            case 0: // X Axis
+                MoveHitboxXLeft();
+                break;
+            case 1: // Y Axis
+                MoveHitboxYLeft();
+                break;
+            case 2: // Z Axis
+                MoveHitboxZLeft();
+                break;
+        }
+    }
+
+    public void MoveHitboxRightArrow()
+    {
+        int selectedOption = moveDropdown.value;
+
+        switch (selectedOption)
+        {
+            case 0: // X Axis
+                MoveHitboxXRight();
+                break;
+            case 1: // Y Axis
+                MoveHitboxYRight();
+                break;
+            case 2: // Z Axis
+                MoveHitboxZRight();
+                break;
+        }
+    }
+
+    public void UpdateMovementSpeed()
+    {
+        moveSpeed = movementSlider.value;
     }
 }
