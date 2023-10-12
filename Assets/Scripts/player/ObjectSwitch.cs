@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ObjectSwitch : MonoBehaviour
 {
-    //public GameObject[] randomPrefabs;
+    public GameObject[] randomPrefabs;
 
     private GameObject txtToDisplay;
 
@@ -13,19 +13,26 @@ public class ObjectSwitch : MonoBehaviour
     private bool playerInZone;
     private void Start()
     {
+        playerInZone = false;
         txtToDisplay = GameObject.Find("InteractableCanvas").transform.Find("ObjectText").gameObject;
-        /*if (randomPrefabs == null || randomPrefabs.Length == 0)
+        if (randomPrefabs == null || randomPrefabs.Length == 0)
         {
             Debug.LogError("No random prefabs assigned to ObjectInteraction script.");
             enabled = false; // Disable the script if there are no prefabs.
-        }*/
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        txtToDisplay.GetComponent<Text>().text = "Press 'E' to interact";
-        playerInZone = true;
-        interactable = other.gameObject;
+        Debug.Log(other.gameObject.name);
+        if (ArrayContainsObjectWithName(randomPrefabs, other.gameObject.tag))
+        {
+            Debug.Log("Player in zone");
+            txtToDisplay.GetComponent<Text>().text = "\n Press 'F' to interact";
+            playerInZone = true;
+            interactable = other.gameObject;
+        }
+        
     }
 
     private void OnTriggerExit(Collider other)
@@ -37,7 +44,7 @@ public class ObjectSwitch : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && playerInZone)
+        if (Input.GetKeyDown(KeyCode.F) && playerInZone)
         {
             Interact();
         }
@@ -45,8 +52,24 @@ public class ObjectSwitch : MonoBehaviour
 
     private void Interact()
     {
-        //int randomIndex = Random.Range(0, randomPrefabs.Length);
-        //GameObject newObject = Instantiate(randomPrefabs[randomIndex], transform.position, transform.rotation);
-        Destroy(interactable); // Remove the old object
+        int randomIndex = Random.Range(0, randomPrefabs.Length);
+        Vector3 spawnPosition = interactable.transform.position + (transform.position - interactable.transform.position).normalized;
+        GameObject newObject = Instantiate(randomPrefabs[randomIndex], spawnPosition, transform.rotation);
+        Debug.Log(interactable.name);
+        interactable.SetActive(false); // Disable the old object
+        //Destroy(interactable); // Remove the old object
     }
+
+    private bool ArrayContainsObjectWithName(GameObject[] array, string objectName)
+    {
+        foreach (GameObject obj in array)
+        {
+            if (obj.tag == objectName)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
