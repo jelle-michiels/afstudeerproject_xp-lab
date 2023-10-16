@@ -320,9 +320,9 @@ public class TextureUploadController : MonoBehaviour
             name = hitbox.name + ".prefab",
             position = new PositionData
             {
-                x = hitbox.transform.position.x,
-                y = hitbox.transform.position.y,
-                z = hitbox.transform.position.z
+                x = hitbox.transform.rotation.x,
+                y = hitbox.transform.rotation.y,
+                z = hitbox.transform.rotation.z
             },
             rotation = new RotationData
             {
@@ -398,9 +398,12 @@ public class TextureUploadController : MonoBehaviour
 
                     // Parent the hitbox to the loaded object
                     instantiatedHitbox.transform.parent = loadedObject.transform;
+                    Vector3 positionLoadedObject = loadedObject.transform.position;
 
                     // Transform the hitbox's position, rotation, and scale based on the loaded data
-                    instantiatedHitbox.transform.position = new Vector3(0, 0, 0);
+                   // instantiatedHitbox.transform.position = positionLoadedObject;
+
+                    instantiatedHitbox.transform.localPosition = new Vector3(loadedData.hitbox.position.x, loadedData.hitbox.position.y, loadedData.hitbox.position.z + 5);
                     //instantiatedHitbox.transform.position = new Vector3(loadedData.hitbox.position.x, loadedData.hitbox.position.y, loadedData.hitbox.position.z);
                     instantiatedHitbox.transform.rotation = Quaternion.Euler(loadedData.hitbox.rotation.x, loadedData.hitbox.rotation.y, loadedData.hitbox.rotation.z);
                     instantiatedHitbox.transform.localScale = new Vector3(loadedData.hitbox.scale.x, loadedData.hitbox.scale.y, loadedData.hitbox.scale.z);
