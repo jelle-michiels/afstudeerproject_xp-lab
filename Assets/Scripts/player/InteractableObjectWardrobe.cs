@@ -13,6 +13,8 @@ public class InteractableObjectWardrobe : MonoBehaviour
     
     private GameObject txtToDisplay;
     private bool playerInZone;
+
+    
     enum ObjectState
     {
         filled,
