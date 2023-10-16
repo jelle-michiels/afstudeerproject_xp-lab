@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using Image = UnityEngine.UIElements.Image;
 
 public class InteractableObjectWardrobe : MonoBehaviour
 {
@@ -26,22 +27,23 @@ public class InteractableObjectWardrobe : MonoBehaviour
         GameObject canvasObject = GameObject.Find("InteractableCanvas");
         if (canvasObject != null)
         {
-            txtToDisplay = canvasObject.transform.Find("ObjectText").gameObject;
+            txtToDisplay = canvasObject.transform.Find("KeyboardE").gameObject;
         }
+        txtToDisplay.gameObject.SetActive(false);
     }
 
 
     // any trigger laat het afgaan
     private void OnTriggerEnter(Collider other)
     {
-        txtToDisplay.GetComponent<Text>().text = "Press 'E' to interact";
         playerInZone = true;
+        txtToDisplay.gameObject.SetActive(true);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        txtToDisplay.GetComponent<Text>().text = "";
         playerInZone = false;
+        txtToDisplay.gameObject.SetActive(false);
     }
 
     void Update()
