@@ -320,9 +320,9 @@ public class TextureUploadController : MonoBehaviour
             name = hitbox.name + ".prefab",
             position = new PositionData
             {
-                x = hitbox.transform.rotation.x,
-                y = hitbox.transform.rotation.y,
-                z = hitbox.transform.rotation.z
+                x = hitbox.transform.position.x,
+                y = hitbox.transform.position.y,
+                z = hitbox.transform.position.z
             },
             rotation = new RotationData
             {
@@ -337,7 +337,6 @@ public class TextureUploadController : MonoBehaviour
                 z = hitbox.transform.localScale.z
             }
         };
-
         string json = JsonUtility.ToJson(saveData);
         string fileNamejson = fileNameInput.text;
         // Define the path where you want to save the JSON file.
