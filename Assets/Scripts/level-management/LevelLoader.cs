@@ -68,7 +68,16 @@ public class LevelLoader : MonoBehaviour
                 {
                     Debug.Log("Creating object " + data.tag);
                     GameObject obj = Instantiate(placeableObjectPrefabs[i], data.position, data.rotation);
+                    if (data.tag == "Wardrobe")
+                {
+                    // Modify the Y-position to be 1.5 units lower
+                    Vector3 newPosition = obj.transform.position;
+                    newPosition.y -= 1.5f;
+                    obj.transform.position = newPosition;
+                }
+
                     obj.transform.localScale = data.scale;
+                    Debug.Log("data.position: " + data.position);
 
                     CreatedObject newObjData = obj.AddComponent<CreatedObject>();
                     newObjData.data = data;

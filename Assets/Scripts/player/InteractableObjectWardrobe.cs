@@ -13,6 +13,8 @@ public class InteractableObjectWardrobe : MonoBehaviour
     
     private GameObject txtToDisplay;
     private bool playerInZone;
+
+    
     enum ObjectState
     {
         filled,
@@ -32,6 +34,11 @@ public class InteractableObjectWardrobe : MonoBehaviour
     // any trigger laat het afgaan
     private void OnTriggerEnter(Collider other)
     {
+        if (txtToDisplay == null)
+        {
+            txtToDisplay = GameObject.Find("InteractableCanvas").transform.Find("ObjectText").gameObject;
+        }
+
         txtToDisplay.GetComponent<Text>().text = "Press 'E' to interact";
         playerInZone = true;
     }

@@ -337,7 +337,6 @@ public class TextureUploadController : MonoBehaviour
                 z = hitbox.transform.localScale.z
             }
         };
-
         string json = JsonUtility.ToJson(saveData);
         string fileNamejson = fileNameInput.text;
         // Define the path where you want to save the JSON file.
