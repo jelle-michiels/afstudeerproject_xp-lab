@@ -17,7 +17,7 @@ public class ObjectSwitch : MonoBehaviour
     {
         index = 0;
         playerInZone = false;
-        txtToDisplay = GameObject.Find("InteractableCanvas").transform.Find("ObjectText").gameObject;
+        txtToDisplay = GameObject.Find("SwitchCanvas").transform.Find("ObjectText").gameObject;
         if (randomPrefabs == null || randomPrefabs.Length == 0)
         {
             Debug.LogError("No random prefabs assigned to ObjectInteraction script.");
@@ -31,7 +31,7 @@ public class ObjectSwitch : MonoBehaviour
         if (ArrayContainsObjectWithName(randomPrefabs, other.gameObject.tag))
         {
             Debug.Log("Player in zone");
-            txtToDisplay.GetComponent<Text>().text = "\n Press 'F' to interact";
+            txtToDisplay.GetComponent<Text>().text = "Press 'F' to switch object";
             playerInZone = true;
             interactable = other.gameObject;
         }
