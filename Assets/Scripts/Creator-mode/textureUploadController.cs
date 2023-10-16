@@ -317,12 +317,12 @@ public class TextureUploadController : MonoBehaviour
         GameObject hitbox = GameObject.FindGameObjectWithTag("Wall");
         saveData.hitbox = new HitboxData
         {
-            name = hitbox.name + ".prefab",
+            name = hitbox.name,
             position = new PositionData
             {
-                x = hitbox.transform.rotation.x,
-                y = hitbox.transform.rotation.y,
-                z = hitbox.transform.rotation.z
+                x = hitbox.transform.position.x,
+                y = hitbox.transform.position.y,
+                z = hitbox.transform.position.z
             },
             rotation = new RotationData
             {
@@ -388,13 +388,15 @@ public class TextureUploadController : MonoBehaviour
                 loadedObject.transform.localScale = new Vector3(loadedData.objectScale.x, loadedData.objectScale.y, loadedData.objectScale.z);
 
                 // Load the hitbox prefab from the Resources folder
-                GameObject hitbox = Resources.Load<GameObject>("HitboxPrefabs/" + loadedData.hitbox.name);
+                string prefabName = loadedData.hitbox.name;
+                GameObject hitbox = Resources.Load<GameObject>("HitboxPrefabs/" + prefabName);
 
-                GameObject hitboxPrefab = Directory.GetFiles("Assets/Resources/HitboxPrefabs").Where(x => x.Contains(loadedData.hitbox.name)).Select(x => AssetDatabase.LoadAssetAtPath<GameObject>(x)).FirstOrDefault();
-                if (hitboxPrefab != null)
+
+                //GameObject hitboxPrefab = Directory.GetFiles("Assets/Resources/HitboxPrefabs").Where(x => x.Contains(loadedData.hitbox.name)).Select(x => AssetDatabase.LoadAssetAtPath<GameObject>(x)).FirstOrDefault();
+                if (hitbox != null)
                 {
                     // Create an instance of the hitbox prefab
-                    GameObject instantiatedHitbox = Instantiate(hitboxPrefab);
+                    GameObject instantiatedHitbox = Instantiate(hitbox);
 
                     // Parent the hitbox to the loaded object
                     instantiatedHitbox.transform.parent = loadedObject.transform;
@@ -402,7 +404,7 @@ public class TextureUploadController : MonoBehaviour
 
                     // Transform the hitbox's position, rotation, and scale based on the loaded data
                     // instantiatedHitbox.transform.position = positionLoadedObject;
-                    MeshRenderer renderer = loadedObject.GetComponent<MeshRenderer>();
+                    MeshRenderer renderer = instantiatedHitbox.GetComponent<MeshRenderer>();
                     renderer.enabled = false;
                     instantiatedHitbox.transform.localPosition = new Vector3(loadedData.hitbox.position.x, loadedData.hitbox.position.y, loadedData.hitbox.position.z + 5);
                     //instantiatedHitbox.transform.position = new Vector3(loadedData.hitbox.position.x, loadedData.hitbox.position.y, loadedData.hitbox.position.z);
