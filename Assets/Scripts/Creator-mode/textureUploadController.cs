@@ -337,7 +337,6 @@ public class TextureUploadController : MonoBehaviour
                 z = hitbox.transform.localScale.z
             }
         };
-
         string json = JsonUtility.ToJson(saveData);
         string fileNamejson = fileNameInput.text;
         // Define the path where you want to save the JSON file.
@@ -398,9 +397,14 @@ public class TextureUploadController : MonoBehaviour
 
                     // Parent the hitbox to the loaded object
                     instantiatedHitbox.transform.parent = loadedObject.transform;
+                    Vector3 positionLoadedObject = loadedObject.transform.position;
 
                     // Transform the hitbox's position, rotation, and scale based on the loaded data
-                    instantiatedHitbox.transform.position = new Vector3(loadedData.hitbox.position.x, loadedData.hitbox.position.y, loadedData.hitbox.position.z);
+                    // instantiatedHitbox.transform.position = positionLoadedObject;
+                    MeshRenderer renderer = loadedObject.GetComponent<MeshRenderer>();
+                    renderer.enabled = false;
+                    instantiatedHitbox.transform.localPosition = new Vector3(loadedData.hitbox.position.x, loadedData.hitbox.position.y, loadedData.hitbox.position.z + 5);
+                    //instantiatedHitbox.transform.position = new Vector3(loadedData.hitbox.position.x, loadedData.hitbox.position.y, loadedData.hitbox.position.z);
                     instantiatedHitbox.transform.rotation = Quaternion.Euler(loadedData.hitbox.rotation.x, loadedData.hitbox.rotation.y, loadedData.hitbox.rotation.z);
                     instantiatedHitbox.transform.localScale = new Vector3(loadedData.hitbox.scale.x, loadedData.hitbox.scale.y, loadedData.hitbox.scale.z);
 
