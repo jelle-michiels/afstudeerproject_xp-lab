@@ -684,13 +684,15 @@ public class PlacementController : MonoBehaviour
                 loadedObject.transform.localScale = new Vector3(loadedData.objectScale.x, loadedData.objectScale.y, loadedData.objectScale.z);
 
                 // Load the hitbox prefab from the Resources folder
-                GameObject hitbox = Resources.Load<GameObject>("HitboxPrefabs/" + loadedData.hitbox.name);
+                string prefabName = loadedData.hitbox.name;
+                GameObject hitbox = Resources.Load<GameObject>("HitboxPrefabs/" + prefabName);
 
-                GameObject hitboxPrefab = Directory.GetFiles("Assets/Resources/HitboxPrefabs").Where(x => x.Contains(loadedData.hitbox.name)).Select(x => AssetDatabase.LoadAssetAtPath<GameObject>(x)).FirstOrDefault();
-                if (hitboxPrefab != null)
+
+                //GameObject hitboxPrefab = Directory.GetFiles("Assets/Resources/HitboxPrefabs").Where(x => x.Contains(loadedData.hitbox.name)).Select(x => AssetDatabase.LoadAssetAtPath<GameObject>(x)).FirstOrDefault();
+                if (hitbox != null)
                 {
                     // Create an instance of the hitbox prefab
-                    GameObject instantiatedHitbox = Instantiate(hitboxPrefab);
+                    GameObject instantiatedHitbox = Instantiate(hitbox);
 
                     // Parent the hitbox to the loaded object
                     instantiatedHitbox.transform.parent = loadedObject.transform;
