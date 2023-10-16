@@ -11,6 +11,8 @@ public class ObjectSwitch : MonoBehaviour
 
     private GameObject interactable;
     private bool playerInZone;
+
+    private int index;
     private void Start()
     {
         playerInZone = false;
@@ -50,11 +52,21 @@ public class ObjectSwitch : MonoBehaviour
         }
     }
 
+    private void indexCheck(){
+        if(index == randomPrefabs.Length - 1){
+            index = 0;
+        }else{
+            index++;
+        }
+    }
+
     private void Interact()
     {
         int randomIndex = Random.Range(0, randomPrefabs.Length);
+
+
         Vector3 spawnPosition = interactable.transform.position + (transform.position - interactable.transform.position).normalized;
-        GameObject newObject = Instantiate(randomPrefabs[randomIndex], spawnPosition, transform.rotation);
+        GameObject newObject = Instantiate(randomPrefabs[index], spawnPosition, transform.rotation);
         Debug.Log(interactable.name);
         interactable.SetActive(false); // Disable the old object
         //Destroy(interactable); // Remove the old object
