@@ -6179,6 +6179,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scriptNameToFind: HealthState
+--- !u!114 &1645697014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645697001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac2240c7b8653e14cbafea95fc11fb36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomPrefabs:
+  - {fileID: 8130921515360841392, guid: a1ab6693b0ac9124d90a3ede639c6c2b, type: 3}
+  - {fileID: 8166981330466387127, guid: c2fc1fb3cc8b79f4a856722d72249927, type: 3}
+  - {fileID: 308483552022518720, guid: a051b923a8916e34c8e0f19973df7faa, type: 3}
+  - {fileID: 8544633097445549815, guid: 07ec76aa1f1b5b745ba4581be339769c, type: 3}
+  - {fileID: 5762143052197826267, guid: b54e8f857e58c9d4d83536d9994f66e9, type: 3}
+  - {fileID: 8130921515360841392, guid: 4c6f05ea6c3b98e46880b1ec7b4f3903, type: 3}
+  - {fileID: 8544633097445549815, guid: 6b8d3a13502ab6b428f0d033ea82d8db, type: 3}
 --- !u!1 &1659153594
 GameObject:
   m_ObjectHideFlags: 0
@@ -6581,6 +6601,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1782702501690864755, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1645697013}
+    - targetCorrespondingSourceObject: {fileID: 1782702501690864755, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1645697014}
   m_SourcePrefab: {fileID: 100100000, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
 --- !u!1 &1695684474
 GameObject:
