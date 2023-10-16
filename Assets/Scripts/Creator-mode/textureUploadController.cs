@@ -9,9 +9,12 @@ using TMPro;
 using System.Linq;
 using Dummiesman;
 using Unity.VisualScripting;
+using System;
 
 public class TextureUploadController : MonoBehaviour
 {
+
+    public InputField fileNameInput;
     public Button uploadButton;
     public GameObject UI;
     public GameObject selectedHitboxPrefab;
@@ -37,6 +40,8 @@ public class TextureUploadController : MonoBehaviour
 
     private float moveSpeed = 1.0f;
 
+
+    public string fileName;
     private void Start()
     {
         // Clear the existing options in the dropdown
@@ -70,7 +75,8 @@ public class TextureUploadController : MonoBehaviour
     public void Upload()
     {
         Debug.Log("Model path: " + modelPath);
-
+        Debug.Log("model name: " + Path.GetFileNameWithoutExtension(modelPath));
+        fileName = Path.GetFileNameWithoutExtension(modelPath);
         if (!string.IsNullOrEmpty(modelPath))
         {
             // Use a coroutine to load the 3D model asynchronously
@@ -175,13 +181,14 @@ public class TextureUploadController : MonoBehaviour
         GameObject newModel = GameObject.Find("Modeltest");
         if (selectedHitboxPrefab != null && newModel != null)
         {
+            Debug.Log("Adding hitbox: " + selectedHitboxPrefab.name);
             // Instantiate the selected hitbox prefab and set its parent to the newModel
             GameObject newHitbox = Instantiate(selectedHitboxPrefab, newModel.transform);
 
             // Optionally, adjust the position and rotation of the new hitbox
             newHitbox.transform.localPosition = Vector3.zero; // Adjust the position as needed
             newHitbox.transform.localRotation = Quaternion.identity; // Adjust the rotation as needed
-
+            newHitbox.name = selectedHitboxPrefab.name;
             // Add a tag to the newHitbox to identify it as a hitbox
             newHitbox.tag = "Wall";
         }
@@ -216,14 +223,223 @@ public class TextureUploadController : MonoBehaviour
 
     IEnumerator ShowLoadDialogCoroutine()
     {
+        string userProfileFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+        string downloadsFolderPath = Path.Combine(userProfileFolder, "Downloads");
         // Show a load file dialog and wait for a response from the user
-        yield return FileBrowser.WaitForLoadDialog(FileBrowser.PickMode.Files, false, null, null, "Load 3D Model", "Load");
+        yield return FileBrowser.WaitForLoadDialog(FileBrowser.PickMode.Files, false, downloadsFolderPath, null, "Load 3D Model", "Load");
 
         if (FileBrowser.Success)
         {
             // Assign the selected model path to the modelPath variable before calling Upload
             modelPath = FileBrowser.Result[0];
-            Upload();
+
+            if (Path.GetExtension(modelPath).ToLower() == ".obj")
+            {
+                // Valid file extension, proceed
+
+                // Copy the selected file to the persistent data path
+                string targetPath = Path.Combine(Application.persistentDataPath, Path.GetFileName(modelPath));
+                File.Copy(modelPath, targetPath, true);
+
+                // Now you have the copied file in the persistent data path
+                modelPath = targetPath;
+
+                // Proceed with your Upload or further processing
+                Upload();
+            }
+            else
+            {
+                //error message
+                UI.GetComponent<TextureUIController>().messagePanel.SetActive(true);
+                UI.GetComponent<TextureUIController>().message.text = "Invalid file type! Please use .obj.";
+                StartCoroutine(UI.GetComponent<TextureUIController>().CloseMessagePanel());
+            }
+        }
+    }
+
+
+
+    //---------------------------------------------------------------
+    [System.Serializable]
+    class SaveData
+    {
+        public string filename;
+        public ScaleData objectScale;
+        public HitboxData hitbox;
+    }
+
+    [System.Serializable]
+    class RotationData
+    {
+        public float x;
+        public float y;
+        public float z;
+    }
+
+    [System.Serializable]
+    class ScaleData
+    {
+        public float x;
+        public float y;
+        public float z;
+    }
+
+    [System.Serializable]
+    class HitboxData
+    {
+        public string name;
+        public PositionData position;
+        public RotationData rotation;
+        public ScaleData scale;
+    }
+
+    [System.Serializable]
+    class PositionData
+    {
+        public float x;
+        public float y;
+        public float z;
+    }
+
+    public void Save()
+    {
+        SaveData saveData = new SaveData();
+        GameObject newModel = GameObject.Find("Modeltest");
+        saveData.filename = fileName + ".obj";
+
+        saveData.objectScale = new ScaleData
+        {
+            x = newModel.transform.localScale.x,
+            y = newModel.transform.localScale.y,
+            z = newModel.transform.localScale.z
+        };
+
+        GameObject hitbox = GameObject.FindGameObjectWithTag("Wall");
+        saveData.hitbox = new HitboxData
+        {
+            name = hitbox.name + ".prefab",
+            position = new PositionData
+            {
+                x = hitbox.transform.position.x,
+                y = hitbox.transform.position.y,
+                z = hitbox.transform.position.z
+            },
+            rotation = new RotationData
+            {
+                x = hitbox.transform.rotation.x,
+                y = hitbox.transform.rotation.y,
+                z = hitbox.transform.rotation.z
+            },
+            scale = new ScaleData
+            {
+                x = hitbox.transform.localScale.x,
+                y = hitbox.transform.localScale.y,
+                z = hitbox.transform.localScale.z
+            }
+        };
+
+        string json = JsonUtility.ToJson(saveData);
+        string fileNamejson = fileNameInput.text;
+        // Define the path where you want to save the JSON file.
+        string savePath = Path.Combine(Application.persistentDataPath, fileNamejson + ".json");
+        
+        // Write the JSON data to the file.
+        File.WriteAllText(savePath, json);
+
+        Debug.Log("Saved to: " + savePath);
+        if(File.Exists(savePath))
+        {
+            UI.GetComponent<TextureUIController>().messagePanel.SetActive(true);
+            UI.GetComponent<TextureUIController>().message.text = "File saved!";
+            StartCoroutine(UI.GetComponent<TextureUIController>().CloseMessagePanel());
+        }
+        else
+        {
+            UI.GetComponent<TextureUIController>().messagePanel.SetActive(true);
+            UI.GetComponent<TextureUIController>().message.text = "Failed to save";
+            StartCoroutine(UI.GetComponent<TextureUIController>().CloseMessagePanel());
+        }
+    }
+
+
+    public void Load(string objPath)
+    {
+
+        Debug.Log("Loading from: " + objPath);
+        // Define the path to load the JSON file
+        string loadPath = objPath;
+
+        if (File.Exists(loadPath))
+        {
+            // Read the JSON data from the file
+            string json = File.ReadAllText(loadPath);
+
+            // Deserialize the JSON data into the SaveData class
+            SaveData loadedData = JsonUtility.FromJson<SaveData>(json);
+            string filepathtoload = Path.Combine(Application.persistentDataPath, loadedData.filename);
+
+            GameObject loadedObject = new OBJLoader().Load(filepathtoload);
+
+            if (loadedObject != null)
+            {
+                GameObject textureUploadButton = GameObject.Find("UploadButton");
+                textureUploadButton.SetActive(false);
+                // Transform the object's scale based on the loaded data
+                loadedObject.transform.localScale = new Vector3(loadedData.objectScale.x, loadedData.objectScale.y, loadedData.objectScale.z);
+
+                // Load the hitbox prefab from the Resources folder
+                GameObject hitbox = Resources.Load<GameObject>("HitboxPrefabs/" + loadedData.hitbox.name);
+
+                GameObject hitboxPrefab = Directory.GetFiles("Assets/Resources/HitboxPrefabs").Where(x => x.Contains(loadedData.hitbox.name)).Select(x => AssetDatabase.LoadAssetAtPath<GameObject>(x)).FirstOrDefault();
+                if (hitboxPrefab != null)
+                {
+                    // Create an instance of the hitbox prefab
+                    GameObject instantiatedHitbox = Instantiate(hitboxPrefab);
+
+                    // Parent the hitbox to the loaded object
+                    instantiatedHitbox.transform.parent = loadedObject.transform;
+
+                    // Transform the hitbox's position, rotation, and scale based on the loaded data
+                    instantiatedHitbox.transform.position = new Vector3(loadedData.hitbox.position.x, loadedData.hitbox.position.y, loadedData.hitbox.position.z);
+                    instantiatedHitbox.transform.rotation = Quaternion.Euler(loadedData.hitbox.rotation.x, loadedData.hitbox.rotation.y, loadedData.hitbox.rotation.z);
+                    instantiatedHitbox.transform.localScale = new Vector3(loadedData.hitbox.scale.x, loadedData.hitbox.scale.y, loadedData.hitbox.scale.z);
+
+                    // Optionally, you can further adjust or apply other properties as needed
+                }
+                else
+                {
+                    Debug.LogError("Hitbox prefab not found: " + loadedData.hitbox.name);
+                }
+            }
+            else
+            {
+                Debug.LogError("Object not found: " + loadedData.filename);
+            }
+        }
+        else
+        {
+            Debug.LogError("File not found: " + loadPath);
+        }
+    }
+
+    public void OpenFileExplorer2()
+    {
+        StartCoroutine(ShowLoadDialogCoroutine2());
+    }
+
+
+
+    IEnumerator ShowLoadDialogCoroutine2()
+    {
+        string path = Application.persistentDataPath;
+        // Show a load file dialog and wait for a response from the user
+        yield return FileBrowser.WaitForLoadDialog(FileBrowser.PickMode.Files, false, path, null, "Load 3D Model", "Load");
+
+        if (FileBrowser.Success)
+        {
+            // Assign the selected model path to the modelPath variable before calling Upload
+            string objPath = FileBrowser.Result[0];
+            Load(objPath);
         }
     }
 
