@@ -400,7 +400,8 @@ public class TextureUploadController : MonoBehaviour
                     instantiatedHitbox.transform.parent = loadedObject.transform;
 
                     // Transform the hitbox's position, rotation, and scale based on the loaded data
-                    instantiatedHitbox.transform.position = new Vector3(loadedData.hitbox.position.x, loadedData.hitbox.position.y, loadedData.hitbox.position.z);
+                    instantiatedHitbox.transform.position = new Vector3(0, 0, 0);
+                    //instantiatedHitbox.transform.position = new Vector3(loadedData.hitbox.position.x, loadedData.hitbox.position.y, loadedData.hitbox.position.z);
                     instantiatedHitbox.transform.rotation = Quaternion.Euler(loadedData.hitbox.rotation.x, loadedData.hitbox.rotation.y, loadedData.hitbox.rotation.z);
                     instantiatedHitbox.transform.localScale = new Vector3(loadedData.hitbox.scale.x, loadedData.hitbox.scale.y, loadedData.hitbox.scale.z);
 
