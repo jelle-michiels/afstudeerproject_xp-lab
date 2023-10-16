@@ -8,6 +8,9 @@ using System.Linq;
 using UnityEditor;
 using System;
 using System.Text;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine.Events;
 
 public class PlacementController : MonoBehaviour
 {
@@ -80,6 +83,9 @@ public class PlacementController : MonoBehaviour
 
         // Create buttons for prefabs
         CreatePrefabButtons();
+
+        //Create buttons for own 3D models
+        CreateJsonFileButtons();
     }
 
 
@@ -610,8 +616,44 @@ public class PlacementController : MonoBehaviour
 
             buttonGO.GetComponent<Button>().onClick.AddListener(() => { ChangeObject(prefab); });
         }
+    }
+
+    private void CreateJsonFileButtons()
+    {
+        string jsonFilesDirectory = Application.persistentDataPath; // Assuming saved JSON files are in the persistent data path
+
+        // Get a list of .json files in the directory
+        string[] jsonFilePaths = Directory.GetFiles(jsonFilesDirectory, "*.json");
+
+        foreach (string jsonFilePath in jsonFilePaths)
+        {
+            GameObject buttonGO = Instantiate(buttonTemplate);
+            buttonGO.transform.SetParent(buttonPanel, false);
+
+            TextMeshProUGUI buttonText = buttonGO.GetComponentInChildren<TextMeshProUGUI>();
+
+            string jsonFileName = Path.GetFileNameWithoutExtension(jsonFilePath);
+            buttonText.text = jsonFileName;
+        }
 
         Destroy(buttonTemplate);
+    }
+
+    private void LoadJsonFile(string jsonFilePath)
+    {
+        try
+        {
+            string jsonText = File.ReadAllText(jsonFilePath);
+
+            // Deserialize the JSON data into your data class
+            //YourDataClass data = JsonUtility.FromJson<YourDataClass>(jsonText);
+
+            // Now you have your deserialized data, and you can use it as needed
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Failed to load JSON file: " + e.Message);
+        }
     }
 
     private string AddSpacesToPrefabName(string prefabName)
