@@ -15,6 +15,7 @@ public class ObjectSwitch : MonoBehaviour
     private int index;
     private void Start()
     {
+        index = 0;
         playerInZone = false;
         txtToDisplay = GameObject.Find("InteractableCanvas").transform.Find("ObjectText").gameObject;
         if (randomPrefabs == null || randomPrefabs.Length == 0)
@@ -62,9 +63,9 @@ public class ObjectSwitch : MonoBehaviour
 
     private void Interact()
     {
-        int randomIndex = Random.Range(0, randomPrefabs.Length);
+        //int randomIndex = Random.Range(0, randomPrefabs.Length);
 
-
+        indexCheck();
         Vector3 spawnPosition = interactable.transform.position + (transform.position - interactable.transform.position).normalized;
         GameObject newObject = Instantiate(randomPrefabs[index], spawnPosition, transform.rotation);
         Debug.Log(interactable.name);
