@@ -17,6 +17,7 @@ TagManager:
   - winScreen
   - Damage
   - Wardrobe
+  - PoorWardrobe
   layers:
   - Default
   - TransparentFX
