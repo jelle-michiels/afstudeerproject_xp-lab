@@ -6375,7 +6375,6 @@ MonoBehaviour:
   randomPrefabs:
   - {fileID: 5762143052197826267, guid: 192479fa7f6710a439a43c69019e9447, type: 3}
   - {fileID: 5762143052197826267, guid: b54e8f857e58c9d4d83536d9994f66e9, type: 3}
-  - {fileID: 3477903515640148249, guid: 4a77ad79e8a41e04180000ab3335a9da, type: 3}
 --- !u!1 &1659153594
 GameObject:
   m_ObjectHideFlags: 0

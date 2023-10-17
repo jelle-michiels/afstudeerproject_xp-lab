@@ -30,6 +30,7 @@ public class ObjectSwitch : MonoBehaviour
         Debug.Log(other.gameObject.name);
         if (ArrayContainsObjectWithName(randomPrefabs, other.gameObject.tag))
         {
+            Debug.Log(other.gameObject.tag);
             Debug.Log("Player in zone");
             txtToDisplay.GetComponent<Text>().text = "Press 'F' to switch object";
             playerInZone = true;
