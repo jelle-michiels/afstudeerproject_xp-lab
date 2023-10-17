@@ -10,6 +10,7 @@ public class ObjectSwitch : MonoBehaviour
     private GameObject txtToDisplay;
 
     private GameObject interactable;
+
     private bool playerInZone;
 
     private int index;
@@ -32,7 +33,7 @@ public class ObjectSwitch : MonoBehaviour
         {
             Debug.Log(other.gameObject.tag);
             Debug.Log("Player in zone");
-            txtToDisplay.GetComponent<Text>().text = "Press 'F' to switch object";
+            txtToDisplay.GetComponent<Text>().text = "Press 'E' to switch object";
             playerInZone = true;
             interactable = other.gameObject;
         }
@@ -48,7 +49,7 @@ public class ObjectSwitch : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && playerInZone)
+        if (Input.GetKeyDown(KeyCode.E) && playerInZone)
         {
             Interact();
         }
@@ -67,11 +68,16 @@ public class ObjectSwitch : MonoBehaviour
         //int randomIndex = Random.Range(0, randomPrefabs.Length);
 
         indexCheck();
-        Vector3 spawnPosition = interactable.transform.position + (transform.position - interactable.transform.position).normalized;
-        GameObject newObject = Instantiate(randomPrefabs[index], spawnPosition, transform.rotation);
+        Vector3 spawnPosition = interactable.transform.position;
+        Quaternion spawnRotation = interactable.transform.rotation;
+
+        GameObject newObject = Instantiate(randomPrefabs[index], spawnPosition, spawnRotation);
+
+
+        //Vector3 spawnPosition = interactable.transform.position + (transform.position - interactable.transform.position).normalized;
+        //GameObject newObject = Instantiate(randomPrefabs[index], spawnPosition, transform.rotation);
         Debug.Log(interactable.name);
         interactable.SetActive(false); // Disable the old object
-        //Destroy(interactable); // Remove the old object
     }
 
     private bool ArrayContainsObjectWithName(GameObject[] array, string objectName)
