@@ -36,6 +36,12 @@ public class InteractableObjectWardrobe : MonoBehaviour
     // any trigger laat het afgaan
     private void OnTriggerEnter(Collider other)
     {
+        if (txtToDisplay == null)
+        {
+            txtToDisplay = GameObject.Find("InteractableCanvas").transform.Find("ObjectText").gameObject;
+        }
+
+        txtToDisplay.GetComponent<Text>().text = "Press 'F' to interact";
         playerInZone = true;
         txtToDisplay.gameObject.SetActive(true);
     }
@@ -48,7 +54,7 @@ public class InteractableObjectWardrobe : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && playerInZone)
+        if (Input.GetKeyDown(KeyCode.F) && playerInZone)
         {
             toggleBoxes();
         }

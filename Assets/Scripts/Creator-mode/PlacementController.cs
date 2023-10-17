@@ -8,10 +8,15 @@ using System.Linq;
 using UnityEditor;
 using System;
 using System.Text;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine.Events;
+using Dummiesman;
 
 public class PlacementController : MonoBehaviour
 {
     public List<GameObject> placeableObjectPrefabs = new List<GameObject>();
+    public List<GameObject> placeableModels = new List<GameObject>();
 
     private GameObject currentPlaceableObject;
 
@@ -80,6 +85,9 @@ public class PlacementController : MonoBehaviour
 
         // Create buttons for prefabs
         CreatePrefabButtons();
+
+        //Create buttons for own 3D models
+        CreateJsonFileButtons();
     }
 
 
@@ -610,6 +618,27 @@ public class PlacementController : MonoBehaviour
 
             buttonGO.GetComponent<Button>().onClick.AddListener(() => { ChangeObject(prefab); });
         }
+    }
+
+    private void CreateJsonFileButtons()
+    {
+        string jsonFilesDirectory = Application.persistentDataPath; // Assuming saved JSON files are in the persistent data path
+
+        // Get a list of .json files in the directory
+        string[] jsonFilePaths = Directory.GetFiles(jsonFilesDirectory, "*.json");
+
+        foreach (string jsonFilePath in jsonFilePaths)
+        {
+            GameObject buttonGO = Instantiate(buttonTemplate);
+            buttonGO.transform.SetParent(buttonPanel, false);
+
+            TextMeshProUGUI buttonText = buttonGO.GetComponentInChildren<TextMeshProUGUI>();
+
+            string jsonFileName = Path.GetFileNameWithoutExtension(jsonFilePath);
+            buttonText.text = jsonFileName;
+
+            buttonGO.GetComponent<Button>().onClick.AddListener(() => { Load(jsonFilePath); });
+        }
 
         Destroy(buttonTemplate);
     }
@@ -629,5 +658,111 @@ public class PlacementController : MonoBehaviour
         }
 
         return spacedName.ToString();
+    }
+
+    public void Load(string objPath)
+    {
+
+        Debug.Log("Loading from: " + objPath);
+        // Define the path to load the JSON file
+        string loadPath = objPath;
+
+        if (File.Exists(loadPath))
+        {
+            // Read the JSON data from the file
+            string json = File.ReadAllText(loadPath);
+
+            // Deserialize the JSON data into the SaveData class
+            SaveData loadedData = JsonUtility.FromJson<SaveData>(json);
+            string filepathtoload = Path.Combine(Application.persistentDataPath, loadedData.filename);
+
+            GameObject loadedObject = new OBJLoader().Load(filepathtoload);
+
+            if (loadedObject != null)
+            {
+                // Transform the object's scale based on the loaded data
+                loadedObject.transform.localScale = new Vector3(loadedData.objectScale.x, loadedData.objectScale.y, loadedData.objectScale.z);
+
+                // Load the hitbox prefab from the Resources folder
+                string prefabName = loadedData.hitbox.name;
+                GameObject hitbox = Resources.Load<GameObject>("HitboxPrefabs/" + prefabName);
+
+
+                //GameObject hitboxPrefab = Directory.GetFiles("Assets/Resources/HitboxPrefabs").Where(x => x.Contains(loadedData.hitbox.name)).Select(x => AssetDatabase.LoadAssetAtPath<GameObject>(x)).FirstOrDefault();
+                if (hitbox != null)
+                {
+                    // Create an instance of the hitbox prefab
+                    GameObject instantiatedHitbox = Instantiate(hitbox);
+
+                    // Parent the hitbox to the loaded object
+                    instantiatedHitbox.transform.parent = loadedObject.transform;
+                    Vector3 positionLoadedObject = loadedObject.transform.position;
+
+                    // Transform the hitbox's position, rotation, and scale based on the loaded data
+                    // instantiatedHitbox.transform.position = positionLoadedObject;
+                    MeshRenderer renderer = instantiatedHitbox.GetComponent<MeshRenderer>();
+                    renderer.enabled = false;
+                    instantiatedHitbox.transform.localPosition = new Vector3(loadedData.hitbox.position.x, loadedData.hitbox.position.y, loadedData.hitbox.position.z + 5);
+                    //instantiatedHitbox.transform.position = new Vector3(loadedData.hitbox.position.x, loadedData.hitbox.position.y, loadedData.hitbox.position.z);
+                    instantiatedHitbox.transform.rotation = Quaternion.Euler(loadedData.hitbox.rotation.x, loadedData.hitbox.rotation.y, loadedData.hitbox.rotation.z);
+                    instantiatedHitbox.transform.localScale = new Vector3(loadedData.hitbox.scale.x, loadedData.hitbox.scale.y, loadedData.hitbox.scale.z);
+
+                    // Optionally, you can further adjust or apply other properties as needed
+                }
+                else
+                {
+                    Debug.LogError("Hitbox prefab not found: " + loadedData.hitbox.name);
+                }
+            }
+            else
+            {
+                Debug.LogError("Object not found: " + loadedData.filename);
+            }
+        }
+        else
+        {
+            Debug.LogError("File not found: " + loadPath);
+        }
+    }
+
+    [System.Serializable]
+    class SaveData
+    {
+        public string filename;
+        public ScaleData objectScale;
+        public HitboxData hitbox;
+    }
+
+    [System.Serializable]
+    class RotationData
+    {
+        public float x;
+        public float y;
+        public float z;
+    }
+
+    [System.Serializable]
+    class ScaleData
+    {
+        public float x;
+        public float y;
+        public float z;
+    }
+
+    [System.Serializable]
+    class HitboxData
+    {
+        public string name;
+        public PositionData position;
+        public RotationData rotation;
+        public ScaleData scale;
+    }
+
+    [System.Serializable]
+    class PositionData
+    {
+        public float x;
+        public float y;
+        public float z;
     }
 }

@@ -4085,7 +4085,6 @@ GameObject:
   - component: {fileID: 690490731}
   - component: {fileID: 690490732}
   - component: {fileID: 690490733}
-  - component: {fileID: 690490734}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -4239,19 +4238,6 @@ MonoBehaviour:
   closeSave: {fileID: 1531132225}
   allowInput: 0
   message: {fileID: 1136052625}
---- !u!114 &690490734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 690490725}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5e3f8dd6329b6145a2932b2862ef890, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fileNameInput: {fileID: 1427811085}
 --- !u!1 &714516873
 GameObject:
   m_ObjectHideFlags: 0
