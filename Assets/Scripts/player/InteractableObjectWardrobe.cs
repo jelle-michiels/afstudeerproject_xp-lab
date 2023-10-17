@@ -39,7 +39,7 @@ public class InteractableObjectWardrobe : MonoBehaviour
             txtToDisplay = GameObject.Find("InteractableCanvas").transform.Find("ObjectText").gameObject;
         }
 
-        txtToDisplay.GetComponent<Text>().text = "Press 'E' to interact";
+        txtToDisplay.GetComponent<Text>().text = "Press 'F' to interact";
         playerInZone = true;
     }
 
@@ -51,7 +51,7 @@ public class InteractableObjectWardrobe : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && playerInZone)
+        if (Input.GetKeyDown(KeyCode.F) && playerInZone)
         {
             toggleBoxes();
         }

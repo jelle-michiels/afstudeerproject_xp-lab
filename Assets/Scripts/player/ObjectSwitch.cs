@@ -32,7 +32,7 @@ public class ObjectSwitch : MonoBehaviour
         {
             Debug.Log(other.gameObject.tag);
             Debug.Log("Player in zone");
-            txtToDisplay.GetComponent<Text>().text = "Press 'F' to switch object";
+            txtToDisplay.GetComponent<Text>().text = "Press 'E' to switch object";
             playerInZone = true;
             interactable = other.gameObject;
         }
@@ -48,7 +48,7 @@ public class ObjectSwitch : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && playerInZone)
+        if (Input.GetKeyDown(KeyCode.E) && playerInZone)
         {
             Interact();
         }
