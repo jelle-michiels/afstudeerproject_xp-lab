@@ -92,7 +92,7 @@ public class DoorController : MonoBehaviour
         {
             if (doorType == "WrongDoor")
             {
-                GameObject.Find("ScoreCanvas").GetComponent<CountdownTimer>().EndGame(false);
+                GameObject.Find("TimerCanvas").GetComponent<CountdownTimer>().EndGame(false);
             }
             
             doorOpened = !doorOpened;           //The toggle function of door to open/close
