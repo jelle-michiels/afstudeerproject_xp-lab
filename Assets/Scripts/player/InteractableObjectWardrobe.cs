@@ -15,7 +15,7 @@ public class InteractableObjectWardrobe : MonoBehaviour
     private GameObject txtToDisplay;
     private bool playerInZone;
 
-    
+
     enum ObjectState
     {
         filled,
@@ -24,7 +24,7 @@ public class InteractableObjectWardrobe : MonoBehaviour
 
     void Start()
     {
-        GameObject canvasObject = GameObject.Find("InteractableCanvas");
+        GameObject canvasObject = GameObject.Find("SwitchCanvas");
         if (canvasObject != null)
         {
             txtToDisplay = canvasObject.transform.Find("KeyboardE").gameObject;
@@ -38,10 +38,9 @@ public class InteractableObjectWardrobe : MonoBehaviour
     {
         if (txtToDisplay == null)
         {
-            txtToDisplay = GameObject.Find("InteractableCanvas").transform.Find("ObjectText").gameObject;
+            txtToDisplay = GameObject.Find("SwitchCanvas").transform.Find("ObjectText").gameObject;
         }
 
-        txtToDisplay.GetComponent<Text>().text = "Press 'F' to interact";
         playerInZone = true;
         txtToDisplay.gameObject.SetActive(true);
     }
@@ -54,7 +53,7 @@ public class InteractableObjectWardrobe : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && playerInZone)
+        if (Input.GetKeyDown(KeyCode.E) && playerInZone)
         {
             toggleBoxes();
         }
