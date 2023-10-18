@@ -54,6 +54,11 @@ public class ObjectSwitch : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        GameObject canvasObject = GameObject.Find("SwitchCanvas");
+        iconToDisplay = canvasObject.transform.Find("KeyboardE").gameObject;
+        controllerToDisplay = canvasObject.transform.Find("ControllerIcon").gameObject;
+        iconToDisplay.gameObject.SetActive(false);
+        controllerToDisplay.gameObject.SetActive(false);
         playerInZone = false;
         interactable = null;
     }
