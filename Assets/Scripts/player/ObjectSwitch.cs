@@ -8,6 +8,7 @@ public class ObjectSwitch : MonoBehaviour
     public GameObject[] randomPrefabs;
 
     private GameObject iconToDisplay;
+    private GameObject controllerToDisplay;
 
     private GameObject interactable;
 
@@ -27,8 +28,10 @@ public class ObjectSwitch : MonoBehaviour
         if (canvasObject != null)
         {
             iconToDisplay = canvasObject.transform.Find("KeyboardE").gameObject;
+            controllerToDisplay = canvasObject.transform.Find("ControllerIcon").gameObject;
         }
         iconToDisplay.gameObject.SetActive(false);
+        controllerToDisplay.gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -40,7 +43,9 @@ public class ObjectSwitch : MonoBehaviour
             Debug.Log(other.gameObject.tag);
             Debug.Log("Player in zone");
             iconToDisplay = canvasObject.transform.Find("KeyboardE").gameObject;
+            controllerToDisplay = canvasObject.transform.Find("ControllerIcon").gameObject;
             iconToDisplay.gameObject.SetActive(true);
+            controllerToDisplay.gameObject.SetActive(true);
             playerInZone = true;
             interactable = other.gameObject;
         }
