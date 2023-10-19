@@ -71,7 +71,7 @@ public class TextureUIController : MonoBehaviour
         mainUI.SetActive(false);
         saveMenu.SetActive(true);
 
-        saveNameInput.text = "FIX IT";
+        //saveNameInput.text = "FIX IT";
     }
 
     public void OpenLoadMenu()

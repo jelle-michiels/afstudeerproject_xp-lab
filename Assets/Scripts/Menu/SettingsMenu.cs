@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class SettingsMenu : MonoBehaviour
 {
@@ -65,6 +66,7 @@ public class SettingsMenu : MonoBehaviour
         {
             upArrowButton.interactable = false;
             upArrowImage.sprite = disabledUpArrowImage;
+            EventSystem.current.SetSelectedGameObject(downArrowButton.gameObject);
         }
     }
 
@@ -82,6 +84,7 @@ public class SettingsMenu : MonoBehaviour
         {
             downArrowButton.interactable = false;
             downArrowImage.sprite = disabledDownArrowImage;
+            EventSystem.current.SetSelectedGameObject(upArrowButton.gameObject);
         }
     }
 

@@ -149,6 +149,7 @@ public class TextureUploadController : MonoBehaviour
 
     public void OnDropdownValueChanged()
     {
+        hitboxToggle.isOn = true;
         int value = prefabDropdown.value;
         string selectedPrefabName = prefabDropdown.options[value].text;
 
