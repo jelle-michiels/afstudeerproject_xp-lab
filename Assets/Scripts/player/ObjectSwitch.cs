@@ -7,7 +7,8 @@ public class ObjectSwitch : MonoBehaviour
 {
     public GameObject[] randomPrefabs;
 
-    private GameObject txtToDisplay;
+    private GameObject iconToDisplay;
+    private GameObject controllerToDisplay;
 
     private GameObject interactable;
 
@@ -18,22 +19,33 @@ public class ObjectSwitch : MonoBehaviour
     {
         index = 0;
         playerInZone = false;
-        txtToDisplay = GameObject.Find("SwitchCanvas").transform.Find("ObjectText").gameObject;
         if (randomPrefabs == null || randomPrefabs.Length == 0)
         {
             Debug.LogError("No random prefabs assigned to ObjectInteraction script.");
             enabled = false; // Disable the script if there are no prefabs.
         }
+        GameObject canvasObject = GameObject.Find("SwitchCanvas");
+        if (canvasObject != null)
+        {
+            iconToDisplay = canvasObject.transform.Find("KeyboardE").gameObject;
+            controllerToDisplay = canvasObject.transform.Find("ControllerIcon").gameObject;
+        }
+        iconToDisplay.gameObject.SetActive(false);
+        controllerToDisplay.gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.gameObject.name);
+        GameObject canvasObject = GameObject.Find("SwitchCanvas");
         if (ArrayContainsObjectWithName(randomPrefabs, other.gameObject.tag))
         {
             Debug.Log(other.gameObject.tag);
             Debug.Log("Player in zone");
-            txtToDisplay.GetComponent<Text>().text = "Press 'E' to switch object";
+            iconToDisplay = canvasObject.transform.Find("KeyboardE").gameObject;
+            controllerToDisplay = canvasObject.transform.Find("ControllerIcon").gameObject;
+            iconToDisplay.gameObject.SetActive(true);
+            controllerToDisplay.gameObject.SetActive(true);
             playerInZone = true;
             interactable = other.gameObject;
         }
@@ -42,14 +54,18 @@ public class ObjectSwitch : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        txtToDisplay.GetComponent<Text>().text = "";
+        GameObject canvasObject = GameObject.Find("SwitchCanvas");
+        iconToDisplay = canvasObject.transform.Find("KeyboardE").gameObject;
+        controllerToDisplay = canvasObject.transform.Find("ControllerIcon").gameObject;
+        iconToDisplay.gameObject.SetActive(false);
+        controllerToDisplay.gameObject.SetActive(false);
         playerInZone = false;
         interactable = null;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && playerInZone)
+        if (Input.GetKeyDown(KeyCode.E) && playerInZone || Input.GetKeyDown(KeyCode.JoystickButton0) && playerInZone)
         {
             Interact();
         }
@@ -65,17 +81,11 @@ public class ObjectSwitch : MonoBehaviour
 
     private void Interact()
     {
-        //int randomIndex = Random.Range(0, randomPrefabs.Length);
-
         indexCheck();
         Vector3 spawnPosition = interactable.transform.position;
         Quaternion spawnRotation = interactable.transform.rotation;
-
         GameObject newObject = Instantiate(randomPrefabs[index], spawnPosition, spawnRotation);
 
-
-        //Vector3 spawnPosition = interactable.transform.position + (transform.position - interactable.transform.position).normalized;
-        //GameObject newObject = Instantiate(randomPrefabs[index], spawnPosition, transform.rotation);
         Debug.Log(interactable.name);
         interactable.SetActive(false); // Disable the old object
     }

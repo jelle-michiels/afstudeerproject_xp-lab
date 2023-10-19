@@ -642,7 +642,6 @@ GameObject:
   - component: {fileID: 3311477120394437590}
   - component: {fileID: 2611856523362048408}
   - component: {fileID: 9215391807513511231}
-  - component: {fileID: 4279641562113092657}
   - component: {fileID: 8610859036949203563}
   m_Layer: 0
   m_Name: Wardrobe
@@ -745,24 +744,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4279641562113092657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5762143052197826267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb09ae8d0f528e147a006a0e1128cd91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boxes:
-  - {fileID: 3185925863483548336}
-  - {fileID: 8419192791321414099}
-  - {fileID: 8341552669670449155}
-  - {fileID: 318825450997353259}
-  attachedObject: {fileID: 5762143052197826267}
 --- !u!135 &8610859036949203563
 SphereCollider:
   m_ObjectHideFlags: 0
