@@ -65,7 +65,7 @@ public class ObjectSwitch : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && playerInZone || Input.GetKeyDown(KeyCode.JoystickButton0) && playerInZone)
+        if (Input.GetKeyDown(KeyCode.E) && playerInZone || Input.GetKeyDown(KeyCode.JoystickButton2) && playerInZone)
         {
             Interact();
         }
