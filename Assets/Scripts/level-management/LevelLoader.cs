@@ -68,7 +68,7 @@ public class LevelLoader : MonoBehaviour
                 {
                     Debug.Log("Creating object " + data.tag);
                     GameObject obj = Instantiate(placeableObjectPrefabs[i], data.position, data.rotation);
-                    if (data.tag == "Wardrobe")
+                    if (data.tag == "Wardrobe" || data.tag == "PoorWardrobe")
                 {
                     // Modify the Y-position to be 1.5 units lower
                     Vector3 newPosition = obj.transform.position;
